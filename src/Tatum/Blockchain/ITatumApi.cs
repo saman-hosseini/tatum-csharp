@@ -43,11 +43,17 @@ namespace Tatum.Blockchain
         [Post("/v3/offchain/withdrawal")]
         Task<WithdrawalResponse> OffchainStoreWithdrawal(CreateWithdrawal withdrawal);
 
+        [Get("/v3/offchain/withdrawal?currency={currency}&status={status}&pageSize={pageSize}&offset={offset}")]
+        Task<List<WithdrawalStatus>> OffchainGetWithdrawals(string currency, string status, int pageSize = 50, int offset = 0);
+
         [Delete("/v3/offchain/withdrawal/{withdrawalId}")]
         Task OffchainCancelWithdrawal(string withdrawalId, bool revert = true);
 
         [Put("/v3/offchain/withdrawal/{withdrawalId}/{txId}")]
         Task OffchainCompleteWithdrawal(string withdrawalId, string txId);
+
+        [Post("/v3/offchain/tron/transfer")]
+        Task<OffchainTransactionResult> OffchainTransferTron(OffchainTransfer offchainTransfer);
 
         //Ledger Account
 
@@ -71,6 +77,9 @@ namespace Tatum.Blockchain
 
         [Delete("/v3/ledger/account/block/account/{accountId}")]
         Task UnblockAllBlockedAmounts(string accountId);
+
+        [Put("/v3/ledger/account/{accountId}")]
+        Task UpdateAccount(string accountId, CreateAccount account);
 
         [Put("/v3/ledger/account/{accountId}/activate")]
         Task ActivateAccount(string accountId);

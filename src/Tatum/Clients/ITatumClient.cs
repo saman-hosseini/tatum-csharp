@@ -19,8 +19,12 @@ namespace Tatum.Clients
         Task<List<Address>> GetAddresses(string accountId);
         Task<TxHash> OffchainBroadcast(BroadcastWithdrawal withdrawal);
         Task<WithdrawalResponse> OffchainStoreWithdrawal(CreateWithdrawal withdrawal);
+        Task<List<WithdrawalStatus>> OffchainGetWithdrawals(string currency, string status, int pageSize = 50, int offset = 0);
         Task OffchainCancelWithdrawal(string withdrawalId, bool revert = true);
         Task OffchainCompleteWithdrawal(string withdrawalId, string txId);
+
+        Task<OffchainTransactionResult> OffchainTransferTron(OffchainTransfer offchainTransfer);
+
 
         Task<Account> GetAccount(string id);
         Task<Account> CreateAccount(CreateAccount createAccount);
@@ -29,6 +33,7 @@ namespace Tatum.Clients
         Task<string> BlockAmount(string accountId, BlockAmount blockAmount);
         Task UnblockBlockedAmount(string blockageId);
         Task UnblockAllBlockedAmounts(string accountId);
+        Task UpdateAccount(string accountId, CreateAccount account);
         Task ActivateAccount(string accountId);
         Task DeactivateAccount(string accountId);
         Task FreezeAccount(string accountId);

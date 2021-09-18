@@ -46,6 +46,11 @@ namespace Tatum.Clients
             return tatumApi.OffchainBroadcast(withdrawal);
         }
 
+        Task<List<WithdrawalStatus>> ITatumClient.OffchainGetWithdrawals(string currency, string status, int pageSize, int offset)
+        {
+            return tatumApi.OffchainGetWithdrawals(currency, status, pageSize, offset);
+        }
+
         Task ITatumClient.OffchainCancelWithdrawal(string withdrawalId, bool revert)
         {
             return tatumApi.OffchainCancelWithdrawal(withdrawalId, revert);

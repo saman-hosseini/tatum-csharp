@@ -55,6 +55,11 @@ namespace Tatum.Clients
             return tatumApi.UnblockAllBlockedAmounts(accountId);
         }
 
+        Task ITatumClient.UpdateAccount(string accountId, CreateAccount account)
+        {
+            return tatumApi.UpdateAccount(accountId, account);
+        }
+
         Task ITatumClient.ActivateAccount(string accountId)
         {
             return tatumApi.ActivateAccount(accountId);
