@@ -71,7 +71,10 @@ namespace Tatum.Model
         MMY,
 
         [EnumString("PAXG")]
-        PAXG
+        PAXG,
+
+        [EnumString("TRX")]
+        TRX
     }
 
     public static class CurrencyExtensions

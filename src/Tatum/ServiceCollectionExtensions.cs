@@ -14,7 +14,8 @@ namespace Tatum
                             .AddScoped(provider => TatumClient.Create(apiBaseUrl, xApiKey))
                             .AddScoped(provider => VeChainClient.Create(apiBaseUrl, xApiKey))
                             .AddScoped(provider => XlmClient.Create(apiBaseUrl, xApiKey))
-                            .AddScoped(provider => XrpClient.Create(apiBaseUrl, xApiKey));
+                            .AddScoped(provider => XrpClient.Create(apiBaseUrl, xApiKey))
+                            .AddScoped(provider => TronClient.Create(apiBaseUrl, xApiKey));
         }
     }
 }

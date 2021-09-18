@@ -25,6 +25,10 @@ namespace Tatum.Model.Requests
         [JsonPropertyName("accountCode")]
         public string AccountCode { get; set; }
 
+        [StringLength(50, MinimumLength = 1)]
+        [JsonPropertyName("accountNumber")]
+        public string AccountNumber { get; set; }
+
         [StringLength(3, MinimumLength = 3)]
         [JsonPropertyName("accountingCurrency")]
         public string AccountingCurrency { get; set; }

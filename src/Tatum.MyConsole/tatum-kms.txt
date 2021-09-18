@@ -1,0 +1,3 @@
+﻿#password = 13
+tatum-kms --help
+tatum-kms daemon --api-key xxx --chain=TRON

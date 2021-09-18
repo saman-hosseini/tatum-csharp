@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using Tatum.Clients;
 using Tatum.Model;
 
@@ -6,7 +7,9 @@ namespace Tatum
 {
     public class Wallet
     {
+        [JsonPropertyName("mnemonic")]
         public string Mnemonic { get; set; }
+        [JsonPropertyName("xpub")]
         public string XPub { get; set; }
         public string PrivateKey { get; set; }
         public string Address { get; set; }
