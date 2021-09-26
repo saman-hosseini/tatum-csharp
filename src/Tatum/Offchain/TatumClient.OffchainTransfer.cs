@@ -8,7 +8,7 @@ namespace Tatum.Clients
 {
     public partial class TatumClient : ITatumClient
     {
-        Task<OffchainTransactionResult> ITatumClient.OffchainTransferTron(OffchainTransfer offchainTransfer)
+        Task<OffchainTransactionResult> ITatumClient.OffchainTransferTron(OffchainTransferTron offchainTransfer)
         {
             return tatumApi.OffchainTransferTron(offchainTransfer);
         }

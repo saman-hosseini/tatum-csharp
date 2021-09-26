@@ -9,9 +9,11 @@ namespace Tatum.Model.Requests
     public class Fee
     {
         [Required]
-        public double GasLimit { get; set; }
+        [RegularExpression(@"^[+]?\d+$")]
+        public string GasLimit { get; set; }
 
         [Required]
-        public BigInteger GasPrice { get; set; }
+        [RegularExpression(@"^[+]?\d+$")]
+        public string GasPrice { get; set; }
     }
 }

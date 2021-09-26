@@ -27,7 +27,8 @@ namespace Tatum
             { Currency.PLTC, "0x429d83bb0dcb8cdd5311e34680adc8b12070a07f" },
             { Currency.XCON, "0x0f237d5ea7876e0e2906034d98fdb20d43666ad4" },
             { Currency.MMY, "0x385ddf50c3de724f6b8ecb41745c29f9dd3c6d75" },
-            { Currency.PAXG, "0x45804880de22913dafe09f4980848ece6ecbaf78" }
+            { Currency.PAXG, "0x45804880de22913dafe09f4980848ece6ecbaf78" },
+            { Currency.WBTC, "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599" }
         };
 
         public static readonly Dictionary<Currency, int> ContractDecimals = new Dictionary<Currency, int>
@@ -45,7 +46,8 @@ namespace Tatum
             { Currency.PLTC, 18 },
             { Currency.XCON, 18 },
             { Currency.MMY, 18 },
-            { Currency.PAXG, 18 }
+            { Currency.PAXG, 18 },
+            { Currency.WBTC, 8 }
         };
 
         public const string TransferMethodAbi = @"

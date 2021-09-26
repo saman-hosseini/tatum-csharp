@@ -16,6 +16,11 @@ namespace Tatum.Clients
             throw new NotImplementedException();
         }
 
+        Task<TransactionHash> IBitcoinCashClient.SendTransactionKMS(TransferBchBlockchainKMS transferBtc)
+        {
+            return bitcoinCashApi.SendTransactionKMS(transferBtc);
+        }
+
         async Task<TransactionHash> IBitcoinCashClient.SendTransaction(TransferBchBlockchain body, bool testnet)
         {
             string txData = (this as IBitcoinCashClient).PrepareSignedTransaction(body, testnet);

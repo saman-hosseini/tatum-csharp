@@ -55,7 +55,7 @@ namespace Tatum.Model.Requests
     public class FromAddress
     {
         [Required]
-        [StringLength(50, MinimumLength = 30)]
+        [StringLength(60, MinimumLength = 30)]
         public string Address { get; set; }
 
         [Required]
@@ -81,7 +81,7 @@ namespace Tatum.Model.Requests
     public class To
     {
         [Required]
-        [StringLength(50, MinimumLength = 30)]
+        [StringLength(60, MinimumLength = 30)]
         public string Address { get; set; }
 
         [Required]
