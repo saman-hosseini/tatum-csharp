@@ -23,7 +23,7 @@ namespace Tatum.Clients
         Task OffchainCancelWithdrawal(string withdrawalId, bool revert = true);
         Task OffchainCompleteWithdrawal(string withdrawalId, string txId);
 
-        Task<OffchainTransactionResult> OffchainTransferTron(OffchainTransfer offchainTransfer);
+        Task<OffchainTransactionResult> OffchainTransferTron(OffchainTransferTron offchainTransfer);
 
 
         Task<Account> GetAccount(string id);

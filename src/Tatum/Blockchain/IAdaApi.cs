@@ -1,0 +1,20 @@
+﻿using Refit;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Tatum.Model.Requests;
+using Tatum.Model.Responses;
+
+namespace Tatum.Blockchain
+{
+    public interface IAdaApi
+    {
+        [Get("/v3/ada/account/{address}")]
+        Task<AdaAccount> GetAccount(string address);
+
+        [Post("/v3/ada/transaction")]
+        Task<TransactionHash> SendTransactionKMS(TransferBtcBasedBlockchainKMS transfer);
+    }
+}

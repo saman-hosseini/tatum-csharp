@@ -12,7 +12,7 @@ namespace Tatum.MyConsole
         string accountId1 = "612d70faddedfc47cc08d1be";
         string accountId2 = "6133c4678f6d53c9087f64af";
         string accountId3 = "6134591d10c9ac177111f3df";
-        string pk3 = "b651a0e471b370783c2e7c8ae1f1445da33b34e4aa0c818db8729fdf07c763f5";
+        string pk3 = "b651a0e47234bgv783c2e7c8ae1f1445da33b34e4fdqc818db8729fdf07c763f5";
         string coinexTronAddress = "TC5kLNd3A7fnxJfYSbUs99F4Qh4C1K47HV";
         public void Setup()
         {
@@ -135,7 +135,7 @@ namespace Tatum.MyConsole
         {
             string withdrawalId = "6134bbc03201f6fb0a2b7de4";
             string txId = "";
-            var obj = new OffchainTransfer()
+            var obj = new OffchainTransferTron()
             {
                 BlockchainAddress = coinexTronAddress,
                 Amount = "51.5",

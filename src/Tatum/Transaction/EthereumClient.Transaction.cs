@@ -33,8 +33,9 @@ namespace Tatum.Clients
             var customFee = body.Fee ??
                 new Fee
                 {
-                    GasLimit = body.Data.Length * 68 + 21000,
-                    GasPrice = await (this as IEthereumClient).GetGasPriceInWei().ConfigureAwait(false)
+
+                    GasLimit = (body.Data.Length * 68 + 21000).ToString(),
+                    GasPrice = (await (this as IEthereumClient).GetGasPriceInWei().ConfigureAwait(false)).ToString()
                 };
 
             var transactionInput = new TransactionInput
@@ -42,7 +43,7 @@ namespace Tatum.Clients
                 data: body.Data,
                 addressTo: addressTo,
                 addressFrom: account.Address,
-                gas: new HexBigInteger(new BigInteger(customFee.GasLimit)),
+                gas: new HexBigInteger(new BigInteger(long.Parse(customFee.GasLimit))),
                 gasPrice: new HexBigInteger(customFee.GasPrice),
                 value: new HexBigInteger(0)
             );
@@ -121,7 +122,8 @@ namespace Tatum.Clients
             }
             else
             {
-                transferFunction.Gas = new HexBigInteger(new BigInteger(body.Fee.GasLimit));
+                var gasLimit = long.Parse(body.Fee.GasLimit);
+                transferFunction.Gas = new HexBigInteger(new BigInteger(gasLimit));
             }
 
             var transactionHash = await transferHandler.SignTransactionAsync(body.ContractAddress, transferFunction).ConfigureAwait(false);
@@ -174,7 +176,8 @@ namespace Tatum.Clients
             }
             else
             {
-                deploymentMessage.Gas = new HexBigInteger(new BigInteger(body.Fee.GasLimit));
+                var gasLimit = long.Parse(body.Fee.GasLimit);
+                deploymentMessage.Gas = new HexBigInteger(new BigInteger(gasLimit));
             }
 
             var transactionHash = await deploymentHandler.SignTransactionAsync(deploymentMessage).ConfigureAwait(false);
@@ -227,7 +230,7 @@ namespace Tatum.Clients
             }
             else
             {
-                transactionInput.Gas = new HexBigInteger(new BigInteger(body.Fee.GasLimit));
+                transactionInput.Gas = new HexBigInteger(new BigInteger(long.Parse(body.Fee.GasLimit)));
             }
 
             return transactionInput;
@@ -241,7 +244,7 @@ namespace Tatum.Clients
             }
             else
             {
-                return fee.GasPrice;
+                return new BigInteger(long.Parse(fee.GasPrice));
             }
         }
 

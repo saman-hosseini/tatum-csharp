@@ -74,7 +74,16 @@ namespace Tatum.Model
         PAXG,
 
         [EnumString("TRX")]
-        TRX
+        TRX,
+
+        [EnumString("WBTC")]
+        WBTC,
+
+        [EnumString("GMC")]
+        GMC,
+
+        [EnumString("GMC_BSC")]
+        GMC_BSC
     }
 
     public static class CurrencyExtensions
@@ -112,6 +121,9 @@ namespace Tatum.Model
                 case Currency.XCON:
                 case Currency.MMY:
                 case Currency.PAXG:
+                case Currency.WBTC:
+                case Currency.GMC:
+                case Currency.GMC_BSC:
                     return true;
                 default:
                     return false;

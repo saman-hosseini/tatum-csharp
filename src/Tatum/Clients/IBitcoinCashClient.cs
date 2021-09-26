@@ -41,7 +41,7 @@ namespace Tatum.Clients
         /// <returns>blockchain address</returns>
         string GenerateAddress(string xPubString, int index, bool testnet);
 
-
+        Task<TransactionHash> SendTransactionKMS(TransferBchBlockchainKMS transferBtc);
         Task<string> SignKmsTransaction(TransactionKms tx, List<string> privateKeys, bool testnet);
 
         /// <summary>

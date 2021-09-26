@@ -13,7 +13,7 @@ namespace Tatum.Clients
         Task<TronInfo> GetBlockchainInfo();
         Task<TronBlock> GetBlock(string hash);
 
-        Task<TronAccount> GetTronAccount(string address);
+        Task<TronAccount> GetAccount(string address);
 
         Wallet CreateWallet(string mnemonic, bool testnet);
 

@@ -45,9 +45,9 @@ namespace Tatum.Clients
             return tronApi.GetBlock(hash);
         }
 
-        Task<TronAccount> ITronClient.GetTronAccount(string address)
+        Task<TronAccount> ITronClient.GetAccount(string address)
         {
-            return tronApi.GetTronAccountbyAddress(address);
+            return tronApi.GetAccount(address);
         }
     }
 }

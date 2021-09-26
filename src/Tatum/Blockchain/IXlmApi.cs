@@ -31,5 +31,8 @@ namespace Tatum.Blockchain
 
         [Get("/v3/xlm/account/tx/{address}")]
         Task<List<XlmTx>> GetAccountTransactions(string address);
+
+        [Post("/v3/xlm/transaction")]
+        Task<TransactionHash> SendTransactionKMS(TransferXlmBlockchainKMS transfer);
     }
 }

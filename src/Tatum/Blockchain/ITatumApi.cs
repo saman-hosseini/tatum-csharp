@@ -52,8 +52,10 @@ namespace Tatum.Blockchain
         [Put("/v3/offchain/withdrawal/{withdrawalId}/{txId}")]
         Task OffchainCompleteWithdrawal(string withdrawalId, string txId);
 
+        //Offchain blockchain transfer
+
         [Post("/v3/offchain/tron/transfer")]
-        Task<OffchainTransactionResult> OffchainTransferTron(OffchainTransfer offchainTransfer);
+        Task<OffchainTransactionResult> OffchainTransferTron(OffchainTransferTron offchainTransfer);
 
         //Ledger Account
 

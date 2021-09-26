@@ -17,7 +17,7 @@ namespace Tatum.Model.Requests
         [RegularExpression(@"^[+]?((\d+(\.\d*)?)|(\.\d+))$")]
         public string Amount { get; set; }
 
-        [StringLength(130000)]
+        [StringLength(50000)]
         public string Data { get; set; }
 
         public Currency Currency { get; set; }

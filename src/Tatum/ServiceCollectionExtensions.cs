@@ -15,7 +15,10 @@ namespace Tatum
                             .AddScoped(provider => VeChainClient.Create(apiBaseUrl, xApiKey))
                             .AddScoped(provider => XlmClient.Create(apiBaseUrl, xApiKey))
                             .AddScoped(provider => XrpClient.Create(apiBaseUrl, xApiKey))
-                            .AddScoped(provider => TronClient.Create(apiBaseUrl, xApiKey));
+                            .AddScoped(provider => TronClient.Create(apiBaseUrl, xApiKey))
+                            .AddScoped(provider => AdaClient.Create(apiBaseUrl, xApiKey))
+                            .AddScoped(provider => DogecoinClient.Create(apiBaseUrl, xApiKey))
+                            .AddScoped(provider => BscClient.Create(apiBaseUrl, xApiKey));
         }
     }
 }

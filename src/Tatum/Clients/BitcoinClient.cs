@@ -63,5 +63,10 @@ namespace Tatum.Clients
         {
             return bitcoinApi.GetTransaction(hash);
         }
+
+        Task<BitcoinAccountBalance> IBitcoinClient.GetAccountBalance(string address)
+        {
+            return bitcoinApi.GetAccountBalance(address);
+        }
     }
 }

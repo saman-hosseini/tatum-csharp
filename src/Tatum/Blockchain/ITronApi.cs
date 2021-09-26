@@ -20,7 +20,7 @@ namespace Tatum.Blockchain
         Task<TronAddress> GenerateTronAddress(string xpub, int index);
 
         [Get("/v3/tron/account/{address}")]
-        Task<TronAccount> GetTronAccountbyAddress(string address);
+        Task<TronAccount> GetAccount(string address);
 
         [Post("/v3/tron/broadcast")]
         Task<TransactionHash> BroadcastSignedTransaction(BroadcastRequest request);
@@ -32,6 +32,12 @@ namespace Tatum.Blockchain
         Task<TronBlock> GetBlock(string hash);
 
         [Post("/v3/tron/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferTronBlockchainKMS transferTronKMS);
+        Task<TransactionHash> SendTransactionKMS(TransferTronBlockchainKMS transfer);
+
+        [Post("/v3/tron/trc20/transaction")]
+        Task<TransactionHash> SendTrc20TransactionKMS(TransferTronTrc20BlockchainKMS transfer);
+
+        [Post("/v3/tron/trc10/transaction")]
+        Task<TransactionHash> SendTrc10TransactionKMS(TransferTronTrc10BlockchainKMS transfer);
     }
 }

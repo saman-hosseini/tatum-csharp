@@ -63,5 +63,15 @@ namespace Tatum.Clients
         {
             return litecoinApi.GetUtxo(txHash, txOutputIndex);
         }
+
+        Task<TransactionHash> ILitecoinClient.SendTransactionKMS(TransferBtcBasedBlockchainKMS transferBtc)
+        {
+            return litecoinApi.SendTransactionKMS(transferBtc);
+        }
+
+        Task<BitcoinAccountBalance> ILitecoinClient.GetAccountBalance(string address)
+        {
+            return litecoinApi.GetAccountBalance(address);
+        }
     }
 }
