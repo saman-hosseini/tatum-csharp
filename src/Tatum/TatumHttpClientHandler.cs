@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Tatum
+namespace TatumPlatform
 {
     public class TatumHttpClientHandler : HttpClientHandler
     {

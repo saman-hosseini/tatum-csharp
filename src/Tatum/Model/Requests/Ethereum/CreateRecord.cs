@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Tatum.Model.Requests
+namespace TatumPlatform.Model.Requests
 {
     public class CreateRecord : IValidatableObject
     {

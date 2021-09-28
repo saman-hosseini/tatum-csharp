@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tatum.Model
+namespace TatumPlatform.Model
 {
     public enum Currency
     {

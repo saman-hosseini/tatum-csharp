@@ -2,7 +2,7 @@
 using NBitcoin.Altcoins;
 using System;
 
-namespace Tatum.Clients
+namespace TatumPlatform.Clients
 {
     public partial class BitcoinCashClient : IBitcoinCashClient
     {

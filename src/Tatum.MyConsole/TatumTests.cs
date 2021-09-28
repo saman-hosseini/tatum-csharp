@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Threading.Tasks;
-using Tatum.Clients;
-using Tatum.Model.Requests;
+using TatumPlatform.Clients;
+using TatumPlatform.Model.Requests;
 
-namespace Tatum.MyConsole
+namespace TatumPlatform.MyConsole
 {
     public class TatumTests
     {

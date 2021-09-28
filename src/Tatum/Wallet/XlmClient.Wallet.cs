@@ -1,6 +1,6 @@
 ﻿using stellar_dotnet_sdk;
 
-namespace Tatum.Clients
+namespace TatumPlatform.Clients
 {
     public partial class XlmClient : IXlmClient
     {

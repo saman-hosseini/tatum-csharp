@@ -1,9 +1,9 @@
 ﻿using Refit;
 using System.Threading.Tasks;
-using Tatum.Model.Requests;
-using Tatum.Model.Responses;
+using TatumPlatform.Model.Requests;
+using TatumPlatform.Model.Responses;
 
-namespace Tatum.Blockchain
+namespace TatumPlatform.Blockchain
 {
     public interface IVeChainApi
     {

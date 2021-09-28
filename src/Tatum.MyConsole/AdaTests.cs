@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tatum.Clients;
+using TatumPlatform.Clients;
 
-namespace Tatum.MyConsole
+namespace TatumPlatform.MyConsole
 {
     public class AdaTests
     {

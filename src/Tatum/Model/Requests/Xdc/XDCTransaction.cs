@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Tatum.Model.Requests.Xdc
+namespace TatumPlatform.Model.Requests.Xdc
 {
     public class XDCTransaction
     {

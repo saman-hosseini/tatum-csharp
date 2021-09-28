@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tatum.Blockchain;
-using Tatum.Model.Requests;
-using Tatum.Model.Responses;
+using TatumPlatform.Blockchain;
+using TatumPlatform.Model.Requests;
+using TatumPlatform.Model.Responses;
 
-namespace Tatum.Clients
+namespace TatumPlatform.Clients
 {
     public class DogecoinClient : IDogecoinClient
     {
         private readonly IDogecoinApi dogecoinApi;
         private readonly IDogechainApi dogechainApi;
-
+        private const string dogechainUrl = "https://dogechain.info/";
         internal DogecoinClient()
         {
             
@@ -22,7 +22,7 @@ namespace Tatum.Clients
         internal DogecoinClient(string apiBaseUrl, string xApiKey)
         {
             dogecoinApi = RestClientFactory.Create<IDogecoinApi>(apiBaseUrl, xApiKey);
-            dogechainApi = RestClientFactory.Create<IDogechainApi>("https://dogechain.info/");
+            dogechainApi = RestClientFactory.Create<IDogechainApi>(dogechainUrl);
         }
 
         public static IDogecoinClient Create(string apiBaseUrl, string xApiKey)

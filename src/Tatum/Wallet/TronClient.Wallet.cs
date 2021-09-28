@@ -1,9 +1,9 @@
 ﻿using NBitcoin;
 using System;
 using System.Threading.Tasks;
-using Tatum.Model.Requests;
+using TatumPlatform.Model.Requests;
 
-namespace Tatum.Clients
+namespace TatumPlatform.Clients
 {
     public partial class TronClient : ITronClient
     {

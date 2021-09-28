@@ -1,4 +1,4 @@
-﻿namespace Tatum
+﻿namespace TatumPlatform
 {
     public class Headers
     {

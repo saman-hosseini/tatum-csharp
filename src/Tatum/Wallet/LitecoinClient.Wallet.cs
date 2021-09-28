@@ -1,8 +1,8 @@
 ﻿using NBitcoin;
 using System;
-using Tatum.Blockchain;
+using TatumPlatform.Blockchain;
 
-namespace Tatum.Clients
+namespace TatumPlatform.Clients
 {
     public partial class LitecoinClient : ILitecoinClient
     {

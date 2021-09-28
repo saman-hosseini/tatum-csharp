@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Tatum.Model.Responses
+namespace TatumPlatform.Model.Responses
 {
     public class BitcoinCashInfo
     {

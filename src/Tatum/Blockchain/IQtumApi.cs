@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tatum.Model.Responses;
+using TatumPlatform.Model.Responses;
 
-namespace Tatum.Blockchain
+namespace TatumPlatform.Blockchain
 {
     public interface IQtumApi
     {

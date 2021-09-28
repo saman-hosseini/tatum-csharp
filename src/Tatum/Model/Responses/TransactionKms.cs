@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tatum.Model.Responses
+namespace TatumPlatform.Model.Responses
 {
     public class TransactionKms
     {

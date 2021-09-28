@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.Json.Serialization;
-using Tatum.Clients;
-using Tatum.Model;
+using TatumPlatform.Clients;
+using TatumPlatform.Model;
 
-namespace Tatum
+namespace TatumPlatform
 {
     public class Wallet
     {

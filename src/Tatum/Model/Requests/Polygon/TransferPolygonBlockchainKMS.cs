@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tatum.Model.Requests
+namespace TatumPlatform.Model.Requests
 {
     public class TransferPolygonBlockchainKMS : TransferBscBlockchainKMS
     {

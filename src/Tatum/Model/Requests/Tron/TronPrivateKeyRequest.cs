@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace Tatum.Model.Requests
+namespace TatumPlatform.Model.Requests
 {
     public class TronPrivateKeyRequest
     {

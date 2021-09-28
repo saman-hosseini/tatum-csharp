@@ -3,7 +3,7 @@ using NBitcoin.DataEncoders;
 using System;
 using static NBitcoin.Altcoins.Litecoin;
 
-namespace Tatum.Blockchain
+namespace TatumPlatform.Blockchain
 {
     /// <summary>
     /// Class copied from NBitcoin.Altcoins.Litecoin with custom Networks settings.

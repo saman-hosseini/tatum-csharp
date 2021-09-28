@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tatum.Blockchain
+namespace TatumPlatform.Blockchain
 {
     public interface INeoApi
     {

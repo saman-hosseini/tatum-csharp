@@ -2,7 +2,7 @@
 using Nethereum.Contracts;
 using System.Numerics;
 
-namespace Tatum.Model.Requests.Ethereum
+namespace TatumPlatform.Model.Requests.Ethereum
 {
     [Function("transfer", "bool")]
     public class TransferFunction : FunctionMessage

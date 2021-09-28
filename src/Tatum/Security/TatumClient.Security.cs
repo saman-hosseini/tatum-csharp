@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Tatum.Model.Responses;
+using TatumPlatform.Model.Responses;
 
-namespace Tatum.Clients
+namespace TatumPlatform.Clients
 {
     public partial class TatumClient : ITatumClient
     {

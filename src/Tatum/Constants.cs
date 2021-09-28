@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Tatum.Model;
+using TatumPlatform.Model;
 
-namespace Tatum
+namespace TatumPlatform
 {
     public static class Constants
     {

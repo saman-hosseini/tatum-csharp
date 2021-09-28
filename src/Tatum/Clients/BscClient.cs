@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Tatum.Blockchain;
-using Tatum.Model.Requests;
-using Tatum.Model.Responses;
+using TatumPlatform.Blockchain;
+using TatumPlatform.Model.Requests;
+using TatumPlatform.Model.Responses;
 
-namespace Tatum.Clients
+namespace TatumPlatform.Clients
 {
     public partial class BscClient : IBscClient
     {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Tatum.Model.Requests
+namespace TatumPlatform.Model.Requests
 {
     public class TransferDogecoinBlockchainKMS
     {

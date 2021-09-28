@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Tatum.Clients;
+using TatumPlatform.Clients;
 
-namespace Tatum
+namespace TatumPlatform
 {
     public static class ServiceCollectionExtensions
     {

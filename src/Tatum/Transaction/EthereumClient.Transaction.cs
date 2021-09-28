@@ -5,11 +5,11 @@ using Nethereum.Web3.Accounts;
 using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 using System.Threading.Tasks;
-using Tatum.Model.Requests;
-using Tatum.Model.Requests.Ethereum;
+using TatumPlatform.Model.Requests;
+using TatumPlatform.Model.Requests.Ethereum;
 using static Nethereum.Util.UnitConversion;
 
-namespace Tatum.Clients
+namespace TatumPlatform.Clients
 {
     public partial class EthereumClient : IEthereumClient
     {

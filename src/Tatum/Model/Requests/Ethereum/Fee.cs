@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 
-namespace Tatum.Model.Requests
+namespace TatumPlatform.Model.Requests
 {
     /// <summary>
     /// Unit is Gwei.

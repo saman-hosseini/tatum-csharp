@@ -3,7 +3,7 @@ using System;
 using System.Net.Http;
 using System.Text.Json;
 
-namespace Tatum
+namespace TatumPlatform
 {
     public static class RestClientFactory
     {

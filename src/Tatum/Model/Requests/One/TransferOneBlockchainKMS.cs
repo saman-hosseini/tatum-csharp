@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Tatum.Model.Requests.One
+namespace TatumPlatform.Model.Requests.One
 {
     public class TransferOneBlockchainKMS
     {

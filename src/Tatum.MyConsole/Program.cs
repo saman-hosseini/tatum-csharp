@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Tatum.MyConsole
+namespace TatumPlatform.MyConsole
 {
     class Program
     {
