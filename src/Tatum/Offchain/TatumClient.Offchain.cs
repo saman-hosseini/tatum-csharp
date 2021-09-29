@@ -18,7 +18,7 @@ namespace TatumPlatform.Clients
             return tatumApi.CheckAddressExists(address, currency, index);
         }
 
-        Task<Address> ITatumClient.GenerateDepositAddress(string accountId, int index)
+        Task<Address> ITatumClient.GenerateDepositAddress(string accountId, int? index)
         {
             return tatumApi.GenerateDepositAddress(accountId, index);
         }

@@ -1,5 +1,4 @@
-﻿using Refit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,14 +6,11 @@ using System.Threading.Tasks;
 using TatumPlatform.Model.Requests;
 using TatumPlatform.Model.Responses;
 
-namespace TatumPlatform.Blockchain
+namespace TatumPlatform.Clients
 {
-    public interface IBinanceApi
+    public interface IBinanceClient
     {
-        [Get("/v3/bnb/account/{address}")]
         Task<BnbAccount> GetAccount(string address);
-
-        [Post("/v3/bnb/transaction")]
         Task<TransactionHash> SendTransactionKMS(TransferBnbBlockchainKMS transfer);
     }
 }

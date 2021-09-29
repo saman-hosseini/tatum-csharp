@@ -11,7 +11,7 @@ namespace TatumPlatform.Model.Responses
         public string Currency { get; set; }
 
         [JsonPropertyName("derivationKey")]
-        public uint DerivationKey { get; set; }
+        public int DerivationKey { get; set; }
 
         [JsonPropertyName("xpub")]
         public string XPub { get; set; }

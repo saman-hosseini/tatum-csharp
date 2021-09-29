@@ -11,7 +11,7 @@ namespace TatumPlatform.Clients
         Task<Rate> GetExchangeRate(string currency, string basePair);
         Task<string> GetTatumVersion();
 
-        Task<Address> GenerateDepositAddress(string accountId, int index);
+        Task<Address> GenerateDepositAddress(string accountId, int? index = null);
         Task<List<Address>> GenerateDepositAddresses(List<GenerateAddressRequest> addresses);
         Task<Account> CheckAddressExists(string address, string currency, string index);
         Task<Address> AssignDepositAddress(string id, string address);

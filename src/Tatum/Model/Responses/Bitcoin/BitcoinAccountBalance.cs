@@ -12,5 +12,17 @@ namespace TatumPlatform.Model.Responses
 
         [JsonPropertyName("outgoing")]
         public string Outgoing { get; set; }
+
+        [JsonIgnore]
+        public decimal CurrentBalance
+        {
+            get
+            {
+                decimal i, o;
+                decimal.TryParse(Incoming, out i);
+                decimal.TryParse(Outgoing, out o);
+                return (i - o);
+            }
+        }
     }
 }

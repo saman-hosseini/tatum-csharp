@@ -72,7 +72,7 @@ namespace TatumPlatform.MyConsole
 
         public async Task SendTransactionKMS()
         {
-            var body = new TransferTronBlockchainKMS()
+            var transfer = new TransferTronBlockchainKMS()
             {
                 From = "TDBndvRdCGNi1cCpLK3zYenv6rjhftPvts",
                 SignatureId = "79981416-4e03-452f-bda5-a869fb955376",
@@ -80,7 +80,7 @@ namespace TatumPlatform.MyConsole
                 Amount = "50.9",
                 Index = 4
             };
-            var hash = await tronClient.SendTransactionKMS(body);
+            var hash = await tronClient.SendTransactionKMS(transfer);
         }
 
         public void FromAddressAndFromUtxoNotTogether()

@@ -9,9 +9,9 @@ namespace TatumPlatform.Clients
 {
     public partial class TronClient : ITronClient
     {
-        async Task<TransactionHash> ITronClient.SendTransactionKMS(TransferTronBlockchainKMS body)
+        async Task<TransactionHash> ITronClient.SendTransactionKMS(TransferTronBlockchainKMS transfer)
         {
-            return await tronApi.SendTransactionKMS(body);
+            return await tronApi.SendTransactionKMS(transfer);
         }
     }
 }

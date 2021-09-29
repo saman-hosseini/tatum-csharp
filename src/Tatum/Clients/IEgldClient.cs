@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using TatumPlatform.Model.Requests;
 using TatumPlatform.Model.Responses;
 
-namespace TatumPlatform.Blockchain
+namespace TatumPlatform.Clients
 {
-    public interface ICeloClient
+    public interface IEgldClient
     {
-        Task<CeloBalance> GetBalance(string address);
+        Task<EgldBalance> GetBalance(string address);
 
-        Task<TransactionHash> SendTransactionKMS(TransferCeloBlockchainKMS transfer);
+        Task<TransactionHash> SendTransactionKMS(TransferEgldBlockchainKMS transfer);
     }
 }

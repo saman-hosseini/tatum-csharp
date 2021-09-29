@@ -17,7 +17,8 @@ namespace TatumPlatform.MyConsole
             var doge = new DogecoinTests();
             doge.Setup();
             //var tsk = Task.Run(async () => await ada.GetAccount()); tsk.Wait();
-            var tsk = Task.Run(async () => await doge.GetBalance()); tsk.Wait();
+            //var tsk = Task.Run(async () => await doge.GetBalance()); tsk.Wait();
+            var tsk = Task.Run(async () => await tatum.GenerateDepositAddress()); tsk.Wait();
             //coin.CreateWalletTestNet();
             //coin.GeneratePrivateKeyTestNet();
             //coin.GenerateAddressTestNet();

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace TatumPlatform.Model.Requests.Binance
+namespace TatumPlatform.Model.Requests
 {
     public class TransferBnbBlockchainKMS
     {

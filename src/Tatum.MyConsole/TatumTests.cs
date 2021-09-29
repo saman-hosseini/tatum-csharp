@@ -48,6 +48,11 @@ namespace TatumPlatform.MyConsole
             var newAccount = await tatumClient.CreateAccount(account);
         }
 
+        public async Task GenerateDepositAddress()
+        {
+            var newAccount = await tatumClient.GenerateDepositAddress(accountId1, 434312);
+        }
+
         public async Task GetAccounts()
         {
             var accounts = await tatumClient.GetAccounts(10, 0);
