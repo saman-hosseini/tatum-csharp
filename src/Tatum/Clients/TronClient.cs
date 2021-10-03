@@ -49,5 +49,46 @@ namespace TatumPlatform.Clients
         {
             return tronApi.GetAccount(address);
         }
+
+        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        {
+            if (transfer.Currency == "TRON")
+            {
+                var tx = await tronApi.SendTransactionKMS(new TransferTronBlockchainKMS()
+                {
+                    SignatureId = transfer.SignatureId,
+                    From = transfer.FromAddress,
+                    To = transfer.ToAddress,
+                    Amount = transfer.Amount.ToString(),
+                    Index = transfer.Index
+                });
+                return tx;
+            }
+            else
+            {
+                var tx = await tronApi.SendTransactionKMS(new TransferTronBlockchainKMS()
+                {
+                    SignatureId = transfer.SignatureId,
+                    From = transfer.FromAddress,
+                    To = transfer.ToAddress,
+                    Amount = transfer.Amount.ToString(),
+                    Index = transfer.Index
+                });
+                return tx;
+            }
+        }
+
+        public async Task<decimal> GetBalance(BalanceRequest request)
+        {
+            var account = await tronApi.GetAccount(request.Address);
+            if (request.Currency == "TRON")
+            {
+                return (account.Balance / 1000000M);
+            }
+            else
+            {
+                return 0M;
+            }
+        }
     }
 }

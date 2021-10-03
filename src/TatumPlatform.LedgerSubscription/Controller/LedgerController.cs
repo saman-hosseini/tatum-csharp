@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,34 @@ namespace TatumPlatform.LedgerSubscription.Controller
     [Route("api/[controller]/[action]")]
     [ApiController]
     //[Authorize(Policy = "CheckHmacDigest")]
-    [Authorize(AuthenticationSchemes = SchemesNamesConst.TokenAuthenticationDefaultScheme)]
+    //[Authorize(AuthenticationSchemes = SchemesNamesConst.TokenAuthenticationDefaultScheme)]
     public class LedgerController : ControllerBase
     {
         [AllowAnonymous]
         public async Task<string> Get()
         {
             return "Hi";
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<string> Test(object obj)
+        {
+            string output = JsonSerializer.Serialize(obj);
+            try
+            {
+                using (var context = new LedgerContext())
+                {
+                    await context.IncomingRequest.AddAsync(new IncomingRequest() { JsonData = output});
+                    await context.SaveChangesAsync();
+                }
+                return "success";
+            }
+            catch (Exception ex)
+            {
+                return Exception(ex);
+            }
+            return "Hiiii";
         }
 
         [HttpPost]

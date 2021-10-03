@@ -8,6 +8,7 @@ namespace TatumPlatform.LedgerSubscription.Model
 {
     public class LedgerContext : DbContext
     {
+        public DbSet<IncomingRequest> IncomingRequest { get; set; }
         public DbSet<AccountIncomingBlockchainTransaction> AccountIncomingBlockchainTransactions { get; set; }
         public DbSet<AccountPendingBlockchainTransaction> AccountPendingBlockchainTransaction { get; set; }
         public DbSet<CustomerTradeMatch> CustomerTradeMatch { get; set; }

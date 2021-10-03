@@ -7,7 +7,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface ITronClient
+    public interface ITronClient: IBaseClient
     {
         Task<TransactionHash> Broadcast(BroadcastRequest request);
         Task<TronInfo> GetBlockchainInfo();

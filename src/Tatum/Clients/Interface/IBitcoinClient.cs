@@ -5,7 +5,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IBitcoinClient
+    public interface IBitcoinClient : IBaseClient
     {
         Task<TransactionHash> Broadcast(BroadcastRequest request);
         Task<BitcoinInfo> GetBlockchainInfo();

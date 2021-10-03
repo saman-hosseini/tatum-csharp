@@ -29,6 +29,10 @@ namespace TatumPlatform.Blockchain
         [Get("/v3/bitcoin/transaction/{hash}")]
         Task<BitcoinTx> GetTransaction(string hash);
 
+
+        [Post("/v3/bitcoin/transaction")]
+        Task<TransactionHash> SendTransaction(TransferBtcBasedBlockchain transfer);
+
         [Post("/v3/bitcoin/transaction")]
         Task<TransactionHash> SendTransactionKMS(TransferBtcBasedBlockchainKMS transfer);
 

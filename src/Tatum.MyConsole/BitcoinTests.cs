@@ -41,6 +41,24 @@ namespace TatumPlatform.MyConsole
             Wallet wallet = bitcoinClient.CreateWallet(mnemonic, false);
         }
 
+        public async Task SendTransactionKMS()
+        {
+            var btc1 = "mkbZK4vpCSvTxr94frf9vw88csLNxAhVB1";
+            var btc2 = "mzRozGK4J4WRxgfU5ZhtYJdZJyWBwiJuQm";
+            var btc3 = "mrBx9RckUraQEF9t7oQgQArxZSMfzUbvtp";
+            var btcold1 = "34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo";
+            var btcold2 = "16ftSEQ4ctQFDtVZiUBusQUjRrGhM3JYwe";
+            var r = await bitcoinClient.SendTransactionKMS(
+                new TransferBlockchainKMS()
+                {
+                    FromAddress = btc2,
+                    Amount = 0.0003M,
+                    Fee = 0.00003M,
+                    ToAddress = btc1,
+                    SignatureId = "cPSSYukdVsEyqQtHZ9Ri9xjKGtM1RbGKiuX38XcHVamHwoVAkHjP"
+                });
+        }
+
         public void CreateWalletTestNet()
         {
             Wallet wallet = bitcoinClient.CreateWallet(mnemonic, true);

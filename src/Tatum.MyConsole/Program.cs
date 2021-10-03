@@ -11,14 +11,14 @@ namespace TatumPlatform.MyConsole
             tatum.Setup();
             var tron = new TronTests();
             tron.Setup();
-            var ada = new AdaTests();
-            ada.Setup();
+            var btc = new BitcoinTests();
+            btc.Setup();
 
             var doge = new DogecoinTests();
             doge.Setup();
-            //var tsk = Task.Run(async () => await ada.GetAccount()); tsk.Wait();
+            var tsk = Task.Run(async () => await btc.SendTransactionKMS()); tsk.Wait();
             //var tsk = Task.Run(async () => await doge.GetBalance()); tsk.Wait();
-            var tsk = Task.Run(async () => await tatum.GenerateDepositAddress()); tsk.Wait();
+            //var tsk = Task.Run(async () => await tatum.GenerateDepositAddress()); tsk.Wait();
             //coin.CreateWalletTestNet();
             //coin.GeneratePrivateKeyTestNet();
             //coin.GenerateAddressTestNet();

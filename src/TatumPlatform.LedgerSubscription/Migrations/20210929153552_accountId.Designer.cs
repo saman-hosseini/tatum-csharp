@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TatumPlatform.LedgerSubscription.Model;
 
 namespace TatumPlatform.LedgerSubscription.Migrations
 {
     [DbContext(typeof(LedgerContext))]
-    partial class LedgerContextModelSnapshot : ModelSnapshot
+    [Migration("20210929153552_accountId")]
+    partial class accountId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

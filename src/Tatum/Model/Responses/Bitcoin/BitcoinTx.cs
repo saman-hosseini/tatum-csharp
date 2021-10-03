@@ -26,6 +26,9 @@ namespace TatumPlatform.Model.Responses
         [JsonPropertyName("block")]
         public string Block { get; set; }
 
+        /// <summary>
+        /// confirmed time
+        /// </summary>
         [JsonPropertyName("time")]
         public long Time { get; set; }
 

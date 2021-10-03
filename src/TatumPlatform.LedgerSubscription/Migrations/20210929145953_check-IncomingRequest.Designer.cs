@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TatumPlatform.LedgerSubscription.Model;
 
 namespace TatumPlatform.LedgerSubscription.Migrations
 {
     [DbContext(typeof(LedgerContext))]
-    partial class LedgerContextModelSnapshot : ModelSnapshot
+    [Migration("20210929145953_check-IncomingRequest")]
+    partial class checkIncomingRequest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,9 +27,6 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AccountId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Amount")
                         .HasColumnType("nvarchar(max)");
@@ -48,6 +47,9 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("From")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("To")
@@ -68,9 +70,6 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AccountId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Amount")
                         .HasColumnType("nvarchar(max)");
 
@@ -90,6 +89,9 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("From")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("To")

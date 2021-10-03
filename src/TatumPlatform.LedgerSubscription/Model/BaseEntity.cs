@@ -12,13 +12,14 @@ namespace TatumPlatform.LedgerSubscription.Model
         [JsonIgnore]
         [Key]
         public virtual TKey TId { get; set; }
-
+        public DateTime CreateDate { get; set; }
         public BaseEntity()
         {
-
+            CreateDate = DateTime.Now;
         }
         public BaseEntity(TKey id)
         {
+            CreateDate = DateTime.Now;
             TId = id;
         }
     }

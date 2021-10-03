@@ -17,8 +17,8 @@ namespace TatumPlatform.LedgerSubscription.Model
         [JsonPropertyName("currency")]
         public string Currency { get; set; }
 
-        [JsonPropertyName("id")]
-        public string Id { get; set; }
+        [JsonPropertyName("accountId")]
+        public string AccountId { get; set; }
 
         [JsonPropertyName("txId")]
         public string TxId { get; set; }

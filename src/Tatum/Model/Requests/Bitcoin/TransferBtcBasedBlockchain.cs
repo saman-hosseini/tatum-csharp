@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace TatumPlatform.Model.Requests
 {
     public class TransferBtcBasedBlockchain : IValidatableObject
     {
+        [JsonPropertyName("fromAddress")]
         public List<FromAddress> FromAddresses { get; set; }
+
+        [JsonPropertyName("fromUTXO")]
         public List<FromUtxo> FromUtxos { get; set; }
+
+        [JsonPropertyName("to")]
         public List<To> Tos { get; set; }
 
 
@@ -56,10 +62,12 @@ namespace TatumPlatform.Model.Requests
     {
         [Required]
         [StringLength(60, MinimumLength = 30)]
+        [JsonPropertyName("address")]
         public string Address { get; set; }
 
         [Required]
         [StringLength(52, MinimumLength = 52)]
+        [JsonPropertyName("privateKey")]
         public string PrivateKey { get; set; }
     }
 
@@ -67,14 +75,17 @@ namespace TatumPlatform.Model.Requests
     {
         [Required]
         [StringLength(64, MinimumLength = 64)]
+        [JsonPropertyName("txHash")]
         public string TxHash { get; set; }
 
         [Required]
-        [Range(0, uint.MaxValue)]
-        public uint Index { get; set; }
+        [Range(0, int.MaxValue)]
+        [JsonPropertyName("index")]
+        public int Index { get; set; }
 
         [Required]
         [StringLength(52, MinimumLength = 52)]
+        [JsonPropertyName("privateKey")]
         public string PrivateKey { get; set; }
     }
 
@@ -82,10 +93,12 @@ namespace TatumPlatform.Model.Requests
     {
         [Required]
         [StringLength(60, MinimumLength = 30)]
+        [JsonPropertyName("address")]
         public string Address { get; set; }
 
         [Required]
         [Range(0, double.PositiveInfinity)]
+        [JsonPropertyName("value")]
         public decimal Value { get; set; }
     }
 }
