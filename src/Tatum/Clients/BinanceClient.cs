@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using TatumPlatform.Blockchain;
 using TatumPlatform.Model.Requests;
 using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public class BinanceClient: IBinanceClient
+    public class BinanceClient : IBinanceClient
     {
         private readonly IBinanceApi bnbApi;
 
@@ -31,6 +32,27 @@ namespace TatumPlatform.Clients
         Task<TransactionHash> IBinanceClient.SendTransactionKMS(TransferBnbBlockchainKMS transfer)
         {
             return bnbApi.SendTransactionKMS(transfer);
+        }
+
+        public async Task<decimal> GetBalance(BalanceRequest request)
+        {
+            var account = await bnbApi.GetAccount(request.Address);
+            var balance = account.Balances.Where(x => x.Symbol == request.Currency).Sum(q => decimal.Parse(q.Free));
+            return balance;
+        }
+
+        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        {
+            var req = new TransferBnbBlockchainKMS()
+            {
+                Amount = transfer.Amount.ToString(),
+                Currency = transfer.Currency,
+                FromAddress = transfer.FromAddress,
+                SignatureId = transfer.SignatureId,
+                To = transfer.ToAddress
+            };
+            var tx = await bnbApi.SendTransactionKMS(req);
+            return tx;
         }
     }
 }

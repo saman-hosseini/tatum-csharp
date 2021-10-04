@@ -8,7 +8,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IBinanceClient
+    public interface IBinanceClient : IBaseClient
     {
         Task<BnbAccount> GetAccount(string address);
         Task<TransactionHash> SendTransactionKMS(TransferBnbBlockchainKMS transfer);

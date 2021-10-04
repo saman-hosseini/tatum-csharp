@@ -11,6 +11,9 @@ namespace TatumPlatform.Blockchain
 {
     public interface IBinanceApi
     {
+        [Get("/v3/bnb/block/current")]
+        Task<long> GetCurrentBlock();
+
         [Get("/v3/bnb/account/{address}")]
         Task<BnbAccount> GetAccount(string address);
 

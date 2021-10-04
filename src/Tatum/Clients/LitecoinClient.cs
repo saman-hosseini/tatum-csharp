@@ -164,16 +164,16 @@ namespace TatumPlatform.Clients
         {
             var allUxtos = await GetAllUxto(transfer.FromAddress);
             var totalSatoshi = BtcToSatoshi(transfer.Amount + transfer.Fee);
-            var uxtos = GetNeededUxto(allUxtos, totalSatoshi);
+            var (Utxos, Remain) = GetNeededUxto(allUxtos, totalSatoshi);
 
-            foreach (var u in uxtos.Utxos)
+            foreach (var u in Utxos)
             {
                 var res = await litecoinApi.GetUtxo(u.Hash, u.Index);
             }
 
             var sendObj = new TransferBtcBasedBlockchainKMS()
             {
-                FromUtxos = ConvertToUtxoKMS(uxtos.Utxos, transfer.SignatureId),
+                FromUtxos = ConvertToUtxoKMS(Utxos, transfer.SignatureId),
                 Tos = new List<To>()
                     {
                         new To()
@@ -184,7 +184,7 @@ namespace TatumPlatform.Clients
                         new To()
                         {
                             Address = transfer.FromAddress,
-                            Value = uxtos.Remain
+                            Value = Remain
                         }
                     }
             };
