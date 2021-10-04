@@ -112,8 +112,6 @@ namespace TatumPlatform.MyConsole
         {
             var currency = "TRON";
             var status = "InProgress";//"InProgress" "Done" "Cancelled"
-            var pageSize = 50;
-            var offset = 0;
             var withdrawalResponse = await tatumClient.OffchainGetWithdrawals(currency, status);
         }
 
@@ -138,8 +136,6 @@ namespace TatumPlatform.MyConsole
 
         public async Task OffchainTransferTron()
         {
-            string withdrawalId = "6134bbc03201f6fb0a2b7de4";
-            string txId = "";
             var obj = new OffchainTransferTron()
             {
                 BlockchainAddress = coinexTronAddress,

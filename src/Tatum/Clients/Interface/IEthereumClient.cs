@@ -6,7 +6,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IEthereumClient
+    public interface IEthereumClient : IBaseClient
     {
         Task<TransactionHash> BroadcastSignedTransaction(BroadcastRequest request);
         Task<int> GetTransactionsCount(string address);

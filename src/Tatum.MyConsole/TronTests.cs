@@ -39,7 +39,6 @@ namespace TatumPlatform.MyConsole
 
         public void CreateWalletMainNet()
         {
-            string expectedXPub = "033dd961ca356b6c9b0af052781895d564b22b3650decb9f5bc218a75a9b5dc007b36f9250ff2eb91359d307032c358c6e3c22f2a793f2dbf8196f8ff1ead35af4";
             Wallet wallet = tronClient.CreateWallet(mnemonic, false);
         }
 
@@ -60,7 +59,6 @@ namespace TatumPlatform.MyConsole
 
         public void GenerateAddressMainNet()
         {
-            string expectedAdress = "TKpy7kpXbF8P6gxEXaTbyfAZGjNyCeTAre";
             string address = tronClient.GenerateAddress("033dd961ca356b6c9b0af052781895d564b22b3650decb9f5bc218a75a9b5dc007b36f9250ff2eb91359d307032c358c6e3c22f2a793f2dbf8196f8ff1ead35af4", 1, false);
         }
 

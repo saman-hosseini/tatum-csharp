@@ -8,7 +8,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IDogecoinClient
+    public interface IDogecoinClient : IBaseClient
     {
         Task<TransactionHash> SendTransactionKMS(TransferDogecoinBlockchainKMS transfer);
         Task<DogecoinBalance> GetBalance(string address);

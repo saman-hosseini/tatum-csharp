@@ -10,9 +10,9 @@ using TatumPlatform.Model.Requests;
 
 namespace TatumPlatform.MyConsole
 {
-    public class DogecoinTests
+    public class EthTests
     {
-        IDogecoinClient dogecoinClient;
+        IEthereumClient ethereumClient;
         public void Setup()
         {
             IConfiguration config = new ConfigurationBuilder()
@@ -24,39 +24,35 @@ namespace TatumPlatform.MyConsole
             string baseUrl = config.GetValue<string>("TatumApiSettings:baseUrl");
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
-            dogecoinClient = DogecoinClient.Create(baseUrl, xApiKey);
+            ethereumClient = EthereumClient.Create(baseUrl, xApiKey);
         }
 
         public async Task GetBalance()
         {
-            var address = "DMr3fEiVrPWFpoCWS958zNtqgnFb7QWn9D";
-            var response = await dogecoinClient.GetBalance(
-                new BalanceRequest() 
-                {
-                    Address = address
-                });
-        }
-
-        public async Task GetOutputs()
-        {
-            var address = "DMr3fEiVrPWFpoCWS958zNtqgnFb7QWn9D";
-            //var response = await dogecoinClient.get(address);
+            var address = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
+            var req = new BalanceRequest()
+            {
+                Address = address,
+                Currency = "ETH",
+                ContractAddress = ""
+            };
+            var response = await ethereumClient.GetBalance(req);
         }
 
         public async Task SendTransactionKMS()
         {
-            var address1 = "nZGmHHXPcorDbiREihKnuBfhssrGPeHmEs";
-            var address2 = "no71xUudiRSBbYwe8QNXWZB8Zz25Nr65g7";
+            var address1 = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
+            var address2 = "0xbd76e88a1abf05d1c49803dab874841570570ea9";
             var req = new TransferBlockchainKMS()
             {
                 FromAddress = address1,
                 ToAddress = address2,
                 Amount = 0.0042M,
-                Currency = "",
+                Currency = "ETH",
                 Fee = 0.001M,
                 SignatureId = "3be381a1-d149-4f86-9c58-b4626b0f502f"
             };
-            var response = await dogecoinClient.SendTransactionKMS(req);
+            var response = await ethereumClient.SendTransactionKMS(req);
         }
     }
 }

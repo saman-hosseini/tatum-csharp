@@ -26,6 +26,12 @@ namespace TatumPlatform.Blockchain
         [Get("/v3/ethereum/account/balance/erc20/{address}?currency={currency}&contractAddress={contractAddress}")]
         Task<EthereumAccountBalance> GetErc20AccountBalance(string address, string currency, string contractAddress);
 
+        [Post("/v3/ethereum/transaction")]
+        Task<TransactionHash> SendTransaction(TransferEthereumErc20 transfer);
+
+        [Post("/v3/ethereum/transaction")]
+        Task<TransactionHash> SendTransactionKMS(TransferEthereumErc20KMS transfer);
+
         [Get("/v3/ethereum/transaction/{hash}")]
         Task<EthereumTx> GetTransaction(string hash);
 

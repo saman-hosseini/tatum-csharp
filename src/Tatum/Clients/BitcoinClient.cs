@@ -123,8 +123,6 @@ namespace TatumPlatform.Clients
                 }
             }
             return result;
-            //var outputs = uxtos.SelectMany((q, i) => q.Outputs).Where(x => x.Address == address).ToList();
-            //return outputs;
         }
 
         private static (List<BitcoinUtxo> Utxos, decimal Remain) GetNeededUxto(List<BitcoinUtxo> allUxtos, long amount)
@@ -151,7 +149,7 @@ namespace TatumPlatform.Clients
 
         private static long BtcToSatoshi(decimal amount)
         {
-            return decimal.ToInt64(amount) * 100000000;
+            return decimal.ToInt64(amount * 100000000);
         }
         private static List<FromUtxoKMS> ConvertToUtxoKMS(List<BitcoinUtxo> utxos, string signatureId)
         {

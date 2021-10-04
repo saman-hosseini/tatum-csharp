@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace TatumPlatform.Model.Requests
 {
@@ -7,24 +8,31 @@ namespace TatumPlatform.Model.Requests
     {
         [Required]
         [StringLength(66, MinimumLength = 66)]
+        [JsonPropertyName("fromPrivateKey")]
         public string FromPrivateKey { get; set; }
 
         [Required]
         [StringLength(42, MinimumLength = 42)]
+        [JsonPropertyName("to")]
         public string To { get; set; }
 
         [Required]
         [RegularExpression(@"^[+]?((\d+(\.\d*)?)|(\.\d+))$")]
+        [JsonPropertyName("amount")]
         public string Amount { get; set; }
 
         [StringLength(50000)]
+        [JsonPropertyName("data")]
         public string Data { get; set; }
 
-        public Currency Currency { get; set; }
+        [JsonPropertyName("currency")]
+        public string Currency { get; set; }
 
+        [JsonPropertyName("fee")]
         public Fee Fee { get; set; }
 
         [Range(0, uint.MaxValue)]
+        [JsonPropertyName("nonce")]
         public uint Nonce { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -37,10 +45,6 @@ namespace TatumPlatform.Model.Requests
                 Validator.ValidateObject(Fee, feeContext, validateAllProperties: true);
             }
 
-            if (!Currency.IsEthereumBasedCurrency())
-            {
-                results.Add(new ValidationResult("Currency is not Ethereum based."));
-            }
 
             if (results.Count == 0)
             {

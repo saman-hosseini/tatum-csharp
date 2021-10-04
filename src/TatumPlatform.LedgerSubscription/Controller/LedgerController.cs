@@ -41,7 +41,6 @@ namespace TatumPlatform.LedgerSubscription.Controller
             {
                 return Exception(ex);
             }
-            return "Hiiii";
         }
 
         [HttpPost]

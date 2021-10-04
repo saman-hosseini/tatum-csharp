@@ -203,7 +203,7 @@ namespace TatumPlatform.Clients
             transactionInput.GasPrice = new HexBigInteger(gasPrice);
             transactionInput.Nonce = new HexBigInteger(body.Nonce);
 
-            if (body.Currency == Model.Currency.ETH)
+            if (body.Currency == Model.Currency.ETH.ToString())
             {
                 transactionInput.Data = body.Data;
                 transactionInput.To = body.To;
@@ -212,16 +212,17 @@ namespace TatumPlatform.Clients
             else
             {
                 var transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
+                System.Enum.TryParse(body.Currency, out Model.Currency currency);
                 var transferFunction = new TransferFunction
                 {
                     FromAddress = addressFrom,
                     GasPrice = gasPrice,
                     Nonce = body.Nonce,
                     To = body.To,
-                    TokenAmount = new BigInteger(decimal.Parse(body.Amount)) * BigInteger.Pow(10, Constants.ContractDecimals[body.Currency])
+                    TokenAmount = new BigInteger(decimal.Parse(body.Amount)) * BigInteger.Pow(10, Constants.ContractDecimals[currency])
                 };
 
-                transactionInput = await transferHandler.CreateTransactionInputEstimatingGasAsync(Constants.ContractAddresses[body.Currency], transferFunction);
+                transactionInput = await transferHandler.CreateTransactionInputEstimatingGasAsync(Constants.ContractAddresses[currency], transferFunction);
             }
 
             if (body.Fee == null)

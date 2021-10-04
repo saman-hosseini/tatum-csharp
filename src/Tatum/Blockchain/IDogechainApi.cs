@@ -13,5 +13,8 @@ namespace TatumPlatform.Blockchain
         //https://dogechain.info/api/v1/address/balance/DMr3fEiVrPWFpoCWS958zNtqgnFb7QWn9D
         [Get("/api/v1/address/balance/{address}")]
         Task<DogecoinBalance> GetBalance(string address);
+
+        [Get("/api/v1/unspent/{address}")]
+        Task<DogecoinOutputs> GetUnspentOutputs(string address);
     }
 }
