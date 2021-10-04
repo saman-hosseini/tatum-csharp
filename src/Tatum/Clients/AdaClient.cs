@@ -36,5 +36,16 @@ namespace TatumPlatform.Clients
         {
             return adaApi.SendTransactionKMS(transfer);
         }
+
+        public async Task<decimal> GetBalance(BalanceRequest request)
+        {
+            var account = await adaApi.GetAccount(request.Address);
+            return 0M;
+        }
+
+        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -6,7 +6,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IBscClient
+    public interface IBscClient : IBaseClient
     {
         Task<TransactionHash> SendTransactionKMS(TransferBscBlockchainKMS transfer);
         Task<EthereumAccountBalance> GetAccountBalance(string address);

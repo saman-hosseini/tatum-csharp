@@ -13,7 +13,7 @@ namespace TatumPlatform.Model.Requests
         public string Data { get; set; }
 
         [Range(0, long.MaxValue)]
-        [JsonPropertyName("nonce")]
+        //[JsonPropertyName("nonce")]
         public long Nonce { get; set; }
 
         [Required]
@@ -45,6 +45,6 @@ namespace TatumPlatform.Model.Requests
         [Required]
         [Range(1, int.MaxValue)]
         [JsonPropertyName("index")]
-        public string Index { get; set; }
+        public int Index { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IAdaClient
+    public interface IAdaClient : IBaseClient
     {
         Task<AdaAccount> GetAccount(string address);
         Task<TransactionHash> SendTransactionKMS(TransferBtcBasedBlockchainKMS transfer);
