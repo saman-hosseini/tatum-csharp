@@ -9,7 +9,6 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    /// <inheritdoc/>
     public partial class BitcoinClient : IBitcoinClient
     {
         private readonly IBitcoinApi bitcoinApi;
@@ -183,9 +182,9 @@ namespace TatumPlatform.Clients
                 var res = await bitcoinApi.GetUtxo(u.Hash, u.Index);
             }
 
-            var sendObj = new TransferBtcBasedBlockchain()
+            var sendObj = new TransferBtcBasedBlockchainKMS()
             {
-                FromUtxos = ConvertToUtxo(uxtos.Utxos, transfer.SignatureId),
+                FromUtxos = ConvertToUtxoKMS(uxtos.Utxos, transfer.SignatureId),
                 Tos = new List<To>()
                     {
                         new To()
@@ -200,7 +199,7 @@ namespace TatumPlatform.Clients
                         }
                     }
             };
-            var txHash = await bitcoinApi.SendTransaction(sendObj);
+            var txHash = await bitcoinApi.SendTransactionKMS(sendObj);
             return txHash;
         }
     }

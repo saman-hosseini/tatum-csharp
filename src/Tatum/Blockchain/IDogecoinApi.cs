@@ -13,5 +13,8 @@ namespace TatumPlatform.Blockchain
     {
         [Post("/v3/dogecoin/transaction")]
         Task<TransactionHash> SendTransactionKMS(TransferDogecoinBlockchainKMS transfer);
+
+        [Get("/v3/dogecoin/utxo/{hash}/{index}")]
+        Task<DogecoinTransactionUtxo> GetTransactionUtxo(string hash, int index);
     }
 }
