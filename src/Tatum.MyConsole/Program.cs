@@ -13,7 +13,8 @@ namespace TatumPlatform.MyConsole
             tron.Setup();
             var btc = new BitcoinTests();
             btc.Setup();
-
+            var ada = new AdaTests();
+            ada.Setup();
             var doge = new DogecoinTests();
             doge.Setup();
 
@@ -26,7 +27,7 @@ namespace TatumPlatform.MyConsole
             var bsc = new BscTests();
             bsc.Setup();
 
-            var tsk1 = Task.Run(async () => await bsc.GetBalance()); tsk1.Wait();
+            var tsk1 = Task.Run(async () => await ada.GetAccount()); tsk1.Wait();
             //var tsk2 = Task.Run(async () => await doge.SendTransactionKMS()); tsk2.Wait();
             //var tsk = Task.Run(async () => await btc.SendTransactionKMS()); tsk.Wait();
             //var tsk = Task.Run(async () => await doge.GetBalance()); tsk.Wait();

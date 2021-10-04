@@ -28,8 +28,9 @@ namespace TatumPlatform.MyConsole
 
         public async Task GetAccount()
         {
-            var address = "addr1qxkyasn5hs78mwc9ls9thfnrn5feslgrjpw4khz6pcze64m22klwgrcgwxtftp9l5wf03f4fhcrmn4yg8ycrjzy52t9s76es24";
-            var response = await adaClient.GetAccount(address);
+            var address1 = "addr1qxkyasn5hs78mwc9ls9thfnrn5feslgrjpw4khz6pcze64m22klwgrcgwxtftp9l5wf03f4fhcrmn4yg8ycrjzy52t9s76es24";
+            var address2 = "addr1qxjssrst332m8t3v8q5wyy9s4mtu3esul25zq0qdngztx5d9pq8qhrz4kwhzcwpguggtptkhernpe74gyq7qmxsykdgsf8ze42";
+            var response = await adaClient.GetAccount(address2);
         }
     }
 }
