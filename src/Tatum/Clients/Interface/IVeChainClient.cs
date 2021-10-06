@@ -4,7 +4,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IVeChainClient
+    public interface IVeChainClient : IBaseClient
     {
         Task<TransactionHash> Broadcast(BroadcastRequest request);
         Task<long> EstimateGas(EstimateGasRequest request);

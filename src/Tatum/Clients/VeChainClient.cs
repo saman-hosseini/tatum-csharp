@@ -9,6 +9,7 @@ namespace TatumPlatform.Clients
     public partial class VeChainClient : IVeChainClient
     {
         private readonly IVeChainApi veChainApi;
+        private const int GasLimit = 21000;
 
         internal VeChainClient()
         {
@@ -42,7 +43,7 @@ namespace TatumPlatform.Clients
 
         Task<VeChainAccountBalance> IVeChainClient.GetAccountBalance(string address)
         {
-            return veChainApi.GetAccountBalance(address);
+            return veChainApi.GetBalance(address);
         }
 
         Task<VeChainAccountEnergy> IVeChainClient.GetAccountEnergy(string address)
@@ -68,6 +69,39 @@ namespace TatumPlatform.Clients
         Task<VeChainTxReceipt> IVeChainClient.GetTransactionReceipt(string hash)
         {
             return veChainApi.GetTransactionReceipt(hash);
+        }
+
+        private static decimal ToDecimalVet(long amount)
+        {
+            return amount / 1000000000000000000M;
+        }
+
+        private static long ToLongVet(decimal amount)
+        {
+            return decimal.ToInt64(amount * 1000000000000000000);
+        }
+
+        public async Task<decimal> GetBalance(BalanceRequest request)
+        {
+            var balance = await veChainApi.GetBalance(request.Address);
+            return TatumHelper.ToDecimal(balance.Balance);
+        }
+
+        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        {
+            var req = new TransferVeChainBlockchainKMS()
+            {
+                SignatureId = transfer.SignatureId,
+                Amount = transfer.Amount.ToString(),
+                Data = transfer.Message,
+                To = transfer.ToAddress,
+                Fee = new VeChainFee()
+                {
+                    GasLimit = GasLimit.ToString()
+                }
+            };
+            var tx = await veChainApi.SendTransactionKMS(req);
+            return tx;
         }
     }
 }

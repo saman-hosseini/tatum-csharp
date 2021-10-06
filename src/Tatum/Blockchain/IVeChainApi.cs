@@ -20,7 +20,7 @@ namespace TatumPlatform.Blockchain
         Task<VeChainBlock> GetBlock(string hash);
 
         [Get("/v3/vet/account/balance/{address}")]
-        Task<VeChainAccountBalance> GetAccountBalance(string address);
+        Task<VeChainAccountBalance> GetBalance(string address);
 
         [Get("/v3/vet/account/energy/{address}")]
         Task<VeChainAccountEnergy> GetAccountEnergy(string address);
