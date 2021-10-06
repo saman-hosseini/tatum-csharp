@@ -13,8 +13,7 @@ namespace TatumPlatform.LedgerSubscription.Controller
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    //[Authorize(Policy = "CheckHmacDigest")]
-    //[Authorize(AuthenticationSchemes = SchemesNamesConst.TokenAuthenticationDefaultScheme)]
+    [Authorize(AuthenticationSchemes = SchemesNamesConst.TokenAuthenticationDefaultScheme)]
     public class LedgerController : ControllerBase
     {
         [AllowAnonymous]

@@ -51,7 +51,10 @@ namespace TatumPlatform.MyConsole
             var vet = new VeChainTests();
             vet.Setup();
 
-            var tsk1 = Task.Run(async () => await vet.SendTransactionKMS()); tsk1.Wait();
+            var hmac = new HMACDigestTests();
+            hmac.Test();
+
+            //var tsk1 = Task.Run(async () => await vet.SendTransactionKMS()); tsk1.Wait();
             //var tsk2 = Task.Run(async () => await doge.SendTransactionKMS()); tsk2.Wait();
             //var tsk = Task.Run(async () => await btc.SendTransactionKMS()); tsk.Wait();
             //var tsk = Task.Run(async () => await doge.GetBalance()); tsk.Wait();

@@ -26,7 +26,6 @@ namespace TatumPlatform.LedgerSubscription
             //{
             //    options.AddPolicy("CheckHmacDigest", policy => policy.Requirements.Add(new HmacDigest("a21")));
             //});
-            services.AddScoped<IAuthorizationHandler, CheckHmacDigestHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
