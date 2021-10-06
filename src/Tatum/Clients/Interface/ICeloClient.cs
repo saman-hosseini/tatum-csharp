@@ -8,7 +8,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface ICeloClient
+    public interface ICeloClient : IBaseClient
     {
         Task<CeloBalance> GetBalance(string address);
         Task<TransactionHash> SendTransactionKMS(TransferCeloBlockchainKMS transfer);

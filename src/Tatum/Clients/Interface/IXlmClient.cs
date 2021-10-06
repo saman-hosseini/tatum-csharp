@@ -5,7 +5,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IXlmClient
+    public interface IXlmClient : IBaseClient
     {
         Task<XlmAccountInfo> GetAccountInfo(string accountAddress);
         Task<TransactionHash> Broadcast(BroadcastRequest request);

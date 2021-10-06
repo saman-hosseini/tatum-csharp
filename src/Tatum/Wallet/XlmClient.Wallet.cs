@@ -2,7 +2,7 @@
 
 namespace TatumPlatform.Clients
 {
-    public partial class XlmClient : IXlmClient
+    public partial class XlmClient
     {
         Wallet IXlmClient.CreateWallet(string secret)
         {

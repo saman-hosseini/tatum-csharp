@@ -67,5 +67,24 @@ namespace TatumPlatform.Clients
         {
             return xlmApi.GetTransaction(hash);
         }
+
+        public async Task<decimal> GetBalance(BalanceRequest request)
+        {
+            var accountInfo = await xlmApi.GetAccountInfo(request.Address);
+            return decimal.Parse("1");
+        }
+
+        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        {
+            var req = new TransferXlmBlockchainKMS()
+            {
+                SignatureId = transfer.SignatureId,
+                Amount = transfer.Amount.ToString(),
+                To = transfer.ToAddress,
+                FromAccount = transfer.FromAddress,
+            };
+            var tx = await xlmApi.SendTransactionKMS(req);
+            return tx;
+        }
     }
 }

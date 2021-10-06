@@ -32,5 +32,26 @@ namespace TatumPlatform.Clients
         {
             return celoApi.SendTransactionKMS(transfer);
         }
+
+        public async Task<decimal> GetBalance(BalanceRequest request)
+        {
+            var accountBalance = await celoApi.GetBalance(request.Address);
+            return decimal.Parse(accountBalance.Celo);
+        }
+
+        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        {
+            var req = new TransferCeloBlockchainKMS()
+            {
+                SignatureId = transfer.SignatureId,
+                Index = transfer.Index,
+                Amount = transfer.Amount.ToString(),
+                Currency = transfer.Currency,
+                FeeCurrency = transfer.Currency,
+                To = transfer.ToAddress,
+            };
+            var tx = await celoApi.SendTransactionKMS(req);
+            return tx;
+        }
     }
 }

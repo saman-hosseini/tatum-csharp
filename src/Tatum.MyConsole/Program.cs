@@ -27,7 +27,10 @@ namespace TatumPlatform.MyConsole
             var bsc = new BscTests();
             bsc.Setup();
 
-            var tsk1 = Task.Run(async () => await ada.GetAccount()); tsk1.Wait();
+            var celo = new CeloTests();
+            celo.Setup();
+
+            var tsk1 = Task.Run(async () => await celo.GetBalance()); tsk1.Wait();
             //var tsk2 = Task.Run(async () => await doge.SendTransactionKMS()); tsk2.Wait();
             //var tsk = Task.Run(async () => await btc.SendTransactionKMS()); tsk.Wait();
             //var tsk = Task.Run(async () => await doge.GetBalance()); tsk.Wait();
