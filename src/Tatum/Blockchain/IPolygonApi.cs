@@ -15,6 +15,6 @@ namespace TatumPlatform.Blockchain
         Task<TransactionHash> SendTransactionKMS(TransferPolygonBlockchainKMS transferKMS);
 
         [Get("/v3/polygon/account/balance/{address}")]
-        Task<EthereumAccountBalance> GetAccountBalance(string address);
+        Task<EthereumAccountBalance> GetBalance(string address);
     }
 }

@@ -8,7 +8,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IPolygonClient
+    public interface IPolygonClient : IBaseClient
     {
         Task<TransactionHash> SendTransactionKMS(TransferPolygonBlockchainKMS transferKMS);
 
