@@ -8,7 +8,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IFlowClient
+    public interface IFlowClient : IBaseClient
     {
         Task<FlowAccount> GetAccount(string address);
 

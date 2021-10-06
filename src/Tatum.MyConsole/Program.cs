@@ -39,7 +39,10 @@ namespace TatumPlatform.MyConsole
             var egld = new EgldTests();
             egld.Setup();
 
-            var tsk1 = Task.Run(async () => await egld.GetBalance()); tsk1.Wait();
+            var flow = new FlowTests();
+            flow.Setup();
+
+            var tsk1 = Task.Run(async () => await flow.GetBalance()); tsk1.Wait();
             //var tsk2 = Task.Run(async () => await doge.SendTransactionKMS()); tsk2.Wait();
             //var tsk = Task.Run(async () => await btc.SendTransactionKMS()); tsk.Wait();
             //var tsk = Task.Run(async () => await doge.GetBalance()); tsk.Wait();
