@@ -4,7 +4,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IXrpClient
+    public interface IXrpClient : IBaseClient
     {
         Task<XrpAccountInfo> GetAccountInfo(string accountAddress);
         Task<TransactionHash> Broadcast(BroadcastRequest request);

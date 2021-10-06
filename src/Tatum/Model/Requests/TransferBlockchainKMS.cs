@@ -10,5 +10,7 @@
         public string ContractAddress { get; set; }
         public int Index { get; set; }
         public string SignatureId { get; set; }
+        public int FromTag { get; set; }
+        public int ToTag { get; set; }
     }
 }

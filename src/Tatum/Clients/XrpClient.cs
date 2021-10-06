@@ -62,5 +62,37 @@ namespace TatumPlatform.Clients
         {
             return xrpApi.GetTransaction(hash);
         }
+
+        private static decimal ToDecimalXrp(long amount)
+        {
+            return amount / 1000000M;
+        }
+
+        private static long ToLongXrp(decimal amount)
+        {
+            return decimal.ToInt64(amount * 1000000);
+        }
+
+        public async Task<decimal> GetBalance(BalanceRequest request)
+        {
+            var accountBalance = await xrpApi.GetAccountBalance(request.Address);
+            return ToDecimalXrp(long.Parse(accountBalance.Balance));
+        }
+
+        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        {
+            var req = new TransferXrpBlockchainKMS()
+            {
+                SignatureId = transfer.SignatureId,
+                FromAccount = transfer.FromAddress,
+                SourceTag = transfer.FromTag,
+                Fee = transfer.Fee.ToString(),
+                Amount = transfer.Amount.ToString(),
+                To = transfer.ToAddress,
+                DestinationTag = transfer.ToTag,
+            };
+            var tx = await xrpApi.SendTransactionKMS(req);
+            return tx;
+        }
     }
 }

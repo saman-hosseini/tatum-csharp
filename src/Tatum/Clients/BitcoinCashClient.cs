@@ -7,7 +7,6 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    ///<inheritdoc/>
     public partial class BitcoinCashClient : IBitcoinCashClient
     {
         private readonly IBitcoinCashApi bitcoinCashApi;
@@ -57,6 +56,16 @@ namespace TatumPlatform.Clients
         Task<List<BitcoinCashTx>> IBitcoinCashClient.GetTxForAccount(string address, int skip)
         {
             return bitcoinCashApi.GetTxForAccount(address, skip);
+        }
+
+        Task<TransactionHash> IBaseClient.SendTransactionKMS(TransferBlockchainKMS transfer)
+        {
+            throw new System.Exception();
+        }
+
+        public async Task<decimal> GetBalance(BalanceRequest request)
+        {
+            throw new System.Exception();
         }
     }
 }

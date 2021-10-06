@@ -36,8 +36,7 @@ namespace TatumPlatform.MyConsole
         }
 
         public void CreateWalletMainNet()
-        {
-            string expectedXPub = "xpub6ErBxoAXLaRuyMrByGBZYnPWbh7R7EMgd74wBnK8X2iR2vShuEAZFkhpSoT5tCY1eNK2jcspa7ijnDD3u1CRgUVNEtjmSkaLtxAPqWBBenz";
+        { 
             Wallet wallet = bitcoinClient.CreateWallet(mnemonic, false);
         }
 
