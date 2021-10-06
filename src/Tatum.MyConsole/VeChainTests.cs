@@ -29,13 +29,28 @@ namespace TatumPlatform.MyConsole
 
         public async Task GetBalance()
         {
-            var Taddress = "23452345";
             var Maddress = "0x9eB35e1F29E643c2F673E4c61B40084c534099EC";
             var req = new BalanceRequest()
             {
                 Address = Maddress
             };
             var response = await veChainClient.GetBalance(req);
+        }
+
+        public async Task SendTransactionKMS()
+        {
+            var btc1 = "mkbZK4vpCSvTxr94frf9vw88csLNxAhVB1";
+            var btc2 = "mzRozGK4J4WRxgfU5ZhtYJdZJyWBwiJuQm";
+            var r = await veChainClient.SendTransactionKMS(
+                new TransferBlockchainKMS()
+                {
+                    FromAddress = btc2,
+                    Amount = 0.0003M,
+                    Fee = 0.00003M,
+                    FromTag = 3,
+                    ToAddress = btc1,
+                    SignatureId = "cPSSYukdVsEyqQtHZ9Ri9xjKGtM1RbGKiuX38XcHVamHwoVAkHjP"
+                });
         }
     }
 }

@@ -29,7 +29,6 @@ namespace TatumPlatform.MyConsole
 
         public async Task GetBalance()
         {
-            var Taddress = "23452345";
             var Maddress = "xdcdc643f3f2065f7d3d06c44c3f9a047a0f45fb532";
             var req = new BalanceRequest()
             {

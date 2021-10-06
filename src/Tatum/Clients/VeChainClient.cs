@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using TatumPlatform.Blockchain;
 using TatumPlatform.Model.Requests;
 using TatumPlatform.Model.Responses;
+using TatumPlatform.Model.Rules;
 
 namespace TatumPlatform.Clients
 {
@@ -89,6 +91,9 @@ namespace TatumPlatform.Clients
 
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
+            var validator = new VeChainTransferValidator();
+            var result = validator.Validate(transfer);
+
             var req = new TransferVeChainBlockchainKMS()
             {
                 SignatureId = transfer.SignatureId,

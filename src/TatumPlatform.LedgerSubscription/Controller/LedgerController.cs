@@ -18,7 +18,7 @@ namespace TatumPlatform.LedgerSubscription.Controller
     public class LedgerController : ControllerBase
     {
         [AllowAnonymous]
-        public async Task<string> Get()
+        public string Get()
         {
             return "Hi";
         }

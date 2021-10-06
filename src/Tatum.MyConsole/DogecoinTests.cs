@@ -37,12 +37,6 @@ namespace TatumPlatform.MyConsole
                 });
         }
 
-        public async Task GetOutputs()
-        {
-            var address = "DMr3fEiVrPWFpoCWS958zNtqgnFb7QWn9D";
-            //var response = await dogecoinClient.get(address);
-        }
-
         public async Task SendTransactionKMS()
         {
             var address1 = "nZGmHHXPcorDbiREihKnuBfhssrGPeHmEs";

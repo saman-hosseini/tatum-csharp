@@ -1,0 +1,19 @@
+﻿using FluentValidation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TatumPlatform.Model.Requests;
+
+namespace TatumPlatform.Model.Rules
+{
+    public class BaseTransferValidator : AbstractValidator<TransferBlockchainKMS>
+    {
+        public BaseTransferValidator()
+        {
+            RuleFor(q => q.SignatureId).NotNull().Length(36);
+            RuleFor(q => q.Amount).GreaterThan(0);
+        }
+    }
+}
