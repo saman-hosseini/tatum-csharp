@@ -64,7 +64,7 @@ namespace TatumPlatform.Clients
                 {
                     GasLimit = GasLimit.ToString(),
                     GasPrice = gasPrice
-                },
+                }
             };
             var tx = await xdcApi.SendTransactionKMS(req);
             return tx;

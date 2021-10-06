@@ -8,7 +8,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IEgldClient
+    public interface IEgldClient : IBaseClient
     {
         Task<EgldBalance> GetBalance(string address);
 
