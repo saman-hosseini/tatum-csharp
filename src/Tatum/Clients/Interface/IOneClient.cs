@@ -8,7 +8,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IOneClient
+    public interface IOneClient : IBaseClient
     {
         Task<OneBalance> GetBalance(string address);
 

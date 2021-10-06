@@ -20,7 +20,7 @@ namespace TatumPlatform.Model.Requests
         public string Currency { get; set; }
 
         [Range(0, int.MaxValue)]
-        [JsonPropertyName("nonce")]
+        //[JsonPropertyName("nonce")]
         public int Nonce { get; set; }
 
         [Required]

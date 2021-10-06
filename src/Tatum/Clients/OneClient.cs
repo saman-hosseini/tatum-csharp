@@ -8,6 +8,7 @@ namespace TatumPlatform.Clients
     public class OneClient : IOneClient
     {
         private readonly IOneApi oneApi;
+        private const int GasLimit = 21000;
 
         internal OneClient()
         {
@@ -31,6 +32,43 @@ namespace TatumPlatform.Clients
         Task<TransactionHash> IOneClient.SendTransactionKMS(TransferOneBlockchainKMS transfer)
         {
             return oneApi.SendTransactionKMS(transfer);
+        }
+
+        private static decimal ToDecimalOne(long amount)
+        {
+            return amount / 1000000000000000000M;
+        }
+
+        private static long ToLongOne(decimal amount)
+        {
+            return decimal.ToInt64(amount * 1000000000000000000);
+        }
+
+        public async Task<decimal> GetBalance(BalanceRequest request)
+        {
+            var balance = await oneApi.GetBalance(request.Address);
+            return TatumHelper.ToDecimal(balance.Balance);
+        }
+
+        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        {
+            var gasPrice = (ToLongOne(transfer.Fee) / GasLimit).ToString();
+            var req = new TransferOneBlockchainKMS()
+            {
+                SignatureId = transfer.SignatureId,
+                Amount = transfer.Amount.ToString(),
+                Currency = transfer.Currency,
+                Data = transfer.Message,
+                Index = transfer.Index,
+                To = transfer.ToAddress,
+                Fee = new Fee()
+                {
+                    GasLimit = GasLimit.ToString(),
+                    GasPrice = gasPrice
+                }
+            };
+            var tx = await oneApi.SendTransactionKMS(req);
+            return tx;
         }
     }
 }
