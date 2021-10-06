@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using TatumPlatform.Blockchain;
 using TatumPlatform.Model.Requests;
@@ -10,6 +11,7 @@ namespace TatumPlatform.Clients
     public partial class XlmClient : IXlmClient
     {
         private readonly IXlmApi xlmApi;
+        private const string Token = "XLM";
 
         internal XlmClient()
         {
@@ -71,7 +73,16 @@ namespace TatumPlatform.Clients
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var accountInfo = await xlmApi.GetAccountInfo(request.Address);
-            return decimal.Parse("1");
+            string strBalance;
+            if (request.Currency.ToUpper() == Token)
+            {
+                strBalance = accountInfo.Balances.FirstOrDefault(q => q.AssetCode == null && q.AssetIssuer == null).Balance;
+            }
+            else
+            {
+                strBalance = accountInfo.Balances.FirstOrDefault(q => q.AssetCode == request.Currency && q.AssetIssuer == request.ContractAddress).Balance;
+            }
+            return TatumHelper.ToDecimal(strBalance);
         }
 
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
@@ -82,6 +93,7 @@ namespace TatumPlatform.Clients
                 Amount = transfer.Amount.ToString(),
                 To = transfer.ToAddress,
                 FromAccount = transfer.FromAddress,
+                Message = transfer.Message
             };
             var tx = await xlmApi.SendTransactionKMS(req);
             return tx;

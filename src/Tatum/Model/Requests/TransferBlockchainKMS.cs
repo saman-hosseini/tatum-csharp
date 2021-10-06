@@ -12,5 +12,6 @@
         public string SignatureId { get; set; }
         public int FromTag { get; set; }
         public int ToTag { get; set; }
+        public string Message { get; set; }
     }
 }
