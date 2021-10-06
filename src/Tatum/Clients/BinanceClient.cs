@@ -37,7 +37,7 @@ namespace TatumPlatform.Clients
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var account = await bnbApi.GetAccount(request.Address);
-            var balance = account.Balances.Where(x => x.Symbol == request.Currency).Sum(q => decimal.Parse(q.Free));
+            var balance = account.Balances.Where(x => x.Symbol == request.Currency).Sum(q => TatumHelper.ToDecimal(q.Free));
             return balance;
         }
 
@@ -49,7 +49,8 @@ namespace TatumPlatform.Clients
                 Currency = transfer.Currency,
                 FromAddress = transfer.FromAddress,
                 SignatureId = transfer.SignatureId,
-                To = transfer.ToAddress
+                To = transfer.ToAddress,
+                Message = transfer.Message
             };
             var tx = await bnbApi.SendTransactionKMS(req);
             return tx;

@@ -16,7 +16,7 @@ namespace TatumPlatform
             return defaultValue;
         }
 
-        public static decimal ToLong(string str, long defaultValue = 0)
+        public static long ToLong(string str, long defaultValue = 0)
         {
             if (String.IsNullOrEmpty(str))
                 return defaultValue;

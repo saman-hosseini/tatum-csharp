@@ -8,7 +8,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public interface IXdcClient
+    public interface IXdcClient : IBaseClient
     {
         Task<XdcBalance> GetBalance(string address);
         Task<TransactionHash> SendTransactionKMS(TransferXdcBlockchainKMS transfer);

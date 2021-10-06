@@ -10,9 +10,9 @@ using TatumPlatform.Model.Requests;
 
 namespace TatumPlatform.MyConsole
 {
-    public class XlmTests
+    public class XdcTests
     {
-        IXlmClient xlmClient;
+        IXdcClient xdcClient;
         public void Setup()
         {
             IConfiguration config = new ConfigurationBuilder()
@@ -24,19 +24,18 @@ namespace TatumPlatform.MyConsole
             string baseUrl = config.GetValue<string>("TatumApiSettings:baseUrl");
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
-            xlmClient = XlmClient.Create(baseUrl, xApiKey);
+            xdcClient = XdcClient.Create(baseUrl, xApiKey);
         }
 
         public async Task GetBalance()
         {
             var Taddress = "23452345";
-            var Maddress = "GDDSJUIDT5676C23QOIDP4YN6KK2X7QXCPJDCDPRUIWCP2CXXLRGKUPI";
+            var Maddress = "xdcdc643f3f2065f7d3d06c44c3f9a047a0f45fb532";
             var req = new BalanceRequest()
             {
-                Address = Maddress,
-                Currency = "XLM"
+                Address = Maddress
             };
-            var response = await xlmClient.GetBalance(req);
+            var response = await xdcClient.GetBalance(req);
         }
     }
 }

@@ -91,6 +91,7 @@ namespace TatumPlatform.Clients
             var gasPrice = (EthToGwei(transfer.Fee) / GasLimit).ToString();
             var sendObj = new TransferEthereumErc20KMS()
             {
+                SignatureId = transfer.SignatureId,
                 Amount = transfer.Amount.ToString(),
                 Currency = transfer.Currency,
                 To = transfer.ToAddress,
@@ -99,7 +100,7 @@ namespace TatumPlatform.Clients
                     GasLimit = GasLimit.ToString(),
                     GasPrice = gasPrice
                 },
-                SignatureId = transfer.SignatureId
+                Data = transfer.Message
             };
             var tx = await ethereumApi.SendTransactionKMS(sendObj);
             return tx;
@@ -110,12 +111,12 @@ namespace TatumPlatform.Clients
             if (request.Currency == Currency.ETH.ToString())
             {
                 var balance = await ethereumApi.GetAccountBalance(request.Address);
-                return decimal.Parse(balance.Balance);
+                return TatumHelper.ToDecimal(balance.Balance);
             }
             else
             {
                 var balance = await ethereumApi.GetErc20AccountBalance(request.Address, request.Currency, request.ContractAddress);
-                return decimal.Parse(balance.Balance);
+                return TatumHelper.ToDecimal(balance.Balance);
             }
         }
     }

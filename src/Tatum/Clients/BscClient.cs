@@ -38,7 +38,7 @@ namespace TatumPlatform.Clients
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var balance = await bscApi.GetAccountBalance(request.Address);
-            return decimal.Parse(balance.Balance);
+            return TatumHelper.ToDecimal(balance.Balance);
         }
 
         private static decimal ToDecimalBsc(long amount)
@@ -65,7 +65,8 @@ namespace TatumPlatform.Clients
                     GasPrice = gasPrice
                 },
                 To = transfer.ToAddress,
-                Index = transfer.Index
+                Index = transfer.Index,
+                Data = transfer.Message
             };
             var tx = await bscApi.SendTransactionKMS(req);
             return tx;

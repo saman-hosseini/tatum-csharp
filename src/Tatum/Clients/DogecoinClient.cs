@@ -68,7 +68,7 @@ namespace TatumPlatform.Clients
             long balance = 0;
             foreach (var tx in allUxtos)
             {
-                var value = ConvertToLong(tx.Value);
+                var value = TatumHelper.ToLong(tx.Value);
                 if (value > 0)
                 {
                     balance += value;
@@ -109,16 +109,8 @@ namespace TatumPlatform.Clients
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var dogecoinBalance = await dogechainApi.GetBalance(request.Address);
-            var balance = decimal.Parse(dogecoinBalance.Balance);
+            var balance = TatumHelper.ToDecimal(dogecoinBalance.Balance);
             return balance;
-        }
-
-        private static long ConvertToLong(string str)
-        {
-            if (string.IsNullOrEmpty(str))
-                return 0;
-            long.TryParse(str, out long result);
-            return result;
         }
     }
 }

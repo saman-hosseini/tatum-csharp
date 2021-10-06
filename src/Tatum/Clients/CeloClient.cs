@@ -36,7 +36,7 @@ namespace TatumPlatform.Clients
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var accountBalance = await celoApi.GetBalance(request.Address);
-            return decimal.Parse(accountBalance.Celo);
+            return TatumHelper.ToDecimal(accountBalance.Celo);
         }
 
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
@@ -49,6 +49,7 @@ namespace TatumPlatform.Clients
                 Currency = transfer.Currency,
                 FeeCurrency = transfer.Currency,
                 To = transfer.ToAddress,
+                Data = transfer.Message
             };
             var tx = await celoApi.SendTransactionKMS(req);
             return tx;

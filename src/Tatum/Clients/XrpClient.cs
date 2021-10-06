@@ -89,7 +89,7 @@ namespace TatumPlatform.Clients
                 Fee = transfer.Fee.ToString(),
                 Amount = transfer.Amount.ToString(),
                 To = transfer.ToAddress,
-                DestinationTag = transfer.ToTag,
+                DestinationTag = transfer.ToTag
             };
             var tx = await xrpApi.SendTransactionKMS(req);
             return tx;
