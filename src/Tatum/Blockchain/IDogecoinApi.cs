@@ -16,5 +16,8 @@ namespace TatumPlatform.Blockchain
 
         [Get("/v3/dogecoin/utxo/{hash}/{index}")]
         Task<DogecoinTransactionUtxo> GetTransactionUtxo(string hash, int index);
+
+        [Get("/v3/dogecoin/address/{xpub}/{index}")]
+        Task<BlockchainAddress> GenerateAddress(string xpub, int index);
     }
 }

@@ -60,5 +60,11 @@ namespace TatumPlatform.Clients
             var tx = await polygonApi.SendTransactionKMS(req);
             return tx;
         }
+
+        public async Task<string> GenerateAddress(string xPubString, int index)
+        {
+            var address = await polygonApi.GenerateAddress(xPubString, index);
+            return address.Address;
+        }
     }
 }

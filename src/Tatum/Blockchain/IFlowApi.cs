@@ -16,5 +16,8 @@ namespace TatumPlatform.Blockchain
 
         [Post("/v3/flow/transaction")]
         Task<TransactionHash> SendTransactionKMS(TransferFlowBlockchainKMS transfer);
+
+        [Get("/v3/flow/address/{xpub}/{index}")]
+        Task<BlockchainAddress> GenerateAddress(string xpub, int index);
     }
 }

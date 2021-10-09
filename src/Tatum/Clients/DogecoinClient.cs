@@ -103,5 +103,11 @@ namespace TatumPlatform.Clients
             var balance = TatumHelper.ToDecimal(dogecoinBalance.Balance);
             return balance;
         }
+
+        public async Task<string> GenerateAddress(string xPubString, int index)
+        {
+            var address = await dogecoinApi.GenerateAddress(xPubString, index);
+            return address.Address;
+        }
     }
 }

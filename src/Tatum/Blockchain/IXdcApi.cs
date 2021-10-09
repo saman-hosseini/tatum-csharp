@@ -19,5 +19,8 @@ namespace TatumPlatform.Blockchain
 
         [Post("/v3/xdc/gas")]
         Task<Fee> EstimateTransactionFee(TransferXdcBlockchainKMS transfer);
+
+        [Get("/v3/xdc/address/{xpub}/{index}")]
+        Task<BlockchainAddress> GenerateAddress(string xpub, int index);
     }
 }

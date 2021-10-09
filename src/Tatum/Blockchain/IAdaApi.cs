@@ -22,5 +22,8 @@ namespace TatumPlatform.Blockchain
 
         [Get("/v3/ada/{address}/utxos")]
         Task<List<AdaUtxo>> GetUtxos(string address);
+
+        [Get("/v3/ada/address/{xpub}/{index}")]
+        Task<BlockchainAddress> GenerateAddress(string xpub, int index);
     }
 }

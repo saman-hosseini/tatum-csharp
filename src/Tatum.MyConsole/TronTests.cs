@@ -57,9 +57,9 @@ namespace TatumPlatform.MyConsole
             var privateKey = tronClient.GeneratePrivateKey(mnemonic, 1, true);
         }
 
-        public void GenerateAddressMainNet()
+        public async Task GenerateAddressMainNet()
         {
-            string address = tronClient.GenerateAddress("033dd961ca356b6c9b0af052781895d564b22b3650decb9f5bc218a75a9b5dc007b36f9250ff2eb91359d307032c358c6e3c22f2a793f2dbf8196f8ff1ead35af4", 1, false);
+            string address = await tronClient.GenerateAddress("033dd961ca356b6c9b0af052781895d564b22b3650decb9f5bc218a75a9b5dc007b36f9250ff2eb91359d307032c358c6e3c22f2a793f2dbf8196f8ff1ead35af4", 1);
         }
 
         public async Task GetAccount()

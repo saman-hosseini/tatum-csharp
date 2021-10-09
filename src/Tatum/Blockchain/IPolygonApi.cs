@@ -16,5 +16,8 @@ namespace TatumPlatform.Blockchain
 
         [Get("/v3/polygon/account/balance/{address}")]
         Task<EthereumAccountBalance> GetBalance(string address);
+
+        [Get("/v3/polygon/address/{xpub}/{index}")]
+        Task<BlockchainAddress> GenerateAddress(string xpub, int index);
     }
 }

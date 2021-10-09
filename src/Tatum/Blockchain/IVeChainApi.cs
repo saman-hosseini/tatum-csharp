@@ -33,5 +33,8 @@ namespace TatumPlatform.Blockchain
 
         [Post("/v3/vet/transaction")]
         Task<TransactionHash> SendTransactionKMS(TransferVeChainBlockchainKMS transfer);
+
+        [Get("/v3/vet/address/{xpub}/{index}")]
+        Task<BlockchainAddress> GenerateAddress(string xpub, int index);
     }
 }

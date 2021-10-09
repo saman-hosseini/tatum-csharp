@@ -38,5 +38,8 @@ namespace TatumPlatform.Blockchain
 
         [Post("/v3/bitcoin/address/balance/{address}")]
         Task<BitcoinAccountBalance> GetAccountBalance(string address);
+
+        [Get("/v3/bitcoin/address/{xpub}/{index}")]
+        Task<BlockchainAddress> GenerateAddress(string xpub, int index);
     }
 }

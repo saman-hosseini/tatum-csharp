@@ -37,5 +37,8 @@ namespace TatumPlatform.Blockchain
 
         [Get("/v3/ethereum/account/transaction/{address}?pageSize={pageSize}&offset={offset}")]
         Task<List<EthereumTx>> GetAccountTransactions(string address, int pageSize = 50, int offset = 0);
+
+        [Get("/v3/ethereum/address/{xpub}/{index}")]
+        Task<BlockchainAddress> GenerateAddress(string xpub, int index);
     }
 }

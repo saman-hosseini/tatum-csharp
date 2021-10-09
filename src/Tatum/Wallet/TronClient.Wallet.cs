@@ -25,12 +25,5 @@ namespace TatumPlatform.Clients
             var privateKey = tsk.Result;
             return privateKey.Key;
         }
-
-        string ITronClient.GenerateAddress(string xPubString, int index, bool testnet)
-        {
-            var tsk = Task.Run(async () => await tronApi.GenerateTronAddress(xPubString, index));
-            var tronAddress = tsk.Result;
-            return tronAddress.Address;
-        }
     }
 }

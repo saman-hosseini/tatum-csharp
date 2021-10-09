@@ -188,5 +188,11 @@ namespace TatumPlatform.Clients
             var balanceReq = await litecoinApi.GetAccountBalance(request.Address);
             return balanceReq.CurrentBalance;
         }
+
+        public async Task<string> GenerateAddress(string xPubString, int index)
+        {
+            var address = await litecoinApi.GenerateAddress(xPubString, index);
+            return address.Address;
+        }
     }
 }

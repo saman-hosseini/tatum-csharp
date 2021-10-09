@@ -85,5 +85,10 @@ namespace TatumPlatform.Clients
             var tx = await xrpApi.SendTransactionKMS(req);
             return tx;
         }
+
+        public Task<string> GenerateAddress(string xPubString, int index)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

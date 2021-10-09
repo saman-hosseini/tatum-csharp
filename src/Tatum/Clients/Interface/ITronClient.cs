@@ -19,8 +19,6 @@ namespace TatumPlatform.Clients
 
         string GeneratePrivateKey(string mnemonic, int index, bool testnet);
 
-        string GenerateAddress(string xPubString, int index, bool testnet);
-
         Task<TransactionHash> SendTransactionKMS(TransferTronBlockchainKMS transfer);
     }
 }

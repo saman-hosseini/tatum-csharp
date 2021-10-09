@@ -53,5 +53,11 @@ namespace TatumPlatform.Clients
             var tx = await flowApi.SendTransactionKMS(req);
             return tx;
         }
+
+        public async Task<string> GenerateAddress(string xPubString, int index)
+        {
+            var address = await flowApi.GenerateAddress(xPubString, index);
+            return address.Address;
+        }
     }
 }

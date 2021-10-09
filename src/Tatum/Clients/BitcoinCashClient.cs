@@ -60,12 +60,17 @@ namespace TatumPlatform.Clients
 
         Task<TransactionHash> IBaseClient.SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            throw new System.Exception();
+            throw new System.NotImplementedException();
         }
 
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
-            throw new System.Exception();
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<string> GenerateAddress(string xPubString, int index)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

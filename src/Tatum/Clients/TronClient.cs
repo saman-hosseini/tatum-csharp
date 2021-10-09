@@ -28,6 +28,11 @@ namespace TatumPlatform.Clients
             return new TronClient(apiBaseUrl, xApiKey);
         }
 
+        Task<TransactionHash> ITronClient.SendTransactionKMS(TransferTronBlockchainKMS transfer)
+        {
+            return tronApi.SendTransactionKMS(transfer);
+        }
+
         Task<TransactionHash> ITronClient.Broadcast(BroadcastRequest request)
         {
             var validationContext = new ValidationContext(request);
@@ -90,6 +95,12 @@ namespace TatumPlatform.Clients
             {
                 return 0M;
             }
+        }
+
+        public async Task<string> GenerateAddress(string xPubString, int index)
+        {
+            var address = await tronApi.GenerateAddress(xPubString, index);
+            return address.Address;
         }
     }
 }

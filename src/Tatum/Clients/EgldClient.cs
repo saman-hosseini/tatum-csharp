@@ -60,5 +60,10 @@ namespace TatumPlatform.Clients
             var tx = await egldApi.SendTransactionKMS(req);
             return tx;
         }
+
+        public async Task<string> GenerateAddress(string xPubString, int index)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

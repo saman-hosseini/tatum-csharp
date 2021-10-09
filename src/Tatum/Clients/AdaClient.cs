@@ -148,5 +148,11 @@ namespace TatumPlatform.Clients
             var txHash = await adaApi.SendTransactionKMS(sendObj);
             return txHash;
         }
+
+        public async Task<string> GenerateAddress(string xPubString, int index)
+        {
+            var address = await adaApi.GenerateAddress(xPubString, index);
+            return address.Address;
+        }
     }
 }

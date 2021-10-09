@@ -16,5 +16,8 @@ namespace TatumPlatform.Blockchain
 
         [Post("/v3/one/transaction?shardID=0")]
         Task<TransactionHash> SendTransactionKMS(TransferOneBlockchainKMS transfer);
+
+        [Get("/v3/one/address/{xpub}/{index}")]
+        Task<BlockchainAddress> GenerateAddress(string xpub, int index);
     }
 }

@@ -17,7 +17,7 @@ namespace TatumPlatform.Blockchain
         Task<TronPrivateKey> GenerateTronPrivateKey(TronPrivateKeyRequest request);
 
         [Get("/v3/tron/address/{xpub}/{index}")]
-        Task<TronAddress> GenerateTronAddress(string xpub, int index);
+        Task<BlockchainAddress> GenerateAddress(string xpub, int index);
 
         [Get("/v3/tron/account/{address}")]
         Task<TronAccount> GetAccount(string address);

@@ -98,5 +98,11 @@ namespace TatumPlatform.Clients
             var tx = await veChainApi.SendTransactionKMS(req);
             return tx;
         }
+
+        public async Task<string> GenerateAddress(string xPubString, int index)
+        {
+            var address = await veChainApi.GenerateAddress(xPubString, index);
+            return address.Address;
+        }
     }
 }

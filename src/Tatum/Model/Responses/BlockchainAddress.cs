@@ -2,7 +2,7 @@
 
 namespace TatumPlatform.Model.Responses
 {
-    public class TronAddress
+    public class BlockchainAddress
     {
         [JsonPropertyName("address")]
         public string Address { get; set; }
