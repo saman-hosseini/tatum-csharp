@@ -14,9 +14,10 @@ namespace TatumPlatform.Clients
         private readonly IDogecoinApi dogecoinApi;
         private readonly IDogechainApi dogechainApi;
         private const string dogechainUrl = "https://dogechain.info/";
+        private static Precision Precision { get; } = Precision.Precision8;
         internal DogecoinClient()
         {
-            
+
         }
 
         internal DogecoinClient(string apiBaseUrl, string xApiKey)
@@ -38,16 +39,6 @@ namespace TatumPlatform.Clients
         Task<TransactionHash> IDogecoinClient.SendTransactionKMS(TransferDogecoinBlockchainKMS transfer)
         {
             return dogecoinApi.SendTransactionKMS(transfer);
-        }
-
-        private static decimal ToDecimalDoge(long amount)
-        {
-            return amount / 100000000M;
-        }
-
-        private static long ToLongDoge(decimal amount)
-        {
-            return decimal.ToInt64(amount * 100000000);
         }
 
         private static List<FromUtxoDogecoinKMS> ConvertToUtxoKMS(List<DogecoinUtxo> utxos, string signatureId)
@@ -79,14 +70,14 @@ namespace TatumPlatform.Clients
                     }
                 }
             }
-            decimal remain = ToDecimalDoge(balance - amount);
+            decimal remain = TatumHelper.ToDecimal((balance - amount), Precision);
             return (result, remain);
         }
 
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var allUxtos = await dogechainApi.GetUnspentOutputs(transfer.FromAddress);
-            var totalSatoshi = ToLongDoge(transfer.Amount + transfer.Fee);
+            var totalSatoshi = TatumHelper.ToLong((transfer.Amount + transfer.Fee), Precision);
             var uxtos = GetNeededUxto(allUxtos.UnspentOutputs, totalSatoshi);
             var sendObj = new TransferDogecoinBlockchainKMS()
             {

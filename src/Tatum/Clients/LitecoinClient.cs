@@ -12,7 +12,7 @@ namespace TatumPlatform.Clients
     public partial class LitecoinClient : ILitecoinClient
     {
         private readonly ILitecoinApi litecoinApi;
-
+        private static Precision Precision { get; } = Precision.Precision8;
         internal LitecoinClient()
         {
         }
@@ -136,19 +136,10 @@ namespace TatumPlatform.Clients
                     break;
                 }
             }
-            decimal remain = SatoshiToBtc(balance - amount);
+            decimal remain = TatumHelper.ToDecimal(balance - amount, Precision);
             return (result, remain);
         }
 
-        private static decimal SatoshiToBtc(long amount)
-        {
-            return amount / 100000000M;
-        }
-
-        private static long BtcToSatoshi(decimal amount)
-        {
-            return decimal.ToInt64(amount * 100000000);
-        }
         private static List<FromUtxoKMS> ConvertToUtxoKMS(List<LitecoinUtxo> utxos, string signatureId)
         {
             return utxos.Select(q =>
@@ -163,7 +154,7 @@ namespace TatumPlatform.Clients
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var allUxtos = await GetAllUxto(transfer.FromAddress);
-            var totalSatoshi = BtcToSatoshi(transfer.Amount + transfer.Fee);
+            var totalSatoshi = TatumHelper.ToLong(transfer.Amount + transfer.Fee, Precision);
             var (Utxos, Remain) = GetNeededUxto(allUxtos, totalSatoshi);
 
             foreach (var u in Utxos)

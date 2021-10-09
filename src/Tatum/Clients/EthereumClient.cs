@@ -16,7 +16,10 @@ namespace TatumPlatform.Clients
         private readonly IEthereumGasApi ethereumGasApi;
         private readonly string tatumWeb3DriverUrl;
         private const int GasLimit = 21000;
-
+        /// <summary>
+        /// Ethereum actual decimal precision is 18
+        /// </summary>
+        private static Precision Precision { get; } = Precision.Gwei;
         internal EthereumClient()
         {
         }
@@ -76,19 +79,9 @@ namespace TatumPlatform.Clients
             return ethereumApi.GetTransactionsCount(address);
         }
 
-        private static decimal GweiToEth(long amount)
-        {
-            return amount / 1000000000M;
-        }
-
-        private static long EthToGwei(decimal amount)
-        {
-            return decimal.ToInt64(amount * 1000000000);
-        }
-
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            var gasPrice = (EthToGwei(transfer.Fee) / GasLimit).ToString();
+            var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
             var sendObj = new TransferEthereumErc20KMS()
             {
                 SignatureId = transfer.SignatureId,

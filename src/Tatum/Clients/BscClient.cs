@@ -10,6 +10,7 @@ namespace TatumPlatform.Clients
     {
         private readonly IBscApi bscApi;
         private const int GasLimit = 21000;
+        private static Precision Precision { get; } = Precision.Precision18;
 
         internal BscClient()
         {
@@ -41,19 +42,9 @@ namespace TatumPlatform.Clients
             return TatumHelper.ToDecimal(balance.Balance);
         }
 
-        private static decimal ToDecimalBsc(long amount)
-        {
-            return amount / 1000000000M;
-        }
-
-        private static long ToLongBsc(decimal amount)
-        {
-            return decimal.ToInt64(amount * 1000000000);
-        }
-
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            var gasPrice = (ToLongBsc(transfer.Fee) / GasLimit).ToString();
+            var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
             var req = new TransferBscBlockchainKMS()
             {
                 SignatureId = transfer.SignatureId,

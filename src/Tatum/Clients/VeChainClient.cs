@@ -12,7 +12,7 @@ namespace TatumPlatform.Clients
     {
         private readonly IVeChainApi veChainApi;
         private const int GasLimit = 21000;
-
+        private static Precision Precision { get; } = Precision.Precision18;
         internal VeChainClient()
         {
         }
@@ -73,16 +73,6 @@ namespace TatumPlatform.Clients
             return veChainApi.GetTransactionReceipt(hash);
         }
 
-        private static decimal ToDecimalVet(long amount)
-        {
-            return amount / 1000000000000000000M;
-        }
-
-        private static long ToLongVet(decimal amount)
-        {
-            return decimal.ToInt64(amount * 1000000000000000000);
-        }
-
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var balance = await veChainApi.GetBalance(request.Address);
@@ -92,7 +82,7 @@ namespace TatumPlatform.Clients
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var validator = new VeChainTransferValidator();
-            var result = validator.Validate(transfer);
+            var validation = validator.Validate(transfer);
 
             var req = new TransferVeChainBlockchainKMS()
             {

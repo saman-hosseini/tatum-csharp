@@ -9,6 +9,7 @@ namespace TatumPlatform.Clients
     public class XrpClient : IXrpClient
     {
         private readonly IXrpApi xrpApi;
+        private static Precision Precision { get; } = Precision.Precision6;
 
         internal XrpClient(string apiBaseUrl, string xApiKey)
         {
@@ -63,20 +64,10 @@ namespace TatumPlatform.Clients
             return xrpApi.GetTransaction(hash);
         }
 
-        private static decimal ToDecimalXrp(long amount)
-        {
-            return amount / 1000000M;
-        }
-
-        private static long ToLongXrp(decimal amount)
-        {
-            return decimal.ToInt64(amount * 1000000);
-        }
-
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var accountBalance = await xrpApi.GetAccountBalance(request.Address);
-            return ToDecimalXrp(long.Parse(accountBalance.Balance));
+            return TatumHelper.ToDecimal(TatumHelper.ToLong(accountBalance.Balance), Precision);
         }
 
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)

@@ -12,7 +12,8 @@ namespace TatumPlatform.Clients
     public partial class TronClient : ITronClient
     {
         private readonly ITronApi tronApi;
-
+        private const string CoinName = "TRON";
+        private static Precision Precision { get; } = Precision.Precision6;
         internal TronClient()
         {
         }
@@ -52,7 +53,7 @@ namespace TatumPlatform.Clients
 
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            if (transfer.Currency == "TRON")
+            if (transfer.Currency == CoinName)
             {
                 var tx = await tronApi.SendTransactionKMS(new TransferTronBlockchainKMS()
                 {
@@ -81,9 +82,9 @@ namespace TatumPlatform.Clients
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var account = await tronApi.GetAccount(request.Address);
-            if (request.Currency == "TRON")
+            if (request.Currency == CoinName)
             {
-                return (account.Balance / 1000000M);
+                return TatumHelper.ToDecimal(account.Balance, Precision);
             }
             else
             {

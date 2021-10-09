@@ -9,7 +9,7 @@ namespace TatumPlatform.Clients
     {
         private readonly IEgldApi egldApi;
         private const int GasLimit = 21000;
-
+        private static Precision Precision { get; } = Precision.Precision18;
         internal EgldClient()
         {
         }
@@ -34,16 +34,6 @@ namespace TatumPlatform.Clients
             return egldApi.SendTransactionKMS(transfer);
         }
 
-        private static decimal ToDecimalEgld(long amount)
-        {
-            return amount / 1000000000000000000M;
-        }
-
-        private static long ToLongEgld(decimal amount)
-        {
-            return decimal.ToInt64(amount * 1000000000000000000);
-        }
-
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var balance = await egldApi.GetBalance(request.Address);
@@ -52,7 +42,7 @@ namespace TatumPlatform.Clients
 
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            var gasPrice = (ToLongEgld(transfer.Fee) / GasLimit).ToString();
+            var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
             var req = new TransferEgldBlockchainKMS()
             {
                 SignatureId = transfer.SignatureId,

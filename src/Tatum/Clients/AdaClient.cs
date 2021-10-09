@@ -12,7 +12,7 @@ namespace TatumPlatform.Clients
     public class AdaClient : IAdaClient
     {
         private readonly IAdaApi adaApi;
-
+        private static Precision Precision { get; } = Precision.Precision6;
         internal AdaClient()
         {
         }
@@ -37,22 +37,12 @@ namespace TatumPlatform.Clients
             return adaApi.SendTransactionKMS(transfer);
         }
 
-        private static decimal ToDecimalAda(long amount)
-        {
-            return amount / 1000000M;
-        }
-
-        private static long ToLongAda(decimal amount)
-        {
-            return decimal.ToInt64(amount * 1000000);
-        }
-
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var account = await adaApi.GetAccount(request.Address);
             var balance = account.Summary.AssetBalances.Where(x => x.Asset.AssetId.ToUpper() == request.Currency)
                 .Sum(q => long.Parse(q.Quantity));
-            return ToDecimalAda(balance);
+            return TatumHelper.ToDecimal(balance, Precision);
         }
 
         async Task<List<BitcoinUtxo>> GetAllUxto(string address)
@@ -127,7 +117,7 @@ namespace TatumPlatform.Clients
                     break;
                 }
             }
-            decimal remain = ToDecimalAda(balance - amount);
+            decimal remain = TatumHelper.ToDecimal(balance - amount, Precision);
             return (result, remain);
         }
 
@@ -135,7 +125,7 @@ namespace TatumPlatform.Clients
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var allUxtos = await GetAllUxto(transfer.FromAddress);
-            var totalSatoshi = ToLongAda(transfer.Amount + transfer.Fee);
+            var totalSatoshi = TatumHelper.ToLong(transfer.Amount + transfer.Fee, Precision);
             var uxtos = GetNeededUxto(allUxtos, totalSatoshi);
 
             var sendObj = new TransferBtcBasedBlockchainKMS()

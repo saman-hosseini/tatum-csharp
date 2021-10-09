@@ -8,7 +8,7 @@ namespace TatumPlatform.Clients
     public class FlowClient : IFlowClient
     {
         private readonly IFlowApi flowApi;
-
+        private static Precision Precision { get; } = Precision.Precision8;
         internal FlowClient()
         {
         }
@@ -33,20 +33,10 @@ namespace TatumPlatform.Clients
             return flowApi.SendTransactionKMS(transfer);
         }
 
-        private static decimal ToDecimalFlow(long amount)
-        {
-            return amount / 100000000M;
-        }
-
-        private static long ToLongFlow(decimal amount)
-        {
-            return decimal.ToInt64(amount * 100000000);
-        }
-
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var balance = await flowApi.GetAccount(request.Address);
-            return ToDecimalFlow(balance.Balance);
+            return TatumHelper.ToDecimal(balance.Balance, Precision);
         }
 
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)

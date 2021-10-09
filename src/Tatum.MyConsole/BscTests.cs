@@ -30,9 +30,10 @@ namespace TatumPlatform.MyConsole
         public async Task GetBalance()
         {
             var address = "0xe4bdce3fee7cd2d722580b0e701531bae004b85b";
+            var addressMain = "0x477AEf00A114a5A2506218E9851D8618b9Fc6B76";
             var req = new BalanceRequest()
             {
-                Address = address
+                Address = addressMain
             };
             var response = await bscClient.GetBalance(req);
         }

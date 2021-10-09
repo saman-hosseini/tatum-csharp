@@ -11,7 +11,7 @@ namespace TatumPlatform.Clients
     public partial class XlmClient : IXlmClient
     {
         private readonly IXlmApi xlmApi;
-        private const string Token = "XLM";
+        private const string CoinName = "XLM";
 
         internal XlmClient()
         {
@@ -74,7 +74,7 @@ namespace TatumPlatform.Clients
         {
             var accountInfo = await xlmApi.GetAccountInfo(request.Address);
             string strBalance;
-            if (request.Currency.ToUpper() == Token)
+            if (request.Currency.ToUpper() == CoinName)
             {
                 strBalance = accountInfo.Balances.FirstOrDefault(q => q.AssetCode == null && q.AssetIssuer == null).Balance;
             }

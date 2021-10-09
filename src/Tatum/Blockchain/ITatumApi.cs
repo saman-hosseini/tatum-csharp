@@ -19,7 +19,6 @@ namespace TatumPlatform.Blockchain
 
         //Offchain
 
-        //[Post("/v3/offchain/account/{accountId}/address?index={index}")]
         [Post("/v3/offchain/account/{accountId}/address")]
         Task<Address> GenerateDepositAddress(string accountId, int? index);
 

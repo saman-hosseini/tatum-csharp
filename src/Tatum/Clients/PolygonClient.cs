@@ -9,7 +9,7 @@ namespace TatumPlatform.Clients
     {
         private readonly IPolygonApi polygonApi;
         private const int GasLimit = 21000;
-
+        private static Precision Precision { get; } = Precision.Precision18;
         internal PolygonClient()
         {
         }
@@ -34,16 +34,6 @@ namespace TatumPlatform.Clients
             return polygonApi.SendTransactionKMS(transfer);
         }
 
-        private static decimal ToDecimalPolygon(long amount)
-        {
-            return amount / 1000000000000000000M;
-        }
-
-        private static long ToLongPolygon(decimal amount)
-        {
-            return decimal.ToInt64(amount * 1000000000000000000);
-        }
-
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var balance = await polygonApi.GetBalance(request.Address);
@@ -52,7 +42,7 @@ namespace TatumPlatform.Clients
 
         public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            var gasPrice = (ToLongPolygon(transfer.Fee) / GasLimit).ToString();
+            var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
             var req = new TransferPolygonBlockchainKMS()
             {
                 SignatureId = transfer.SignatureId,
