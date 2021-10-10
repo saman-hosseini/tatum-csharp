@@ -30,7 +30,7 @@ namespace TatumPlatform.Blockchain
         Task<TransactionHash> SendTransaction(TransferEthereumErc20 transfer);
 
         [Post("/v3/ethereum/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferEthereumErc20KMS transfer);
+        Task<Signature> SendTransactionKMS(TransferEthereumErc20KMS transfer);
 
         [Get("/v3/ethereum/transaction/{hash}")]
         Task<EthereumTx> GetTransaction(string hash);

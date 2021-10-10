@@ -11,6 +11,6 @@ namespace TatumPlatform.Clients
     public interface IXdcClient : IBaseClient
     {
         Task<XdcBalance> GetBalance(string address);
-        Task<TransactionHash> SendTransactionKMS(TransferXdcBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferXdcBlockchainKMS transfer);
     }
 }

@@ -29,7 +29,7 @@ namespace TatumPlatform.Clients
             return xdcApi.GetBalance(address);
         }
 
-        Task<TransactionHash> IXdcClient.SendTransactionKMS(TransferXdcBlockchainKMS transfer)
+        Task<Signature> IXdcClient.SendTransactionKMS(TransferXdcBlockchainKMS transfer)
         {
             return xdcApi.SendTransactionKMS(transfer);
         }
@@ -40,7 +40,7 @@ namespace TatumPlatform.Clients
             return TatumHelper.ToDecimal(balance.Balance);
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
             var req = new TransferXdcBlockchainKMS()

@@ -10,7 +10,7 @@ namespace TatumPlatform.Clients
 {
     public interface IPolygonClient : IBaseClient
     {
-        Task<TransactionHash> SendTransactionKMS(TransferPolygonBlockchainKMS transferKMS);
+        Task<Signature> SendTransactionKMS(TransferPolygonBlockchainKMS transferKMS);
 
         Task<EthereumAccountBalance> GetAccountBalance(string address);
     }

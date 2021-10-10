@@ -65,7 +65,7 @@ namespace TatumPlatform.Clients
             return litecoinApi.GetUtxo(txHash, txOutputIndex);
         }
 
-        Task<TransactionHash> ILitecoinClient.SendTransactionKMS(TransferBtcBasedBlockchainKMS transferBtc)
+        Task<Signature> ILitecoinClient.SendTransactionKMS(TransferBtcBasedBlockchainKMS transferBtc)
         {
             return litecoinApi.SendTransactionKMS(transferBtc);
         }
@@ -151,16 +151,11 @@ namespace TatumPlatform.Clients
                 }).ToList();
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var allUxtos = await GetAllUxto(transfer.FromAddress);
             var totalSatoshi = TatumHelper.ToLong(transfer.Amount + transfer.Fee, Precision);
             var (Utxos, Remain) = GetNeededUxto(allUxtos, totalSatoshi);
-
-            foreach (var u in Utxos)
-            {
-                var res = await litecoinApi.GetUtxo(u.Hash, u.Index);
-            }
 
             var sendObj = new TransferBtcBasedBlockchainKMS()
             {

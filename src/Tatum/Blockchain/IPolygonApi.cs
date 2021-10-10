@@ -12,7 +12,7 @@ namespace TatumPlatform.Blockchain
     public interface IPolygonApi
     {
         [Post("/v3/polygon/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferPolygonBlockchainKMS transferKMS);
+        Task<Signature> SendTransactionKMS(TransferPolygonBlockchainKMS transferKMS);
 
         [Get("/v3/polygon/account/balance/{address}")]
         Task<EthereumAccountBalance> GetBalance(string address);

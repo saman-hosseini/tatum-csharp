@@ -32,7 +32,7 @@ namespace TatumPlatform.Blockchain
         Task<TronBlock> GetBlock(string hash);
 
         [Post("/v3/tron/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferTronBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferTronBlockchainKMS transfer);
 
         [Post("/v3/tron/trc20/transaction")]
         Task<TransactionHash> SendTrc20TransactionKMS(TransferTronTrc20BlockchainKMS transfer);

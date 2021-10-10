@@ -8,7 +8,7 @@ namespace TatumPlatform.Blockchain
     public interface IBscApi
     {
         [Post("/v3/bsc/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferBscBlockchainKMS transferKMS);
+        Task<Signature> SendTransactionKMS(TransferBscBlockchainKMS transferKMS);
 
         [Get("/v3/bsc/account/balance/{address}")]
         Task<EthereumAccountBalance> GetAccountBalance(string address);

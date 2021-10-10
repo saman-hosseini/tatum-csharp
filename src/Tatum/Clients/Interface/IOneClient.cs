@@ -12,6 +12,6 @@ namespace TatumPlatform.Clients
     {
         Task<OneBalance> GetBalance(string address);
 
-        Task<TransactionHash> SendTransactionKMS(TransferOneBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferOneBlockchainKMS transfer);
     }
 }

@@ -15,7 +15,7 @@ namespace TatumPlatform.Blockchain
         Task<XdcBalance> GetBalance(string address);
 
         [Post("/v3/xdc/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferXdcBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferXdcBlockchainKMS transfer);
 
         [Post("/v3/xdc/gas")]
         Task<Fee> EstimateTransactionFee(TransferXdcBlockchainKMS transfer);

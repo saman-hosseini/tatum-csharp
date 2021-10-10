@@ -28,7 +28,7 @@ namespace TatumPlatform.Clients
             return flowApi.GetAccount(address);
         }
 
-        Task<TransactionHash> IFlowClient.SendTransactionKMS(TransferFlowBlockchainKMS transfer)
+        Task<Signature> IFlowClient.SendTransactionKMS(TransferFlowBlockchainKMS transfer)
         {
             return flowApi.SendTransactionKMS(transfer);
         }
@@ -39,7 +39,7 @@ namespace TatumPlatform.Clients
             return TatumHelper.ToDecimal(balance.Balance, Precision);
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var req = new TransferFlowBlockchainKMS()
             {

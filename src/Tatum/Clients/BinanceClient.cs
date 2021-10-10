@@ -29,7 +29,7 @@ namespace TatumPlatform.Clients
             return bnbApi.GetAccount(address);
         }
 
-        Task<TransactionHash> IBinanceClient.SendTransactionKMS(TransferBnbBlockchainKMS transfer)
+        Task<Signature> IBinanceClient.SendTransactionKMS(TransferBnbBlockchainKMS transfer)
         {
             return bnbApi.SendTransactionKMS(transfer);
         }
@@ -41,7 +41,7 @@ namespace TatumPlatform.Clients
             return balance;
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var req = new TransferBnbBlockchainKMS()
             {

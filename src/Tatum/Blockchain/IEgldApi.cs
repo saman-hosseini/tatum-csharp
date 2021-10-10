@@ -15,6 +15,6 @@ namespace TatumPlatform.Blockchain
         Task<EgldBalance> GetBalance(string address);
 
         [Post("/v3/egld/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferEgldBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferEgldBlockchainKMS transfer);
     }
 }

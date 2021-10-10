@@ -15,7 +15,7 @@ namespace TatumPlatform.Blockchain
         Task<CeloBalance> GetBalance(string address);
 
         [Post("/v3/celo/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferCeloBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferCeloBlockchainKMS transfer);
 
         [Get("/v3/celo/address/{xpub}/{index}")]
         Task<BlockchainAddress> GenerateAddress(string xpub, int index);

@@ -30,7 +30,7 @@ namespace TatumPlatform.Blockchain
         Task<LitecoinTx> GetTransaction(string hash);
 
         [Post("/v3/litecoin/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferBtcBasedBlockchainKMS transferBtc);
+        Task<Signature> SendTransactionKMS(TransferBtcBasedBlockchainKMS transferBtc);
 
         [Post("/v3/litecoin/address/balance/{address}")]
         Task<BitcoinAccountBalance> GetAccountBalance(string address);

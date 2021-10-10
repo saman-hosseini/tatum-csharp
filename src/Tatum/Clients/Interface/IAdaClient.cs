@@ -11,6 +11,6 @@ namespace TatumPlatform.Clients
     public interface IAdaClient : IBaseClient
     {
         Task<AdaAccount> GetAccount(string address);
-        Task<TransactionHash> SendTransactionKMS(TransferBtcBasedBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferBtcBasedBlockchainKMS transfer);
     }
 }

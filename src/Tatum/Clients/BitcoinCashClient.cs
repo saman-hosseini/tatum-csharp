@@ -58,7 +58,7 @@ namespace TatumPlatform.Clients
             return bitcoinCashApi.GetTxForAccount(address, skip);
         }
 
-        Task<TransactionHash> IBaseClient.SendTransactionKMS(TransferBlockchainKMS transfer)
+        Task<Signature> IBaseClient.SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             throw new System.NotImplementedException();
         }

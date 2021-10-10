@@ -4,7 +4,7 @@ using System;
 
 namespace TatumPlatform.Clients
 {
-    public partial class BitcoinCashClient : IBitcoinCashClient
+    public partial class BitcoinCashClient
     {
         Wallet IBitcoinCashClient.CreateWallet(string mnemonic, bool testnet)
         {

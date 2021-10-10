@@ -18,7 +18,7 @@ namespace TatumPlatform.Blockchain
         Task<AdaAccount> GetAccount(string address);
 
         [Post("/v3/ada/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferBtcBasedBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferBtcBasedBlockchainKMS transfer);
 
         [Get("/v3/ada/{address}/utxos")]
         Task<List<AdaUtxo>> GetUtxos(string address);

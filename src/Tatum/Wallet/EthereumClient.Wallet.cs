@@ -5,7 +5,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public partial class EthereumClient : IEthereumClient
+    public partial class EthereumClient
     {
         Wallet IEthereumClient.CreateWallet(string mnemonic, bool testnet)
         {

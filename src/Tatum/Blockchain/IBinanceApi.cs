@@ -18,6 +18,6 @@ namespace TatumPlatform.Blockchain
         Task<BnbAccount> GetAccount(string address);
 
         [Post("/v3/bnb/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferBnbBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferBnbBlockchainKMS transfer);
     }
 }

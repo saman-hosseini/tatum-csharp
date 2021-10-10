@@ -10,7 +10,7 @@ namespace TatumPlatform.Clients
 {
     public interface IDogecoinClient : IBaseClient
     {
-        Task<TransactionHash> SendTransactionKMS(TransferDogecoinBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferDogecoinBlockchainKMS transfer);
         Task<DogecoinBalance> GetBalance(string address);
     }
 }

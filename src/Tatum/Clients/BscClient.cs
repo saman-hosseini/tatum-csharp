@@ -31,7 +31,7 @@ namespace TatumPlatform.Clients
             return bscApi.GetAccountBalance(address);
         }
 
-        Task<TransactionHash> IBscClient.SendTransactionKMS(TransferBscBlockchainKMS transfer)
+        Task<Signature> IBscClient.SendTransactionKMS(TransferBscBlockchainKMS transfer)
         {
             return bscApi.SendTransactionKMS(transfer);
         }
@@ -42,7 +42,7 @@ namespace TatumPlatform.Clients
             return TatumHelper.ToDecimal(balance.Balance);
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
             var req = new TransferBscBlockchainKMS()

@@ -36,7 +36,7 @@ namespace TatumPlatform.Clients
             return dogechainApi.GetBalance(address);
         }
 
-        Task<TransactionHash> IDogecoinClient.SendTransactionKMS(TransferDogecoinBlockchainKMS transfer)
+        Task<Signature> IDogecoinClient.SendTransactionKMS(TransferDogecoinBlockchainKMS transfer)
         {
             return dogecoinApi.SendTransactionKMS(transfer);
         }
@@ -74,16 +74,16 @@ namespace TatumPlatform.Clients
             return (result, remain);
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var allUxtos = await dogechainApi.GetUnspentOutputs(transfer.FromAddress);
             var totalSatoshi = TatumHelper.ToLong((transfer.Amount + transfer.Fee), Precision);
-            var uxtos = GetNeededUxto(allUxtos.UnspentOutputs, totalSatoshi);
+            var (Utxos, Remain) = GetNeededUxto(allUxtos.UnspentOutputs, totalSatoshi);
             var sendObj = new TransferDogecoinBlockchainKMS()
             {
                 ChangeAddress = transfer.FromAddress,
                 Fee = transfer.Fee.ToString(),
-                FromUTXO = ConvertToUtxoKMS(uxtos.Utxos, transfer.SignatureId),
+                FromUTXO = ConvertToUtxoKMS(Utxos, transfer.SignatureId),
                 To = new List<ToDogecoin>()
                 {
                     new ToDogecoin()

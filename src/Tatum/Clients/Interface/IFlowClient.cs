@@ -12,6 +12,6 @@ namespace TatumPlatform.Clients
     {
         Task<FlowAccount> GetAccount(string address);
 
-        Task<TransactionHash> SendTransactionKMS(TransferFlowBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferFlowBlockchainKMS transfer);
     }
 }

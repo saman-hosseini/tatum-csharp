@@ -28,7 +28,7 @@ namespace TatumPlatform.Clients
             return new TronClient(apiBaseUrl, xApiKey);
         }
 
-        Task<TransactionHash> ITronClient.SendTransactionKMS(TransferTronBlockchainKMS transfer)
+        Task<Signature> ITronClient.SendTransactionKMS(TransferTronBlockchainKMS transfer)
         {
             return tronApi.SendTransactionKMS(transfer);
         }
@@ -56,7 +56,7 @@ namespace TatumPlatform.Clients
             return tronApi.GetAccount(address);
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             if (transfer.Currency == CoinName)
             {

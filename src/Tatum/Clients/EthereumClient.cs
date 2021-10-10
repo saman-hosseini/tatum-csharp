@@ -79,7 +79,7 @@ namespace TatumPlatform.Clients
             return ethereumApi.GetTransactionsCount(address);
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
             var sendObj = new TransferEthereumErc20KMS()
@@ -111,6 +111,12 @@ namespace TatumPlatform.Clients
                 var balance = await ethereumApi.GetErc20AccountBalance(request.Address, request.Currency, request.ContractAddress);
                 return TatumHelper.ToDecimal(balance.Balance);
             }
+        }
+
+        public async Task<string> GenerateAddress(string xPubString, int index)
+        {
+            var address = await ethereumApi.GenerateAddress(xPubString, index);
+            return address.Address;
         }
     }
 }

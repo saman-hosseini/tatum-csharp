@@ -32,6 +32,6 @@ namespace TatumPlatform.Blockchain
         Task<XrpAccountTransactionsRoot> GetAccountTransactions(string address, uint min = 0, string marker = null);
 
         [Post("/v3/xrp/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferXrpBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferXrpBlockchainKMS transfer);
     }
 }

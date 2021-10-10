@@ -11,6 +11,6 @@ namespace TatumPlatform.Clients
     public interface IBinanceClient : IBaseClient
     {
         Task<BnbAccount> GetAccount(string address);
-        Task<TransactionHash> SendTransactionKMS(TransferBnbBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferBnbBlockchainKMS transfer);
     }
 }

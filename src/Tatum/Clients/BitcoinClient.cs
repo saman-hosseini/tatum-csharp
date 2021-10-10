@@ -152,30 +152,15 @@ namespace TatumPlatform.Clients
                 }).ToList();
         }
 
-        private static List<FromUtxo> ConvertToUtxo(List<BitcoinUtxo> utxos, string privatekey)
-        {
-            return utxos.Select(q =>
-                new FromUtxo()
-                {
-                    PrivateKey = privatekey,
-                    Index = q.Index,
-                    TxHash = q.Hash
-                }).ToList();
-        }
-        async Task<TransactionHash> IBaseClient.SendTransactionKMS(TransferBlockchainKMS transfer)
+        async Task<Signature> IBaseClient.SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var allUxtos = await GetAllUxto(transfer.FromAddress);
             var totalSatoshi = TatumHelper.ToLong(transfer.Amount + transfer.Fee, Precision);
-            var uxtos = GetNeededUxto(allUxtos, totalSatoshi);
-
-            foreach (var u in uxtos.Utxos)
-            {
-                var res = await bitcoinApi.GetUtxo(u.Hash, u.Index);
-            }
+            var (Utxos, Remain) = GetNeededUxto(allUxtos, totalSatoshi);
 
             var sendObj = new TransferBtcBasedBlockchainKMS()
             {
-                FromUtxos = ConvertToUtxoKMS(uxtos.Utxos, transfer.SignatureId),
+                FromUtxos = ConvertToUtxoKMS(Utxos, transfer.SignatureId),
                 Tos = new List<To>()
                     {
                         new To()
@@ -186,12 +171,18 @@ namespace TatumPlatform.Clients
                         new To()
                         {
                             Address = transfer.FromAddress,
-                            Value = uxtos.Remain
+                            Value = Remain
                         }
                     }
             };
             var txHash = await bitcoinApi.SendTransactionKMS(sendObj);
             return txHash;
+        }
+
+        public async Task<string> GenerateAddress(string xPubString, int index)
+        {
+            var address = await bitcoinApi.GenerateAddress(xPubString, index);
+            return address.Address;
         }
     }
 

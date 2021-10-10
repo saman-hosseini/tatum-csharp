@@ -19,6 +19,6 @@ namespace TatumPlatform.Clients
 
         string GeneratePrivateKey(string mnemonic, int index, bool testnet);
 
-        Task<TransactionHash> SendTransactionKMS(TransferTronBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferTronBlockchainKMS transfer);
     }
 }

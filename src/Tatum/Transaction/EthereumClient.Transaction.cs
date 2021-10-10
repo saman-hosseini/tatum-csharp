@@ -11,7 +11,7 @@ using static Nethereum.Util.UnitConversion;
 
 namespace TatumPlatform.Clients
 {
-    public partial class EthereumClient : IEthereumClient
+    public partial class EthereumClient
     {
         async Task<BigInteger> IEthereumClient.GetGasPriceInWei()
         {

@@ -32,7 +32,7 @@ namespace TatumPlatform.Clients
             return adaApi.GetAccount(address);
         }
 
-        Task<TransactionHash> IAdaClient.SendTransactionKMS(TransferBtcBasedBlockchainKMS transfer)
+        Task<Signature> IAdaClient.SendTransactionKMS(TransferBtcBasedBlockchainKMS transfer)
         {
             return adaApi.SendTransactionKMS(transfer);
         }
@@ -122,15 +122,15 @@ namespace TatumPlatform.Clients
         }
 
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var allUxtos = await GetAllUxto(transfer.FromAddress);
             var totalSatoshi = TatumHelper.ToLong(transfer.Amount + transfer.Fee, Precision);
-            var uxtos = GetNeededUxto(allUxtos, totalSatoshi);
+            var (Utxos, Remain) = GetNeededUxto(allUxtos, totalSatoshi);
 
             var sendObj = new TransferBtcBasedBlockchainKMS()
             {
-                FromUtxos = ConvertToUtxoKMS(uxtos.Utxos, transfer.SignatureId),
+                FromUtxos = ConvertToUtxoKMS(Utxos, transfer.SignatureId),
                 Tos = new List<To>()
                     {
                         new To()
@@ -141,7 +141,7 @@ namespace TatumPlatform.Clients
                         new To()
                         {
                             Address = transfer.FromAddress,
-                            Value = uxtos.Remain
+                            Value = Remain
                         }
                     }
             };

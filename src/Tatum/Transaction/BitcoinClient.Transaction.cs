@@ -8,14 +8,14 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public partial class BitcoinClient : IBitcoinClient
+    public partial class BitcoinClient
     {
         Task<string> IBitcoinClient.SignKmsTransaction(TransactionKms tx, List<string> privateKeys, bool testnet)
         {
             throw new NotImplementedException();
         }
 
-        Task<TransactionHash> IBitcoinClient.SendTransactionKMS(TransferBtcBasedBlockchainKMS transferBtc)
+        Task<Signature> IBitcoinClient.SendTransactionKMS(TransferBtcBasedBlockchainKMS transferBtc)
         {
             return bitcoinApi.SendTransactionKMS(transferBtc);
         }

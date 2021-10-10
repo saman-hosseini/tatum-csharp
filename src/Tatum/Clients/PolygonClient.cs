@@ -29,7 +29,7 @@ namespace TatumPlatform.Clients
             return polygonApi.GetBalance(address);
         }
 
-        Task<TransactionHash> IPolygonClient.SendTransactionKMS(TransferPolygonBlockchainKMS transfer)
+        Task<Signature> IPolygonClient.SendTransactionKMS(TransferPolygonBlockchainKMS transfer)
         {
             return polygonApi.SendTransactionKMS(transfer);
         }
@@ -40,7 +40,7 @@ namespace TatumPlatform.Clients
             return TatumHelper.ToDecimal(balance.Balance);
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
             var req = new TransferPolygonBlockchainKMS()

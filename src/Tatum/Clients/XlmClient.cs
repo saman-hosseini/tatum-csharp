@@ -85,7 +85,7 @@ namespace TatumPlatform.Clients
             return TatumHelper.ToDecimal(strBalance);
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var req = new TransferXlmBlockchainKMS()
             {

@@ -12,7 +12,7 @@ namespace TatumPlatform.Blockchain
     public interface IDogecoinApi
     {
         [Post("/v3/dogecoin/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferDogecoinBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferDogecoinBlockchainKMS transfer);
 
         [Get("/v3/dogecoin/utxo/{hash}/{index}")]
         Task<DogecoinTransactionUtxo> GetTransactionUtxo(string hash, int index);

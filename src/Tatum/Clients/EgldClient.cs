@@ -29,7 +29,7 @@ namespace TatumPlatform.Clients
             return egldApi.GetBalance(address);
         }
 
-        Task<TransactionHash> IEgldClient.SendTransactionKMS(TransferEgldBlockchainKMS transfer)
+        Task<Signature> IEgldClient.SendTransactionKMS(TransferEgldBlockchainKMS transfer)
         {
             return egldApi.SendTransactionKMS(transfer);
         }
@@ -40,7 +40,7 @@ namespace TatumPlatform.Clients
             return TatumHelper.ToDecimal(balance.Balance);
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
             var req = new TransferEgldBlockchainKMS()

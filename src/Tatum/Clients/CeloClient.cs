@@ -28,7 +28,7 @@ namespace TatumPlatform.Clients
             return celoApi.GetBalance(address);
         }
 
-        Task<TransactionHash> ICeloClient.SendTransactionKMS(TransferCeloBlockchainKMS transfer)
+        Task<Signature> ICeloClient.SendTransactionKMS(TransferCeloBlockchainKMS transfer)
         {
             return celoApi.SendTransactionKMS(transfer);
         }
@@ -39,7 +39,7 @@ namespace TatumPlatform.Clients
             return TatumHelper.ToDecimal(accountBalance.Celo);
         }
 
-        public async Task<TransactionHash> SendTransactionKMS(TransferBlockchainKMS transfer)
+        public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var req = new TransferCeloBlockchainKMS()
             {

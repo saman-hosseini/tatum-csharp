@@ -34,7 +34,7 @@ namespace TatumPlatform.Blockchain
         Task<TransactionHash> SendTransaction(TransferBtcBasedBlockchain transfer);
 
         [Post("/v3/bitcoin/transaction")]
-        Task<TransactionHash> SendTransactionKMS(TransferBtcBasedBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferBtcBasedBlockchainKMS transfer);
 
         [Post("/v3/bitcoin/address/balance/{address}")]
         Task<BitcoinAccountBalance> GetAccountBalance(string address);
