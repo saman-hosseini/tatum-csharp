@@ -8,6 +8,7 @@
         public decimal Fee { get; set; }
         public string Currency { get; set; }
         public string ContractAddress { get; set; }
+        public string ContractType { get; set; }
         public int Index { get; set; }
         public string SignatureId { get; set; }
         public int FromTag { get; set; }

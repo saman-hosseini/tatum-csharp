@@ -59,7 +59,14 @@ namespace TatumPlatform.MyConsole
 
         public async Task GenerateAddressMainNet()
         {
-            string address = await tronClient.GenerateAddress("033dd961ca356b6c9b0af052781895d564b22b3650decb9f5bc218a75a9b5dc007b36f9250ff2eb91359d307032c358c6e3c22f2a793f2dbf8196f8ff1ead35af4", 1);
+            var address = await tronClient.GenerateAddress("033dd961ca356b6c9b0af052781895d564b22b3650decb9f5bc218a75a9b5dc007b36f9250ff2eb91359d307032c358c6e3c22f2a793f2dbf8196f8ff1ead35af4", 1);
+        }
+
+        public async Task GenerateAddress()
+        {
+            string xPub = "033dd961ca356b6c9b0af052781895d564b22b3650decb9f5bc218a75a9b5dc007b36f9250ff2eb91359d307032c358c6e3c22f2a793f2dbf8196f8ff1ead35af4";
+            int index = 1;
+            var add = await tronClient.GenerateAddress(xPub, index);
         }
 
         public async Task GetAccount()
@@ -68,7 +75,7 @@ namespace TatumPlatform.MyConsole
             var account = await tronClient.GetAccount(adress);
         }
 
-        public async Task SendTransactionKMS()
+        public async Task SendTransaction()
         {
             var transfer = new TransferTronBlockchainKMS()
             {
@@ -76,44 +83,27 @@ namespace TatumPlatform.MyConsole
                 SignatureId = "79981416-4e03-452f-bda5-a869fb955376",
                 To = "TC5kLNd3A7fnxJfYSbUs99F4Qh4C1K47HV",
                 Amount = "50.9",
-                Index = 4
+                Index = 1
             };
             var hash = await tronClient.SendTransactionKMS(transfer);
         }
 
-        public void FromAddressAndFromUtxoNotTogether()
+        public async Task SendTransactionKMS()
         {
-            var body = new TransferBtcBasedBlockchain
-            {
-                FromAddresses = new List<FromAddress>
+            var address1 = "TUr5jyXgdCvpUfBMa9gqSekdTdFFGzZ9wD";
+            var address2 = "TDqxs8V9QdQ7NHGZgoR9ParThTVkSgs6Ro";
+            var signatureId = "8df80a24-378c-4c9b-8080-023ee3e03ad4";
+            var r = await tronClient.SendTransactionKMS(
+                new TransferBlockchainKMS()
                 {
-                    new FromAddress
-                    {
-                        Address = "2MzNGwuKvMEvKMQogtgzSqJcH2UW3Tc5oc7",
-                        PrivateKey = "cVX7YtgL5muLTPncHFhP95oitV1mqUUA5VeSn8HeCRJbPqipzobf"
-                    }
-                },
-                FromUtxos = new List<FromUtxo>
-                {
-                    new FromUtxo
-                    {
-                        TxHash = "53faa103e8217e1520f5149a4e8c84aeb58e55bdab11164a95e69a8ca50f8fcc",
-                        Index = 0,
-                        PrivateKey = "cVX7YtgL5muLTPncHFhP95oitV1mqUUA5VeSn8HeCRJbPqipzobf"
-                    }
-                },
-                Tos = new List<To>
-                {
-                    new To
-                    {
-                        Address = "2MzNGwuKvMEvKMQogtgzSqJcH2UW3Tc5oc7",
-                        Value = 0.02969944M
-                    }
-                }
-            };
-
-            var validationContext = new ValidationContext(body);
-
+                    FromAddress = address1,
+                    Amount = 50,
+                    Fee = 0,
+                    ToAddress = address2,
+                    SignatureId = signatureId,
+                    Index = 1,
+                    Currency = "TRON"
+                });
         }
     }
 }

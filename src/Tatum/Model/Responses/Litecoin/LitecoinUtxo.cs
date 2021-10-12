@@ -11,7 +11,7 @@ namespace TatumPlatform.Model.Responses
         public long Height { get; set; }
 
         [JsonPropertyName("value")]
-        public long Value { get; set; }
+        public decimal Value { get; set; }
 
         [JsonPropertyName("script")]
         public string Script { get; set; }

@@ -29,12 +29,37 @@ namespace TatumPlatform.MyConsole
 
         public async Task GetBalance()
         {
-            var Maddress = "xdcdc643f3f2065f7d3d06c44c3f9a047a0f45fb532";
+            var Maddress = "xdcb5a0bf77a775eaecf45dea79798f90a9f628194d";
             var req = new BalanceRequest()
             {
                 Address = Maddress
             };
             var response = await xdcClient.GetBalance(req);
+        }
+
+        public async Task GenerateAddress()
+        {
+            string xPub = "xdcb5a0bf77a775eaecf45dea79798f90a9f628194d";
+            int index = 1;
+            var add = await xdcClient.GenerateAddress(xPub, index);
+        }
+
+        public async Task SendTransactionKMS()
+        {
+            var address1 = "xdcb5a0bf77a775eaecf45dea79798f90a9f628194d";
+            var address2 = "xdce8316f4001acd808f47fbbf0034d72c8c6db30b4";
+            var signatureId = "ad347649-7b0e-495d-b02b-8072f2be555b";
+            var r = await xdcClient.SendTransactionKMS(
+                new TransferBlockchainKMS()
+                {
+                    FromAddress = address1,
+                    Amount = 125,
+                    Fee = 1,
+                    Currency = "XDC",
+                    Index = 1,
+                    ToAddress = address2,
+                    SignatureId = signatureId
+                });
         }
     }
 }

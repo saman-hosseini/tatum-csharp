@@ -37,5 +37,14 @@ namespace TatumPlatform.MyConsole
             };
             var response = await flowClient.GetBalance(req);
         }
+
+        public async Task GenerateAddress()
+        {
+            string xPub = "xpub6EFa9bLxi1dK31XxDL4JxhCGvMnWxxCUF1mKdMJsCZup2QBrWDCurZ9YPxoYC8zQYmad6EQ1P3ZQ7MBc8Cy1FTNnrYC9S53Y9ewLTcgFcK8";
+            int index = 1;
+            var add = await flowClient.GenerateAddress(xPub, index);
+        }
+
+        
     }
 }

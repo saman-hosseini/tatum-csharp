@@ -29,12 +29,37 @@ namespace TatumPlatform.MyConsole
 
         public async Task GetBalance()
         {
-            var Maddress = "one1k67d4pme0lefp3zt77mcwpvay33el9wfqg2azm";
+            var Maddress = "0xb5a0bf77a775eaecf45dea79798f90a9f628194d";
             var req = new BalanceRequest()
             {
                 Address = Maddress
             };
             var response = await oneClient.GetBalance(req);
+        }
+
+        public async Task GenerateAddress()
+        {
+            string xPub = "xpub6EKUpbjwvtMDHKo6W3uGXxU784CiQXzJg8u7f2ygmZDkAJJqLkVJ3VhMWvF4s2Mu1owWvdabxsdShrpqkKMhEwaTzZ6ijrLezqDuiyAYh7o";
+            int index = 1;
+            var add = await oneClient.GenerateAddress(xPub, index);
+        }
+
+        public async Task SendTransactionKMS()
+        {
+            var address1 = "0xb5a0bf77a775eaecf45dea79798f90a9f628194d";
+            var address2 = "0xe8316f4001acd808f47fbbf0034d72c8c6db30b4";
+            var signatureId = "45128d92-a46f-4d2a-9543-8bdb5221a389";
+            var r = await oneClient.SendTransactionKMS(
+                new TransferBlockchainKMS()
+                {
+                    FromAddress = address1,
+                    Amount = 125,
+                    Fee = 1,
+                    Currency = "ONE",
+                    Index = 1,
+                    ToAddress = address2,
+                    SignatureId = signatureId
+                });
         }
     }
 }

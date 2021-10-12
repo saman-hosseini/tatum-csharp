@@ -33,6 +33,6 @@ namespace TatumPlatform.Model.Responses
         public long Nonce { get; set; }
 
         [JsonPropertyName("txs")]
-        public List<BitcoinTx> Txs { get; set; }
+        public List<AdaTx> Txs { get; set; }
     }
 }

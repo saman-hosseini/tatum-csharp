@@ -8,9 +8,9 @@ namespace TatumPlatform.Clients
 {
     public partial class TatumClient : ITatumClient
     {
-        Task<Address> ITatumClient.AssignDepositAddress(string accountId, string address)
+        Task<Address> ITatumClient.AssignDepositAddress(string accountId, string address, int? index)
         {
-            return tatumApi.AssignDepositAddress(accountId, address);
+            return tatumApi.AssignDepositAddress(accountId, address, index);
         }
 
         Task<Account> ITatumClient.CheckAddressExists(string address, string currency, string index)

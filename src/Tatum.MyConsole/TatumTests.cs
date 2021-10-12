@@ -71,9 +71,9 @@ namespace TatumPlatform.MyConsole
 
         public async Task CheckAddressExists()
         {
-            string address = "TNNNryU7ZbUmVKfCqCWnWhC9YXQhxdraC5";
-            var currency = "USDT";
-            var account = await tatumClient.CheckAddressExists(address, currency, "");
+            string address = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
+            var currency = "CELO";
+            var account = await tatumClient.CheckAddressExists(address, currency, "25");
         }
 
         public async Task RemoveDepositAddress()

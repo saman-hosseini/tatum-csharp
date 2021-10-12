@@ -33,23 +33,32 @@ namespace TatumPlatform.MyConsole
             var addressMain = "0x477AEf00A114a5A2506218E9851D8618b9Fc6B76";
             var req = new BalanceRequest()
             {
-                Address = addressMain
+                Address = address
             };
             var response = await bscClient.GetBalance(req);
+        }
+
+        public async Task GenerateAddress()
+        {
+            string xPub = "xpub6FGg7CoGebEDo4PX3UuNi4chj7YoPWZFZeZdCFwq8YcHcBQUnkqrTD9g3qCgZSWsMKa5HiA7YiNA9hWkAXBt8bwsy8mGwinLh6DMN4iqoHU";
+            int index = 2;
+            var add = await bscClient.GenerateAddress(xPub, index);
         }
 
         public async Task SendTransactionKMS()
         {
             var address1 = "0xe4bdce3fee7cd2d722580b0e701531bae004b85b";
             var address2 = "0x3cc789313fbe6b482a871cec004261759c0699f4";
+            var signatureId = "35521f03-310c-4544-8732-54cfcd2138e0";
             var req = new TransferBlockchainKMS()
             {
                 FromAddress = address1,
                 ToAddress = address2,
-                Amount = 0.0042M,
-                Currency = "ETH",
-                Fee = 0.001M,
-                SignatureId = "3be381a1-d149-4f86-9c58-b4626b0f502f"
+                Amount = 0.0043M,
+                Currency = "BSC",
+                Fee = 0.0022M,
+                Index = 1,
+                SignatureId = signatureId
             };
             var response = await bscClient.SendTransactionKMS(req);
         }

@@ -9,7 +9,7 @@ namespace TatumPlatform.Clients
     {
         private readonly IOneApi oneApi;
         private const int GasLimit = 21000;
-        private static Precision Precision { get; } = Precision.Precision18;
+        private static Precision Precision { get; } = Precision.Gwei;
         internal OneClient()
         {
         }
@@ -61,9 +61,10 @@ namespace TatumPlatform.Clients
             return tx;
         }
 
-        public async Task<string> GenerateAddress(string xPubString, int index)
+        public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
-            throw new System.NotImplementedException();
+            var address = await oneApi.GenerateAddress(xPubString, index);
+            return new GenerateAddressResponse() { Address = address.Address, BlockchainAddressType = BlockchainAddressType.ReceiveAddress };
         }
     }
 }

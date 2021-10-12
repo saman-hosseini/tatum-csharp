@@ -68,9 +68,10 @@ namespace TatumPlatform.Clients
             throw new System.NotImplementedException();
         }
 
-        public async Task<string> GenerateAddress(string xPubString, int index)
+        public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
-            throw new System.NotImplementedException();
+            var address = await bitcoinCashApi.GenerateAddress(xPubString, index);
+            return new GenerateAddressResponse() { Address = address.Address, BlockchainAddressType = BlockchainAddressType.ReceiveAddress };
         }
     }
 }

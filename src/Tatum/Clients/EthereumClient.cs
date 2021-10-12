@@ -93,6 +93,7 @@ namespace TatumPlatform.Clients
                     GasLimit = GasLimit.ToString(),
                     GasPrice = gasPrice
                 },
+                Index = transfer.Index,
                 Data = transfer.Message
             };
             var tx = await ethereumApi.SendTransactionKMS(sendObj);
@@ -113,10 +114,10 @@ namespace TatumPlatform.Clients
             }
         }
 
-        public async Task<string> GenerateAddress(string xPubString, int index)
+        public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await ethereumApi.GenerateAddress(xPubString, index);
-            return address.Address;
+            return new GenerateAddressResponse() { Address = address.Address, BlockchainAddressType = BlockchainAddressType.ReceiveAddress };
         }
     }
 }

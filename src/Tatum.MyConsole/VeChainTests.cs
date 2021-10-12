@@ -29,7 +29,7 @@ namespace TatumPlatform.MyConsole
 
         public async Task GetBalance()
         {
-            var Maddress = "0x9eB35e1F29E643c2F673E4c61B40084c534099EC";
+            var Maddress = "0xe4bdce3fee7cd2d722580b0e701531bae004b85b";
             var req = new BalanceRequest()
             {
                 Address = Maddress
@@ -39,18 +39,41 @@ namespace TatumPlatform.MyConsole
 
         public async Task SendTransactionKMS()
         {
-            var btc1 = "mkbZK4vpCSvTxr94frf9vw88csLNxAhVB1";
-            var btc2 = "mzRozGK4J4WRxgfU5ZhtYJdZJyWBwiJuQm";
+            var address1 = "0xe4bdce3fee7cd2d722580b0e701531bae004b85b";
+            var address2 = "0x6a03e1FF4b617bb37fe238AC3b11a91Af68F5112";
+            var signatureId = "edd6587e-db00-49a9-9ee3-4c4112ed6b5e";
             var r = await veChainClient.SendTransactionKMS(
                 new TransferBlockchainKMS()
                 {
-                    FromAddress = btc2,
-                    Amount = 0.0003M,
-                    Fee = 0.00003M,
-                    FromTag = 3,
-                    ToAddress = btc1,
-                    SignatureId = "cPSSYukdVsEyqQtHZ9Ri9xjKGtM1RbGKiuX38XcHVamHwoVAkHjP"
+                    FromAddress = address1,
+                    Amount = 5.3M,
+                    ToAddress = address2,
+                    Index = 1,
+                    SignatureId = signatureId
                 });
+        }
+
+        public async Task GenerateAddress()
+        {
+            string xPub = "xpub6FGg7CoGebEDo4PX3UuNi4chj7YoPWZFZeZdCFwq8YcHcBQUnkqrTD9g3qCgZSWsMKa5HiA7YiNA9hWkAXBt8bwsy8mGwinLh6DMN4iqoHU";
+            int index = 1;
+            var add = await veChainClient.GenerateAddress(xPub, index);
+        }
+
+        public async Task FindIndexAddress()
+        {
+            string xPub = "xpub6F2SjKKrCbV67QmKBp9rZFYx151uR2ntkShivQXeU7eB2wvrLpA4tjaCGAP8ELWdQUBRSVeQcp2VKY5fpTknTEfL7kqTjEdwsFups1o9Q68";
+            var address = "0x6a03e1FF4b617bb37fe238AC3b11a91Af68F5112";
+            for (int i = 230; i < int.MaxValue; i++)
+            {
+                var add = await veChainClient.GenerateAddress(xPub, i);
+                Console.WriteLine(i);
+                await Task.Delay(100);
+                if (add.Address == address)
+                {
+
+                }
+            }
         }
     }
 }

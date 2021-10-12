@@ -8,7 +8,6 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    /// <inheritdoc/>
     public partial class LitecoinClient : ILitecoinClient
     {
         private readonly ILitecoinApi litecoinApi;
@@ -113,7 +112,7 @@ namespace TatumPlatform.Clients
                         result.Add(new LitecoinUtxo()
                         {
                             Index = oi,
-                            Value = long.Parse(item.Value),
+                            Value = decimal.Parse(item.Value),
                             Hash = uxto.Hash
                         });
                     }
@@ -123,10 +122,10 @@ namespace TatumPlatform.Clients
             return result;
         }
 
-        private static (List<LitecoinUtxo> Utxos, decimal Remain) GetNeededUxto(List<LitecoinUtxo> allUxtos, long amount)
+        private static (List<LitecoinUtxo> Utxos, decimal Remain) GetNeededUxto(List<LitecoinUtxo> allUxtos, decimal amount)
         {
             List<LitecoinUtxo> result = new();
-            long balance = 0;
+            decimal balance = 0;
             foreach (var tx in allUxtos)
             {
                 balance += tx.Value;
@@ -136,7 +135,7 @@ namespace TatumPlatform.Clients
                     break;
                 }
             }
-            decimal remain = TatumHelper.ToDecimal(balance - amount, Precision);
+            decimal remain = balance - amount;
             return (result, remain);
         }
 
@@ -154,7 +153,7 @@ namespace TatumPlatform.Clients
         public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var allUxtos = await GetAllUxto(transfer.FromAddress);
-            var totalSatoshi = TatumHelper.ToLong(transfer.Amount + transfer.Fee, Precision);
+            var totalSatoshi = transfer.Amount + transfer.Fee;
             var (Utxos, Remain) = GetNeededUxto(allUxtos, totalSatoshi);
 
             var sendObj = new TransferBtcBasedBlockchainKMS()
@@ -184,10 +183,10 @@ namespace TatumPlatform.Clients
             return balanceReq.CurrentBalance;
         }
 
-        public async Task<string> GenerateAddress(string xPubString, int index)
+        public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await litecoinApi.GenerateAddress(xPubString, index);
-            return address.Address;
+            return new GenerateAddressResponse() { Address = address.Address, BlockchainAddressType = BlockchainAddressType.ReceiveAddress };
         }
     }
 }

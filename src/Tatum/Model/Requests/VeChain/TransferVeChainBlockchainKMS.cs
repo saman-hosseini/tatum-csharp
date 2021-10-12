@@ -22,7 +22,11 @@ namespace TatumPlatform.Model.Requests
 
         [Required]
         [StringLength(36, MinimumLength = 36)]
+        [JsonPropertyName("signatureId")]
         public string SignatureId { get; set; }
+
+        [JsonPropertyName("index")]
+        public int Index { get; set; }
 
         [StringLength(10000)]
         [JsonPropertyName("data")]

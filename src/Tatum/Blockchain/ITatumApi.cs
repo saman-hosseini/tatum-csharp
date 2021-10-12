@@ -29,7 +29,7 @@ namespace TatumPlatform.Blockchain
         Task<Account> CheckAddressExists(string address, string currency, string index);
 
         [Post("/v3/offchain/account/{accountId}/address/{address}")]
-        Task<Address> AssignDepositAddress(string accountId, string address);
+        Task<Address> AssignDepositAddress(string accountId, string address, int? index);
 
         [Delete("/v3/offchain/account/{accountId}/address/{address}")]
         Task RemoveDepositAddress(string accountId, string address);

@@ -12,7 +12,7 @@ namespace TatumPlatform.Clients
     {
         private readonly IVeChainApi veChainApi;
         private const int GasLimit = 21000;
-        private static Precision Precision { get; } = Precision.Precision18;
+        private static Precision Precision { get; } = Precision.Gwei;
         internal VeChainClient()
         {
         }
@@ -90,6 +90,7 @@ namespace TatumPlatform.Clients
                 Amount = transfer.Amount.ToString(),
                 Data = transfer.Message,
                 To = transfer.ToAddress,
+                Index = transfer.Index,
                 Fee = new VeChainFee()
                 {
                     GasLimit = GasLimit.ToString()
@@ -99,10 +100,10 @@ namespace TatumPlatform.Clients
             return tx;
         }
 
-        public async Task<string> GenerateAddress(string xPubString, int index)
+        public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await veChainApi.GenerateAddress(xPubString, index);
-            return address.Address;
+            return new GenerateAddressResponse() { Address = address.Address, BlockchainAddressType = BlockchainAddressType.ReceiveAddress };
         }
     }
 }

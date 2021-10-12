@@ -10,9 +10,9 @@ using TatumPlatform.Model.Requests;
 
 namespace TatumPlatform.MyConsole
 {
-    public class CeloTests
+    public class BitcoinCashTests
     {
-        ICeloClient celoClient;
+        IBitcoinCashClient bitcoinCashClient;
         public void Setup()
         {
             IConfiguration config = new ConfigurationBuilder()
@@ -24,33 +24,39 @@ namespace TatumPlatform.MyConsole
             string baseUrl = config.GetValue<string>("TatumApiSettings:baseUrl");
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
-            celoClient = CeloClient.Create(baseUrl, xApiKey);
+            bitcoinCashClient = BitcoinCashClient.Create(baseUrl, xApiKey);
         }
 
         public async Task GetBalance()
         {
-            var address = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
+            var Maddress = "bchtest:qz5q7l34dsnstcd4m7qe6099wx7j5tu2zcf6d4ez7p";
             var req = new BalanceRequest()
             {
-                Address = address,
-                Currency = "Celo"
+                Address = Maddress
             };
-            var response = await celoClient.GetBalance(req);
+            var response = await bitcoinCashClient.GetBalance(req);
+        }
+
+        public async Task GenerateAddress()
+        {
+            string xPub = "tpubDEx6jhQE6o1MmaHpXmugZHBXNYLJdqeABiD5SFfFfchb2Xwfr2RdG36mSNMqYjSccKXaVtc4thze3jtbhpHyggbCEUj5YHypDi79BaeYVae";
+            int index = 2;
+            var add = await bitcoinCashClient.GenerateAddress(xPub, index);
         }
 
         public async Task SendTransactionKMS()
         {
-            var address1 = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
-            var address2 = "0xbd76e88a1abf05d1c49803dab874841570570ea9";
-            var signatureId = "3021a27c-ccc1-4ad5-bc8d-5f7d7315c591";
-            var r = await celoClient.SendTransactionKMS(
+            var address1 = "bchtest:qz5q7l34dsnstcd4m7qe6099wx7j5tu2zcf6d4ez7p";
+            var address2 = "rNopBjEd3Ck94VE7to3X26VQL98F5BtGCr";
+            var signatureId = "debe7373-303e-40e5-aed6-b6cb78cb191f";
+            var r = await bitcoinCashClient.SendTransactionKMS(
                 new TransferBlockchainKMS()
                 {
                     FromAddress = address1,
-                    Amount = 3,
+                    Amount = 125,
                     Fee = 1,
-                    Index = 1,
-                    Currency = "CELO",
+                    FromTag = 3,
+                    ToTag = 2,
                     ToAddress = address2,
                     SignatureId = signatureId
                 });

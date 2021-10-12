@@ -100,5 +100,6 @@ namespace TatumPlatform.Model.Requests
         [Range(0, double.PositiveInfinity)]
         [JsonPropertyName("value")]
         public decimal Value { get; set; }
+
     }
 }

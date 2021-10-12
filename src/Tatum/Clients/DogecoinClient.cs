@@ -104,10 +104,10 @@ namespace TatumPlatform.Clients
             return balance;
         }
 
-        public async Task<string> GenerateAddress(string xPubString, int index)
+        public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await dogecoinApi.GenerateAddress(xPubString, index);
-            return address.Address;
+            return new GenerateAddressResponse() { Address = address.Address, BlockchainAddressType = BlockchainAddressType.ReceiveAddress };
         }
     }
 }

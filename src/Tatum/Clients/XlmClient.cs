@@ -99,9 +99,9 @@ namespace TatumPlatform.Clients
             return tx;
         }
 
-        public Task<string> GenerateAddress(string xPubString, int index)
+        public Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult(new GenerateAddressResponse() { Address = xPubString, TagId = index, BlockchainAddressType = BlockchainAddressType.TagId });
         }
     }
 }

@@ -30,6 +30,10 @@ namespace TatumPlatform.Model.Requests
         //[JsonPropertyName("nonce")]
         public uint Nonce { get; set; }
 
+        [Range(0, int.MaxValue)]
+        [JsonPropertyName("index")]
+        public int Index { get; set; }
+
         [Required]
         [StringLength(36, MinimumLength = 36)]
         [JsonPropertyName("signatureId")]

@@ -10,9 +10,9 @@ using TatumPlatform.Model.Requests;
 
 namespace TatumPlatform.MyConsole
 {
-    public class CeloTests
+    public class LitecoinTests
     {
-        ICeloClient celoClient;
+        ILitecoinClient litecoinClient;
         public void Setup()
         {
             IConfiguration config = new ConfigurationBuilder()
@@ -24,33 +24,38 @@ namespace TatumPlatform.MyConsole
             string baseUrl = config.GetValue<string>("TatumApiSettings:baseUrl");
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
-            celoClient = CeloClient.Create(baseUrl, xApiKey);
+            litecoinClient = LitecoinClient.Create(baseUrl, xApiKey);
         }
 
         public async Task GetBalance()
         {
-            var address = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
+            var address1 = "mhxuc8xJVx9fh4uwQLHngVY9Le2LmYFevQ";
+            var address2 = "tltc1qw8xwcerar6u0p5sp253jn2g38verelx49ctwva";
             var req = new BalanceRequest()
             {
-                Address = address,
-                Currency = "Celo"
+                Address = address1
             };
-            var response = await celoClient.GetBalance(req);
+            var response = await litecoinClient.GetBalance(req);
+        }
+
+        public async Task GenerateAddress()
+        {
+            string xPub = "ttub4f491UVVMvWRPLGE7HqAZv2BU5YuDxj1pVbHdi1r5Nx4RCTzu6S8awMvWzbbMEU7zmWiFuD8iuYbVrd8iWJDybRdt4dBYYr2Exrw5vVTTzn";
+            int index = 1;
+            var add = await litecoinClient.GenerateAddress(xPub, index);
         }
 
         public async Task SendTransactionKMS()
         {
-            var address1 = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
-            var address2 = "0xbd76e88a1abf05d1c49803dab874841570570ea9";
-            var signatureId = "3021a27c-ccc1-4ad5-bc8d-5f7d7315c591";
-            var r = await celoClient.SendTransactionKMS(
+            var address1 = "mhxuc8xJVx9fh4uwQLHngVY9Le2LmYFevQ";
+            var address2 = "n28hDC8fB1LLmk5a43SsNgYpZ6hx74cKbx";
+            var signatureId = "620ceb86-e2ca-47a9-8e52-b9d8a74af8e0";
+            var r = await litecoinClient.SendTransactionKMS(
                 new TransferBlockchainKMS()
                 {
                     FromAddress = address1,
-                    Amount = 3,
-                    Fee = 1,
-                    Index = 1,
-                    Currency = "CELO",
+                    Amount = 0.002M,
+                    Fee = 0.001M,
                     ToAddress = address2,
                     SignatureId = signatureId
                 });

@@ -44,131 +44,27 @@ namespace TatumPlatform.MyConsole
         {
             var btc1 = "mkbZK4vpCSvTxr94frf9vw88csLNxAhVB1";
             var btc2 = "mzRozGK4J4WRxgfU5ZhtYJdZJyWBwiJuQm";
-            var btc3 = "mrBx9RckUraQEF9t7oQgQArxZSMfzUbvtp";
+            var btc3 = "n4GRF6TitaPYHFpJqxhF6Bg38rD27kMDuH";
+            var signatureId = "a14d9315-7f84-4c30-8f89-7c2775f95aad";
             var btcold1 = "34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo";
             var btcold2 = "16ftSEQ4ctQFDtVZiUBusQUjRrGhM3JYwe";
             var r = await bitcoinClient.SendTransactionKMS(
                 new TransferBlockchainKMS()
                 {
-                    FromAddress = btc2,
-                    Amount = 0.0003M,
-                    Fee = 0.00003M,
-                    ToAddress = btc1,
-                    SignatureId = "cPSSYukdVsEyqQtHZ9Ri9xjKGtM1RbGKiuX38XcHVamHwoVAkHjP"
+                    FromAddress = btc3,
+                    Amount = 0.00002M,
+                    Fee = 0.00001M,
+                    ToAddress = btc2,
+                    SignatureId = signatureId
                 });
         }
 
-        public void CreateWalletTestNet()
+        public async Task GenerateAddressMainNet()
         {
-            Wallet wallet = bitcoinClient.CreateWallet(mnemonic, true);
-        }
-
-        public void GeneratePrivateKeyMainNet()
-        {
-            var privateKey = bitcoinClient.GeneratePrivateKey(mnemonic, 1, false);
-        }
-
-        public void GeneratePrivateKeyTestNet()
-        {
-            var privateKey = bitcoinClient.GeneratePrivateKey(mnemonic, 1, true);
-        }
-
-        public void GenerateAddressMainNet()
-        {
+            string xPub = "tpubDFeJdScxMsBg4raNVftTuyx54EeTNu4K7H9vYozyUTNBMU5BrygwbepWHsHU5wU79E6yuHfz5pCCqt1MZP3823QB2jWadFSaH3om86GiTmg";
+            int index = 1;
             string address = bitcoinClient.GenerateAddress("xpub6EsCk1uU6cJzqvP9CdsTiJwT2rF748YkPnhv5Qo8q44DG7nn2vbyt48YRsNSUYS44jFCW9gwvD9kLQu9AuqXpTpM1c5hgg9PsuBLdeNncid", 1, false);
-
-        }
-
-        public void GenerateAddressTestNet()
-        {
-            string address = bitcoinClient.GenerateAddress("tpubDFjLw3ykn4aB7fFt96FaqRjSnvtDsU2wpVr8GQk3Eo612LS9jo9JgMkQRfYVG248J3pTBsxGg3PYUXFd7pReNLTeUzxFcUDL3zCvrp3H34a", 1, true);
-
-        }
-
-        public async Task TransactionFromUtxo()
-        {
-            var body = new TransferBtcBasedBlockchain
-            {
-                FromUtxos = new List<FromUtxo>
-                {
-                    new FromUtxo
-                    {
-                        TxHash = "060d1bde52949044971b056aaec807e1189ca80db4d06e90d4f312a610de2aee",
-                        Index = 0,
-                        PrivateKey = "cSmnhYYG2mXRPvi1FoFDihT4bL5qy9DDhephoubJ7mwxb2sgLNGQ"
-                    }
-                },
-                Tos = new List<To>
-                {
-                    new To
-                    {
-                        Address = "mkQporSV7myJLwfWEVyHMhphY9viiiEMWc",
-                        Value = 0.00005m
-                    }
-                }
-            };
-
-            var txData = await bitcoinClient.PrepareSignedTransaction(body, true);
-        }
-
-        public async Task TransactionFromAddress()
-        {
-            var body = new TransferBtcBasedBlockchain
-            {
-                FromAddresses = new List<FromAddress>
-                {
-                    new FromAddress
-                    {
-                        Address = "mfk4BVNg4p4m7qPx3u398otHT97M9hotPR",
-                        PrivateKey = "cSmnhYYG2mXRPvi1FoFDihT4bL5qy9DDhephoubJ7mwxb2sgLNGQ"
-                    }
-                },
-                Tos = new List<To>
-                {
-                    new To
-                    {
-                        Address = "mkQporSV7myJLwfWEVyHMhphY9viiiEMWc",
-                        Value = 0.00005m
-                    }
-                }
-            };
-
-            var txData = await bitcoinClient.PrepareSignedTransaction(body, true);
-        }
-
-        public void FromAddressAndFromUtxoNotTogether()
-        {
-            var body = new TransferBtcBasedBlockchain
-            {
-                FromAddresses = new List<FromAddress>
-                {
-                    new FromAddress
-                    {
-                        Address = "2MzNGwuKvMEvKMQogtgzSqJcH2UW3Tc5oc7",
-                        PrivateKey = "cVX7YtgL5muLTPncHFhP95oitV1mqUUA5VeSn8HeCRJbPqipzobf"
-                    }
-                },
-                FromUtxos = new List<FromUtxo>
-                {
-                    new FromUtxo
-                    {
-                        TxHash = "53faa103e8217e1520f5149a4e8c84aeb58e55bdab11164a95e69a8ca50f8fcc",
-                        Index = 0,
-                        PrivateKey = "cVX7YtgL5muLTPncHFhP95oitV1mqUUA5VeSn8HeCRJbPqipzobf"
-                    }
-                },
-                Tos = new List<To>
-                {
-                    new To
-                    {
-                        Address = "2MzNGwuKvMEvKMQogtgzSqJcH2UW3Tc5oc7",
-                        Value = 0.02969944M
-                    }
-                }
-            };
-
-            var validationContext = new ValidationContext(body);
-
+            var add = await bitcoinClient.GenerateAddress(xPub, index);
         }
     }
 }

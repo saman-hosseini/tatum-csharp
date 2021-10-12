@@ -1,3 +1,4 @@
 ﻿#password = 13
 tatum-kms --help
 tatum-kms daemon --api-key xxx --chain=TRON
+tatum-kms daemon --chain=XDC --api-key=909d71c2-bc6a-4c7c-87d2-a022ab0df3d5 --testnet

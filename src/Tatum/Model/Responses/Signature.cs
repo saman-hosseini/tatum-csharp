@@ -9,7 +9,7 @@ namespace TatumPlatform.Model.Responses
 {
     public class Signature
     {
-        [JsonPropertyName("SignatureId")]
+        [JsonPropertyName("signatureId")]
         public string SignatureId { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace TatumPlatform.Clients
         Task<Address> GenerateDepositAddress(string accountId, int? index = null);
         Task<List<Address>> GenerateDepositAddresses(List<GenerateAddressRequest> addresses);
         Task<Account> CheckAddressExists(string address, string currency, string index);
-        Task<Address> AssignDepositAddress(string accountId, string address);
+        Task<Address> AssignDepositAddress(string accountId, string address, int? index=null);
         Task RemoveDepositAddress(string id, string address);
         Task<List<Address>> GetAddresses(string accountId);
         Task<TxHash> OffchainBroadcast(BroadcastWithdrawal withdrawal);

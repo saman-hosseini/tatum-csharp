@@ -36,7 +36,11 @@ namespace TatumPlatform.Clients
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var accountBalance = await celoApi.GetBalance(request.Address);
-            return TatumHelper.ToDecimal(accountBalance.Celo);
+            if (request.Currency.ToUpper() == "CELO" )
+                return TatumHelper.ToDecimal(accountBalance.Celo);
+            if (request.Currency.ToUpper() == "CUSD")
+                return TatumHelper.ToDecimal(accountBalance.CUsd);
+            throw new System.Exception($"Celo network doesnt support {request.Currency}");
         }
 
         public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
@@ -55,10 +59,10 @@ namespace TatumPlatform.Clients
             return tx;
         }
 
-        public async Task<string> GenerateAddress(string xPubString, int index)
+        public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await celoApi.GenerateAddress(xPubString, index);
-            return address.Address;
+            return new GenerateAddressResponse() { Address = address.Address, BlockchainAddressType = BlockchainAddressType.ReceiveAddress };
         }
     }
 }

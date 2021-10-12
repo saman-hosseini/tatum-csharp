@@ -8,6 +8,6 @@ namespace TatumPlatform.Clients
     {
         Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer);
         Task<decimal> GetBalance(BalanceRequest request);
-        Task<string> GenerateAddress(string xPubString, int index);
+        Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index);
     }
 }

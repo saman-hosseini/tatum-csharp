@@ -175,14 +175,15 @@ namespace TatumPlatform.Clients
                         }
                     }
             };
+       
             var txHash = await bitcoinApi.SendTransactionKMS(sendObj);
             return txHash;
         }
 
-        public async Task<string> GenerateAddress(string xPubString, int index)
+        public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await bitcoinApi.GenerateAddress(xPubString, index);
-            return address.Address;
+            return new GenerateAddressResponse() { Address = address.Address, BlockchainAddressType = BlockchainAddressType.ReceiveAddress };
         }
     }
 

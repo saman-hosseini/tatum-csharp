@@ -9,7 +9,7 @@ namespace TatumPlatform.Clients
     {
         private readonly IPolygonApi polygonApi;
         private const int GasLimit = 21000;
-        private static Precision Precision { get; } = Precision.Precision18;
+        private static Precision Precision { get; } = Precision.Gwei;
         internal PolygonClient()
         {
         }
@@ -61,10 +61,10 @@ namespace TatumPlatform.Clients
             return tx;
         }
 
-        public async Task<string> GenerateAddress(string xPubString, int index)
+        public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await polygonApi.GenerateAddress(xPubString, index);
-            return address.Address;
+            return new GenerateAddressResponse() { Address = address.Address, BlockchainAddressType = BlockchainAddressType.ReceiveAddress };
         }
     }
 }

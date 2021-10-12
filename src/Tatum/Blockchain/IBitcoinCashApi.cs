@@ -14,6 +14,9 @@ namespace TatumPlatform.Blockchain
         [Get("/v3/bcash/info")]
         Task<BitcoinCashInfo> GetBlockchainInfo();
 
+        [Get("/v3/bcash/address/{xpub}/{index}")]
+        Task<BlockchainAddress> GenerateAddress(string xpub, int index);
+
         [Get("/v3/bcash/block/{hash}")]
         Task<BitcoinCashBlock> GetBlock(string hash);
 

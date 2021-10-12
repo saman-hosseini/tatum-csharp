@@ -37,6 +37,13 @@ namespace TatumPlatform.MyConsole
                 });
         }
 
+        public async Task GenerateAddress()
+        {
+            string xPub = "tpubDFeJdScxMsBg4raNVftTuyx54EeTNu4K7H9vYozyUTNBMU5BrygwbepWHsHU5wU79E6yuHfz5pCCqt1MZP3823QB2jWadFSaH3om86GiTmg";
+            int index = 1;
+            var add = await dogecoinClient.GenerateAddress(xPub, index);
+        }
+
         public async Task SendTransactionKMS()
         {
             var address1 = "nZGmHHXPcorDbiREihKnuBfhssrGPeHmEs";

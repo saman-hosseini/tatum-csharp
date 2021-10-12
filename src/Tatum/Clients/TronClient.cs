@@ -70,9 +70,9 @@ namespace TatumPlatform.Clients
                 });
                 return tx;
             }
-            else
+            else if(transfer.ContractType == "TRC20")
             {
-                var tx = await tronApi.SendTransactionKMS(new TransferTronBlockchainKMS()
+                var tx = await tronApi.SendTrc20TransactionKMS(new TransferTronTrc20BlockchainKMS()
                 {
                     SignatureId = transfer.SignatureId,
                     From = transfer.FromAddress,
@@ -82,6 +82,19 @@ namespace TatumPlatform.Clients
                 });
                 return tx;
             }
+            else if (transfer.ContractType == "TRC10")
+            {
+                var tx = await tronApi.SendTrc10TransactionKMS(new TransferTronTrc10BlockchainKMS()
+                {
+                    SignatureId = transfer.SignatureId,
+                    From = transfer.FromAddress,
+                    To = transfer.ToAddress,
+                    Amount = transfer.Amount.ToString(),
+                    Index = transfer.Index
+                });
+                return tx;
+            }
+            throw new NotImplementedException();
         }
 
         public async Task<decimal> GetBalance(BalanceRequest request)
@@ -97,10 +110,10 @@ namespace TatumPlatform.Clients
             }
         }
 
-        public async Task<string> GenerateAddress(string xPubString, int index)
+        public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await tronApi.GenerateAddress(xPubString, index);
-            return address.Address;
+            return new GenerateAddressResponse() { Address = address.Address, BlockchainAddressType = BlockchainAddressType.ReceiveAddress };
         }
     }
 }

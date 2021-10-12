@@ -12,7 +12,7 @@ namespace TatumPlatform.Blockchain
     public interface IAdaApi
     {
         [Get("/v3/ada/transaction/address/{address}?pageSize={pageSize}&offset={offset}")]
-        Task<List<BitcoinTx>> GetTxForAccount(string address, int pageSize = 50, int offset = 0);
+        Task<List<AdaTx>> GetTxForAccount(string address, int pageSize = 50, int offset = 0);
 
         [Get("/v3/ada/account/{address}")]
         Task<AdaAccount> GetAccount(string address);
