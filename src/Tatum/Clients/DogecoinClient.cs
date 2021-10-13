@@ -9,7 +9,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public class DogecoinClient : IDogecoinClient
+    public class DogecoinClient : BaseClient, IDogecoinClient
     {
         private readonly IDogecoinApi dogecoinApi;
         private readonly IDogechainApi dogechainApi;

@@ -8,7 +8,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public partial class XlmClient : IXlmClient
+    public partial class XlmClient : BaseClient, IXlmClient
     {
         private readonly IXlmApi xlmApi;
         private const string CoinName = "XLM";
@@ -74,13 +74,13 @@ namespace TatumPlatform.Clients
         {
             var accountInfo = await xlmApi.GetAccountInfo(request.Address);
             string strBalance;
-            if (request.Currency.ToUpper() == CoinName)
+            if (Currency.ToUpper() == CoinName)
             {
                 strBalance = accountInfo.Balances.FirstOrDefault(q => q.AssetCode == null && q.AssetIssuer == null).Balance;
             }
             else
             {
-                strBalance = accountInfo.Balances.FirstOrDefault(q => q.AssetCode == request.Currency && q.AssetIssuer == request.ContractAddress).Balance;
+                strBalance = accountInfo.Balances.FirstOrDefault(q => q.AssetCode == Currency && q.AssetIssuer == ContractAddress).Balance;
             }
             return TatumHelper.ToDecimal(strBalance);
         }

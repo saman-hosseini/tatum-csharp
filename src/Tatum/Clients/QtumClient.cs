@@ -4,7 +4,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public class QtumClient: IQtumClient
+    public class QtumClient: BaseClient, IQtumClient
     {
         private readonly IQtumApi qtumApi;
 

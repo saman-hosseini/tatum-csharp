@@ -5,7 +5,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public class FlowClient : IFlowClient
+    public class FlowClient : BaseClient, IFlowClient
     {
         private readonly IFlowApi flowApi;
         private static Precision Precision { get; } = Precision.Precision8;
@@ -45,7 +45,7 @@ namespace TatumPlatform.Clients
             {
                 SignatureId = transfer.SignatureId,
                 Amount = transfer.Amount.ToString(),
-                Currency = transfer.Currency,
+                Currency = Currency,
                 Index = transfer.Index,
                 To = transfer.ToAddress,
                 Account = transfer.FromAddress

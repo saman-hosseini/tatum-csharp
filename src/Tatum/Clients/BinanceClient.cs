@@ -6,7 +6,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public class BinanceClient : IBinanceClient
+    public class BinanceClient : BaseClient, IBinanceClient
     {
         private readonly IBinanceApi bnbApi;
 
@@ -37,7 +37,7 @@ namespace TatumPlatform.Clients
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var account = await bnbApi.GetAccount(request.Address);
-            var balance = account.Balances.Where(x => x.Symbol == request.Currency).Sum(q => TatumHelper.ToDecimal(q.Free));
+            var balance = account.Balances.Where(x => x.Symbol == Currency).Sum(q => TatumHelper.ToDecimal(q.Free));
             return balance;
         }
 
@@ -46,7 +46,7 @@ namespace TatumPlatform.Clients
             var req = new TransferBnbBlockchainKMS()
             {
                 Amount = transfer.Amount.ToString(),
-                Currency = transfer.Currency,
+                Currency = Currency,
                 FromAddress = transfer.FromAddress,
                 SignatureId = transfer.SignatureId,
                 To = transfer.ToAddress,

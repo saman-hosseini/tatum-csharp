@@ -7,7 +7,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public partial class BitcoinCashClient : IBitcoinCashClient
+    public partial class BitcoinCashClient : BaseClient, IBitcoinCashClient
     {
         private readonly IBitcoinCashApi bitcoinCashApi;
 

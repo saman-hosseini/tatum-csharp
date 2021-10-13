@@ -25,6 +25,7 @@ namespace TatumPlatform.MyConsole
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
             xlmClient = XlmClient.Create(baseUrl, xApiKey);
+            xlmClient.Currency = "XLM";
         }
 
         public async Task GetBalance()
@@ -34,7 +35,7 @@ namespace TatumPlatform.MyConsole
             var req = new BalanceRequest()
             {
                 Address = xPub,
-                Currency = "XLM"
+                
             };
             var response = await xlmClient.GetBalance(req);
         }
@@ -49,13 +50,13 @@ namespace TatumPlatform.MyConsole
         public async Task SendTransactionKMS()
         {
             var address1 = "GC7Q6ZF35G6MIVLCZYZGOLNLR2KMZMF6HU37QPC2DXQKCABUHNKSRKGP";
-            var address2 = "rNopBjEd3Ck94VE7to3X26VQL98F5BtGCr";
-            var signatureId = "debe7373-303e-40e5-aed6-b6cb78cb191f";
+            var address2 = "GDOE2VKNZHWTSLQ3RXZQLJWXPTUCITJICDOMNFH2AWM2YIERPXKJIQBM";
+            var signatureId = "1b45e9db-b9ac-48ab-86aa-215ab9a3f14b";
             var r = await xlmClient.SendTransactionKMS(
                 new TransferBlockchainKMS()
                 {
                     FromAddress = address1,
-                    Amount = 125,
+                    Amount = 128,
                     Fee = 1,
                     FromTag = 3,
                     ToTag = 2,

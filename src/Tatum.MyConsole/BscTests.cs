@@ -25,6 +25,7 @@ namespace TatumPlatform.MyConsole
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
             bscClient = BscClient.Create(baseUrl, xApiKey);
+            bscClient.Currency = "BSC";
         }
 
         public async Task GetBalance()
@@ -55,7 +56,6 @@ namespace TatumPlatform.MyConsole
                 FromAddress = address1,
                 ToAddress = address2,
                 Amount = 0.0043M,
-                Currency = "BSC",
                 Fee = 0.0022M,
                 Index = 1,
                 SignatureId = signatureId

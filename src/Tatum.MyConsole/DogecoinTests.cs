@@ -53,7 +53,6 @@ namespace TatumPlatform.MyConsole
                 FromAddress = address1,
                 ToAddress = address2,
                 Amount = 0.0042M,
-                Currency = "",
                 Fee = 0.001M,
                 SignatureId = "3be381a1-d149-4f86-9c58-b4626b0f502f"
             };

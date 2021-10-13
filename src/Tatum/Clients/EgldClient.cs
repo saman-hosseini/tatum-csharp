@@ -5,7 +5,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public class EgldClient : IEgldClient
+    public class EgldClient : BaseClient, IEgldClient
     {
         private readonly IEgldApi egldApi;
         private const int GasLimit = 21000;

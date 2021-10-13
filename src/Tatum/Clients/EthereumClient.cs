@@ -9,8 +9,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    /// <inheritdoc/>
-    public partial class EthereumClient : IEthereumClient
+    public partial class EthereumClient : BaseClient, IEthereumClient
     {
         private readonly IEthereumApi ethereumApi;
         private readonly IEthereumGasApi ethereumGasApi;
@@ -86,7 +85,7 @@ namespace TatumPlatform.Clients
             {
                 SignatureId = transfer.SignatureId,
                 Amount = transfer.Amount.ToString(),
-                Currency = transfer.Currency,
+                Currency = Currency,
                 To = transfer.ToAddress,
                 Fee = new Fee()
                 {
@@ -102,14 +101,14 @@ namespace TatumPlatform.Clients
 
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
-            if (request.Currency == Currency.ETH.ToString())
+            if (Currency == Model.Currency.ETH.ToString())
             {
                 var balance = await ethereumApi.GetAccountBalance(request.Address);
                 return TatumHelper.ToDecimal(balance.Balance);
             }
             else
             {
-                var balance = await ethereumApi.GetErc20AccountBalance(request.Address, request.Currency, request.ContractAddress);
+                var balance = await ethereumApi.GetErc20AccountBalance(request.Address, Currency, ContractAddress);
                 return TatumHelper.ToDecimal(balance.Balance);
             }
         }

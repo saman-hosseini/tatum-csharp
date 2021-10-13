@@ -54,6 +54,9 @@ namespace TatumPlatform.Blockchain
 
         //Offchain blockchain transfer
 
+        [Post("/v3/offchain/bitcoin/transfer")]
+        Task<Signature> OffchainTransferBtc(OffchainTransferBtcKMS offchainTransfer);
+
         [Post("/v3/offchain/tron/transfer")]
         Task<OffchainTransactionResult> OffchainTransferTron(OffchainTransferTron offchainTransfer);
 

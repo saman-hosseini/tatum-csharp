@@ -25,6 +25,7 @@ namespace TatumPlatform.MyConsole
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
             celoClient = CeloClient.Create(baseUrl, xApiKey);
+            celoClient.Currency = "Celo";
         }
 
         public async Task GetBalance()
@@ -32,8 +33,7 @@ namespace TatumPlatform.MyConsole
             var address = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
             var req = new BalanceRequest()
             {
-                Address = address,
-                Currency = "Celo"
+                Address = address
             };
             var response = await celoClient.GetBalance(req);
         }
@@ -50,7 +50,6 @@ namespace TatumPlatform.MyConsole
                     Amount = 3,
                     Fee = 1,
                     Index = 1,
-                    Currency = "CELO",
                     ToAddress = address2,
                     SignatureId = signatureId
                 });

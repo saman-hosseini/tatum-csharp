@@ -6,7 +6,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public partial class BscClient : IBscClient
+    public partial class BscClient : BaseClient, IBscClient
     {
         private readonly IBscApi bscApi;
         private const int GasLimit = 21000;
@@ -49,7 +49,7 @@ namespace TatumPlatform.Clients
             {
                 SignatureId = transfer.SignatureId,
                 Amount = transfer.Amount.ToString(),
-                Currency = transfer.Currency,
+                Currency = Currency,
                 Fee = new Fee()
                 {
                     GasLimit = GasLimit.ToString(),

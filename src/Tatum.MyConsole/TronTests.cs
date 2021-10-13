@@ -37,31 +37,6 @@ namespace TatumPlatform.MyConsole
             var response = await tronClient.GetBlockchainInfo();
         }
 
-        public void CreateWalletMainNet()
-        {
-            Wallet wallet = tronClient.CreateWallet(mnemonic, false);
-        }
-
-        public void CreateWalletTestNet()
-        {
-            Wallet wallet = tronClient.CreateWallet(mnemonic, true);
-        }
-
-        public void GeneratePrivateKeyMainNet()
-        {
-            var privateKey = tronClient.GeneratePrivateKey(mnemonic, 1, false);
-        }
-
-        public void GeneratePrivateKeyTestNet()
-        {
-            var privateKey = tronClient.GeneratePrivateKey(mnemonic, 1, true);
-        }
-
-        public async Task GenerateAddressMainNet()
-        {
-            var address = await tronClient.GenerateAddress("033dd961ca356b6c9b0af052781895d564b22b3650decb9f5bc218a75a9b5dc007b36f9250ff2eb91359d307032c358c6e3c22f2a793f2dbf8196f8ff1ead35af4", 1);
-        }
-
         public async Task GenerateAddress()
         {
             string xPub = "033dd961ca356b6c9b0af052781895d564b22b3650decb9f5bc218a75a9b5dc007b36f9250ff2eb91359d307032c358c6e3c22f2a793f2dbf8196f8ff1ead35af4";
@@ -73,6 +48,20 @@ namespace TatumPlatform.MyConsole
         {
             string adress = "TDBndvRdCGNi1cCpLK3zYenv6rjhftPvts";
             var account = await tronClient.GetAccount(adress);
+        }
+
+        public async Task GetBalance()
+        {
+            tronClient.ContractAddress = "1003533";
+            tronClient.Currency = "PAL";
+            tronClient.ContractType = "TRC10";
+            tronClient.DecimalPrecision = 2;
+            var Maddress = "TDBndvRdCGNi1cCpLK3zYenv6rjhftPvts";
+            var req = new BalanceRequest()
+            {
+                Address = Maddress,               
+            };
+            var response = await tronClient.GetBalance(req);
         }
 
         public async Task SendTransaction()
@@ -93,6 +82,7 @@ namespace TatumPlatform.MyConsole
             var address1 = "TUr5jyXgdCvpUfBMa9gqSekdTdFFGzZ9wD";
             var address2 = "TDqxs8V9QdQ7NHGZgoR9ParThTVkSgs6Ro";
             var signatureId = "8df80a24-378c-4c9b-8080-023ee3e03ad4";
+            tronClient.Currency = "TRON";
             var r = await tronClient.SendTransactionKMS(
                 new TransferBlockchainKMS()
                 {
@@ -101,8 +91,7 @@ namespace TatumPlatform.MyConsole
                     Fee = 0,
                     ToAddress = address2,
                     SignatureId = signatureId,
-                    Index = 1,
-                    Currency = "TRON"
+                    Index = 1
                 });
         }
     }

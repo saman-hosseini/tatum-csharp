@@ -6,7 +6,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public class XrpClient : IXrpClient
+    public class XrpClient : BaseClient, IXrpClient
     {
         private readonly IXrpApi xrpApi;
         private static Precision Precision { get; } = Precision.Precision6;

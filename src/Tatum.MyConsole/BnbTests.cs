@@ -25,22 +25,23 @@ namespace TatumPlatform.MyConsole
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
             binanceClient = BinanceClient.Create(baseUrl, xApiKey);
+            binanceClient.Currency = "BNB";
         }
 
         public async Task GetBalance()
         {
+            binanceClient.Currency = "BNB";
             var address = "bnb1z35wusfv8twfele77vddclka9z84ugywug48gn";
             var req = new BalanceRequest()
             {
-                Address = address,
-                Currency = "BNB",
-                ContractAddress = ""
+                Address = address
             };
             var response = await binanceClient.GetBalance(req);
         }
 
         public async Task SendTransactionKMS()
         {
+            binanceClient.Currency = "ETH";
             var address1 = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
             var address2 = "0xbd76e88a1abf05d1c49803dab874841570570ea9";
             var req = new TransferBlockchainKMS()
@@ -48,7 +49,6 @@ namespace TatumPlatform.MyConsole
                 FromAddress = address1,
                 ToAddress = address2,
                 Amount = 0.0042M,
-                Currency = "ETH",
                 Fee = 0.001M,
                 SignatureId = "3be381a1-d149-4f86-9c58-b4626b0f502f"
             };

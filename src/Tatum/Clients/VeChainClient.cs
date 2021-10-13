@@ -8,7 +8,7 @@ using TatumPlatform.Model.Rules;
 
 namespace TatumPlatform.Clients
 {
-    public partial class VeChainClient : IVeChainClient
+    public partial class VeChainClient : BaseClient, IVeChainClient
     {
         private readonly IVeChainApi veChainApi;
         private const int GasLimit = 21000;

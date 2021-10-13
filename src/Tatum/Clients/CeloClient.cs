@@ -5,7 +5,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public class CeloClient : ICeloClient
+    public class CeloClient : BaseClient, ICeloClient
     {
         private readonly ICeloApi celoApi;
 
@@ -36,11 +36,11 @@ namespace TatumPlatform.Clients
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var accountBalance = await celoApi.GetBalance(request.Address);
-            if (request.Currency.ToUpper() == "CELO" )
+            if (Currency.ToUpper() == "CELO" )
                 return TatumHelper.ToDecimal(accountBalance.Celo);
-            if (request.Currency.ToUpper() == "CUSD")
+            if (Currency.ToUpper() == "CUSD")
                 return TatumHelper.ToDecimal(accountBalance.CUsd);
-            throw new System.Exception($"Celo network doesnt support {request.Currency}");
+            throw new System.Exception($"Celo network doesnt support {Currency}");
         }
 
         public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
@@ -50,8 +50,8 @@ namespace TatumPlatform.Clients
                 SignatureId = transfer.SignatureId,
                 Index = transfer.Index,
                 Amount = transfer.Amount.ToString(),
-                Currency = transfer.Currency,
-                FeeCurrency = transfer.Currency,
+                Currency = Currency,
+                FeeCurrency = Currency,
                 To = transfer.ToAddress,
                 Data = transfer.Message
             };

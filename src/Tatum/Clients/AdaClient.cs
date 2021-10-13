@@ -9,7 +9,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public class AdaClient : IAdaClient
+    public class AdaClient : BaseClient, IAdaClient
     {
         private readonly IAdaApi adaApi;
         private static Precision Precision { get; } = Precision.Precision6;
@@ -40,7 +40,7 @@ namespace TatumPlatform.Clients
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var account = await adaApi.GetAccount(request.Address);
-            var balance = account.Summary.AssetBalances.Where(x => x.Asset.AssetId.ToUpper() == request.Currency)
+            var balance = account.Summary.AssetBalances.Where(x => x.Asset.AssetId.ToUpper() == Currency)
                 .Sum(q => long.Parse(q.Quantity));
             return TatumHelper.ToDecimal(balance, Precision);
         }

@@ -5,7 +5,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public class OneClient : IOneClient
+    public class OneClient : BaseClient, IOneClient
     {
         private readonly IOneApi oneApi;
         private const int GasLimit = 21000;
@@ -47,7 +47,7 @@ namespace TatumPlatform.Clients
             {
                 SignatureId = transfer.SignatureId,
                 Amount = transfer.Amount.ToString(),
-                Currency = transfer.Currency,
+                Currency = Currency,
                 Data = transfer.Message,
                 Index = transfer.Index,
                 To = transfer.ToAddress,

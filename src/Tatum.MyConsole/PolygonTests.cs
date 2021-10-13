@@ -25,6 +25,7 @@ namespace TatumPlatform.MyConsole
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
             polygonClient = PolygonClient.Create(baseUrl, xApiKey);
+            polygonClient.Currency = "MATIC";
         }
 
         public async Task GetBalance()
@@ -39,9 +40,26 @@ namespace TatumPlatform.MyConsole
 
         public async Task GenerateAddress()
         {
-            string xPub = "xpub6FGg7CoGebEDo4PX3UuNi4chj7YoPWZFZeZdCFwq8YcHcBQUnkqrTD9g3qCgZSWsMKa5HiA7YiNA9hWkAXBt8bwsy8mGwinLh6DMN4iqoHU";
-            int index = 1;
+            string xPub = "xpub6ELHEaGoiMdiu6u3DGp9725SA5n4imZPemCxG2zHjUxZzF9FFeMKanv4x9d16FcQNeLzRozkLfeEChsSZKnnPvBtL19GfDvR6Mi9vWMQac3";
+            int index = 2;
             var add = await polygonClient.GenerateAddress(xPub, index);
+        }
+
+        public async Task SendTransactionKMS()
+        {
+            var address1 = "0x3986452b72e1e6a75308abca73003478dd3bc1c4";
+            var address2 = "0xbe1d787ad368d27f2853eaec767b70402b1feab7";
+            var signatureId = "c1bc7c42-aa3a-4b2d-a463-d90039926034";
+            var r = await polygonClient.SendTransactionKMS(
+                new TransferBlockchainKMS()
+                {
+                    FromAddress = address1,
+                    Amount = 0.0002M,
+                    Fee = 0.00066M,
+                    Index = 1,
+                    ToAddress = address2,
+                    SignatureId = signatureId
+                });
         }
     }
 }

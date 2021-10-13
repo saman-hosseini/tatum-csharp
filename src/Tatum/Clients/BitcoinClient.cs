@@ -9,9 +9,10 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public partial class BitcoinClient : IBitcoinClient
+    public partial class BitcoinClient : BaseClient, IBitcoinClient
     {
         private readonly IBitcoinApi bitcoinApi;
+        private readonly ITatumApi tatumApi;
         private static Precision Precision { get; } = Precision.Precision8;
         internal BitcoinClient()
         {
@@ -20,6 +21,8 @@ namespace TatumPlatform.Clients
         internal BitcoinClient(string apiBaseUrl, string xApiKey)
         {
             bitcoinApi = RestClientFactory.Create<IBitcoinApi>(apiBaseUrl, xApiKey);
+            tatumApi = RestClientFactory.Create<ITatumApi>(apiBaseUrl, xApiKey);
+            tatumApi.OffchainTransferBtc
         }
 
         public static IBitcoinClient Create(string apiBaseUrl, string xApiKey)
@@ -152,7 +155,7 @@ namespace TatumPlatform.Clients
                 }).ToList();
         }
 
-        async Task<Signature> IBaseClient.SendTransactionKMS(TransferBlockchainKMS transfer)
+        async Task<Signature> SendTransactionKMSOld(TransferBlockchainKMS transfer)
         {
             var allUxtos = await GetAllUxto(transfer.FromAddress);
             var totalSatoshi = TatumHelper.ToLong(transfer.Amount + transfer.Fee, Precision);
@@ -175,9 +178,52 @@ namespace TatumPlatform.Clients
                         }
                     }
             };
-       
+
             var txHash = await bitcoinApi.SendTransactionKMS(sendObj);
             return txHash;
+        }
+
+        async Task<Signature> IBaseClient.SendTransactionKMS(TransferBlockchainKMS transfer)
+        {
+            var sendObj = new TransferBtcBasedBlockchainKMS()
+            {
+                FromAddresses = new List<FromAddressKMS>()
+                    {
+                        new FromAddressKMS()
+                        {
+                            Address = transfer.FromAddress,
+                            SignatureId = transfer.SignatureId
+                        }
+                    },
+                Tos = new List<To>()
+                    {
+                        new To()
+                        {
+                            Address = transfer.ToAddress,
+                            Value = transfer.Amount
+                        }
+                    }
+            };
+
+            var txHash = await bitcoinApi.SendTransactionKMS(sendObj);
+            return txHash;
+        }
+
+        public override async Task<Signature> SendLedgerKMS(TransferLedgerKMS transfer)
+        {
+            var signature = await tatumApi.OffchainTransferBtc(new OffchainTransferBtcKMS()
+            {
+                SignatureId = transfer.SignatureId,
+                Fee = transfer.Fee.ToString(),
+                Amount = transfer.Amount.ToString(),
+                Compliant = false,
+                BlockchainAddress = transfer.ToAddress,
+                Xpub = transfer.Xpub,
+                SenderAccountId = transfer.SenderAccountId,
+                PaymentId = "1",
+                SenderNote = "1"
+            });
+            return signature;
         }
 
         public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)

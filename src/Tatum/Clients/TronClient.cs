@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using TatumPlatform.Blockchain;
 using TatumPlatform.Model.Requests;
@@ -9,7 +9,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public partial class TronClient : ITronClient
+    public partial class TronClient : BaseClient, ITronClient
     {
         private readonly ITronApi tronApi;
         private const string CoinName = "TRON";
@@ -58,7 +58,7 @@ namespace TatumPlatform.Clients
 
         public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            if (transfer.Currency == CoinName)
+            if (Currency == CoinName)
             {
                 var tx = await tronApi.SendTransactionKMS(new TransferTronBlockchainKMS()
                 {
@@ -70,7 +70,7 @@ namespace TatumPlatform.Clients
                 });
                 return tx;
             }
-            else if(transfer.ContractType == "TRC20")
+            else if (ContractType == "TRC20")
             {
                 var tx = await tronApi.SendTrc20TransactionKMS(new TransferTronTrc20BlockchainKMS()
                 {
@@ -82,7 +82,7 @@ namespace TatumPlatform.Clients
                 });
                 return tx;
             }
-            else if (transfer.ContractType == "TRC10")
+            else if (ContractType == "TRC10")
             {
                 var tx = await tronApi.SendTrc10TransactionKMS(new TransferTronTrc10BlockchainKMS()
                 {
@@ -100,14 +100,21 @@ namespace TatumPlatform.Clients
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
             var account = await tronApi.GetAccount(request.Address);
-            if (request.Currency == CoinName)
+            if (Currency == CoinName)
             {
                 return TatumHelper.ToDecimal(account.Balance, Precision);
             }
-            else
+            else if (ContractType == "TRC10")
             {
-                return 0M;
+                return TatumHelper.ToDecimal(account.Trc10.FirstOrDefault(q => q.Key == ContractAddress).Value, DecimalPrecision);
             }
+            else if (ContractType == "TRC20")
+            {
+                string balance = "0";
+                account.Trc20.FirstOrDefault(q => q.TryGetValue(ContractAddress, out balance));
+                return TatumHelper.ToDecimal(TatumHelper.ToLong(balance), DecimalPrecision);
+            }
+            throw new NotImplementedException();
         }
 
         public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)

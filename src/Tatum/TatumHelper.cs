@@ -16,6 +16,7 @@ namespace TatumPlatform
         private const long LongPrecision8 = 100000000;
         private const long LongPrecision9 = 1000000000;
         private const long LongPrecision18 = 1000000000000000000;
+        public const int RandomStep = 1000;
         public static decimal ToDecimal(string str, decimal defaultValue = 0)
         {
             if (String.IsNullOrEmpty(str))
@@ -48,6 +49,11 @@ namespace TatumPlatform
                     break;
             }
             throw new Exception("wrong precision for convert");
+        }
+
+        public static decimal ToDecimal(long amount, int precision)
+        {
+            return amount / Convert.ToDecimal(Math.Pow(10, precision));
         }
 
         public static long ToLong(decimal amount, Precision precision)

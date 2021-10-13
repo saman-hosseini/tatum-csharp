@@ -8,7 +8,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    public partial class LitecoinClient : ILitecoinClient
+    public partial class LitecoinClient : BaseClient, ILitecoinClient
     {
         private readonly ILitecoinApi litecoinApi;
         private static Precision Precision { get; } = Precision.Precision8;

@@ -25,6 +25,7 @@ namespace TatumPlatform.MyConsole
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
             oneClient = OneClient.Create(baseUrl, xApiKey);
+            oneClient.Currency = "ONE";
         }
 
         public async Task GetBalance()
@@ -55,7 +56,6 @@ namespace TatumPlatform.MyConsole
                     FromAddress = address1,
                     Amount = 125,
                     Fee = 1,
-                    Currency = "ONE",
                     Index = 1,
                     ToAddress = address2,
                     SignatureId = signatureId
