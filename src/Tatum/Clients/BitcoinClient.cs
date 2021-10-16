@@ -22,7 +22,6 @@ namespace TatumPlatform.Clients
         {
             bitcoinApi = RestClientFactory.Create<IBitcoinApi>(apiBaseUrl, xApiKey);
             tatumApi = RestClientFactory.Create<ITatumApi>(apiBaseUrl, xApiKey);
-            tatumApi.OffchainTransferBtc
         }
 
         public static IBitcoinClient Create(string apiBaseUrl, string xApiKey)

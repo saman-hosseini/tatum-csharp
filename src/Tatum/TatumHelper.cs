@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace TatumPlatform
 {
@@ -17,6 +18,35 @@ namespace TatumPlatform
         private const long LongPrecision9 = 1000000000;
         private const long LongPrecision18 = 1000000000000000000;
         public const int RandomStep = 1000;
+
+        public static BigInteger ToBig(string str)
+        {
+            BigInteger defaultValue = new(0);
+            if (String.IsNullOrEmpty(str))
+                return defaultValue;
+            BigInteger.TryParse(str, out defaultValue);
+            return defaultValue;
+        }
+
+        public static string ToFormat(string str, int precision)
+        {
+            var l = str.Length;
+            if (l > precision)
+            {
+                str = str.Insert(l - precision, ".");
+            }
+            else
+            {
+                string lz = "";
+                for (int i = l; i < precision; i++)
+                {
+                    lz += "0";
+                }
+                str = "0." + lz + str;
+            }
+            return str;
+        }
+
         public static decimal ToDecimal(string str, decimal defaultValue = 0)
         {
             if (String.IsNullOrEmpty(str))

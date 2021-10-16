@@ -4,11 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace TatumPlatform.Model.Requests
 {
-    public class TransferBscBlockchainKMS
+    public class TransferBscTokenBlockchainKMS
     {
-        [StringLength(0, MinimumLength = 50000)]
-        [JsonPropertyName("data")]
-        public string Data { get; set; }
+        [Required]
+        [JsonPropertyName("chain")]
+        public string Chain { get; set; }
 
         [Range(0, long.MaxValue)]
         //[JsonPropertyName("nonce")]
@@ -20,14 +20,19 @@ namespace TatumPlatform.Model.Requests
         public string SignatureId { get; set; }
 
         [Required]
-        [StringLength(42, MinimumLength = 42)]
+        [StringLength(1, MinimumLength = 50)]
         [JsonPropertyName("to")]
         public string To { get; set; }
 
         [Required]
-        [StringLength(3, MinimumLength = 10)]
-        [JsonPropertyName("currency")]
-        public string Currency { get; set; }
+        [StringLength(1, MinimumLength = 50)]
+        [JsonPropertyName("contractAddress")]
+        public string ContractAddress { get; set; }
+
+        [Required]
+        [Range(1, 30)]
+        [JsonPropertyName("digits")]
+        public int Digits { get; set; }
 
         [JsonPropertyName("fee")]
         public Fee Fee { get; set; }

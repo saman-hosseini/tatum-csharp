@@ -11,6 +11,8 @@ namespace TatumPlatform.Clients
         private readonly IBscApi bscApi;
         private const int GasLimit = 21000;
         private static Precision Precision { get; } = Precision.Gwei;
+        private const string CoinName = "BSC";
+        private const string ChainName = "BSC";
 
         internal BscClient()
         {
@@ -38,29 +40,58 @@ namespace TatumPlatform.Clients
 
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
-            var balance = await bscApi.GetAccountBalance(request.Address);
-            return TatumHelper.ToDecimal(balance.Balance);
+            EthereumAccountBalance balance;
+            if (Currency == CoinName)
+            {
+                balance = await bscApi.GetAccountBalance(request.Address);
+                return TatumHelper.ToDecimal(balance.Balance);
+            }
+            balance = await bscApi.GetBalance(request.Address, Currency, ContractAddress);
+            return TatumHelper.ToDecimal(TatumHelper.ToFormat(balance.Balance, DecimalPrecision));
         }
 
         public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
-            var req = new TransferBscBlockchainKMS()
+            if (Currency == CoinName)
             {
-                SignatureId = transfer.SignatureId,
-                Amount = transfer.Amount.ToString(),
-                Currency = Currency,
-                Fee = new Fee()
+                var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
+                var req = new TransferBscBlockchainKMS()
                 {
-                    GasLimit = GasLimit.ToString(),
-                    GasPrice = gasPrice
-                },
-                To = transfer.ToAddress,
-                Index = transfer.Index,
-                Data = transfer.Message
-            };
-            var tx = await bscApi.SendTransactionKMS(req);
-            return tx;
+                    SignatureId = transfer.SignatureId,
+                    Amount = transfer.Amount.ToString(),
+                    Currency = Currency,
+                    Fee = new Fee()
+                    {
+                        GasLimit = GasLimit.ToString(),
+                        GasPrice = gasPrice
+                    },
+                    To = transfer.ToAddress,
+                    Index = transfer.Index,
+                    Data = transfer.Message
+                };
+                var tx = await bscApi.SendTransactionKMS(req);
+                return tx;
+            }
+            else
+            {
+                var req = new TransferBscTokenBlockchainKMS()
+                {
+                    Chain = ChainName,
+                    SignatureId = transfer.SignatureId,
+                    Amount = transfer.Amount.ToString(),
+                    ContractAddress = ContractAddress,
+                    //Fee = new Fee()
+                    //{
+                    //    GasLimit = GasLimit.ToString(),
+                    //    GasPrice = "40"
+                    //},
+                    To = transfer.ToAddress,
+                    Index = transfer.Index,
+                    Digits = DecimalPrecision
+                };
+                var tx = await bscApi.SendTokenTransactionKMS(req);
+                return tx;
+            }
         }
 
         public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)

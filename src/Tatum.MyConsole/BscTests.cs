@@ -25,7 +25,7 @@ namespace TatumPlatform.MyConsole
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
             bscClient = BscClient.Create(baseUrl, xApiKey);
-            bscClient.Currency = "BSC";
+            bscClient.Currency = "BNB";
         }
 
         public async Task GetBalance()
@@ -34,9 +34,19 @@ namespace TatumPlatform.MyConsole
             var addressMain = "0x477AEf00A114a5A2506218E9851D8618b9Fc6B76";
             var req = new BalanceRequest()
             {
+                Address = addressMain
+            };
+            bscClient.Currency = "BNB";
+            //var response = await bscClient.GetBalance(req);
+
+            bscClient.Currency = "BUSD";
+            bscClient.DecimalPrecision = 18;
+            bscClient.ContractAddress = "0x55d398326f99059ff775485246999027b3197955";
+            var req2 = new BalanceRequest()
+            {
                 Address = address
             };
-            var response = await bscClient.GetBalance(req);
+            var response2 = await bscClient.GetBalance(req);
         }
 
         public async Task GenerateAddress()
@@ -55,11 +65,14 @@ namespace TatumPlatform.MyConsole
             {
                 FromAddress = address1,
                 ToAddress = address2,
-                Amount = 0.0043M,
-                Fee = 0.0022M,
+                Amount = 0.12M,
+                Fee = 1,
                 Index = 1,
                 SignatureId = signatureId
             };
+            bscClient.Currency = "BUSD";
+            bscClient.DecimalPrecision = 18;
+            bscClient.ContractAddress = "0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee";
             var response = await bscClient.SendTransactionKMS(req);
         }
     }
