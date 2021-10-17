@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Refit;
 using System.Threading.Tasks;
 using TatumPlatform.Model.Requests;
 using TatumPlatform.Model.Responses;

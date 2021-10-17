@@ -24,9 +24,7 @@ namespace TatumPlatform
             {
                 string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                string errorMessage = $"Invalid Tatum API request. Response Status Code: {response.StatusCode}. {responseContent}";
-
-                throw new Exception(errorMessage);
+                throw new TatumException(responseContent, response.StatusCode);
             }
 
             return response;

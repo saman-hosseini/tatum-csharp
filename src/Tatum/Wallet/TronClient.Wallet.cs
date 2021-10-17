@@ -5,7 +5,7 @@ using TatumPlatform.Model.Requests;
 
 namespace TatumPlatform.Clients
 {
-    public partial class TronClient : ITronClient
+    public partial class TronClient
     {
         Wallet ITronClient.CreateWallet(string mnemonic, bool testnet)
         {

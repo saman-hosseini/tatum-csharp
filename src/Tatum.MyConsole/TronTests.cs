@@ -40,13 +40,14 @@ namespace TatumPlatform.MyConsole
         public async Task GenerateAddress()
         {
             string xPub = "033dd961ca356b6c9b0af052781895d564b22b3650decb9f5bc218a75a9b5dc007b36f9250ff2eb91359d307032c358c6e3c22f2a793f2dbf8196f8ff1ead35af4";
-            int index = 1;
+            int index = 1000;
             var add = await tronClient.GenerateAddress(xPub, index);
         }
 
         public async Task GetAccount()
         {
             string adress = "TDBndvRdCGNi1cCpLK3zYenv6rjhftPvts";
+            string adress2 = "TMCBHqyAbFDG1mbu64YABMLRMwGef9u9to";
             var account = await tronClient.GetAccount(adress);
         }
 

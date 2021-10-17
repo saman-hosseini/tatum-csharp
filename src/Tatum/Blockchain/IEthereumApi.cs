@@ -40,5 +40,8 @@ namespace TatumPlatform.Blockchain
 
         [Get("/v3/ethereum/address/{xpub}/{index}")]
         Task<BlockchainAddress> GenerateAddress(string xpub, int index);
+
+        [Post("/v3/blockchain/token/transaction")]
+        Task<Signature> SendTokenTransactionKMS(TransferEthereumTokenErc20KMS transfer);
     }
 }
