@@ -11,10 +11,6 @@ namespace TatumPlatform.Model.Requests
         [JsonPropertyName("chain")]
         public string Chain { get; set; }
 
-        [StringLength(2, MinimumLength = 7)]
-        [JsonPropertyName("currency")]
-        public string Currency { get; set; }
-
         [Required]
         [StringLength(1, MinimumLength = 50)]
         [JsonPropertyName("to")]

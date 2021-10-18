@@ -62,8 +62,8 @@ namespace TatumPlatform.MyConsole
 
             var hmac = new HMACDigestTests();
             //hmac.Test();
-            eth.Find();
-            var tsk1 = Task.Run(async () => await tron.GetBalance()); tsk1.Wait();
+            //eth.Find();
+            var tsk1 = Task.Run(async () => await eth.SendTokenTransactionKMS()); tsk1.Wait();
             //var tsk2 = Task.Run(async () => await doge.SendTransactionKMS()); tsk2.Wait();
             //var tsk = Task.Run(async () => await btc.SendTransactionKMS()); tsk.Wait();
             //var tsk = Task.Run(async () => await doge.GetBalance()); tsk.Wait();

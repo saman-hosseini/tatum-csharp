@@ -9,10 +9,10 @@ namespace TatumPlatform
     [Injection(typeof(LogCall))]
     public class LogCall : Attribute
     {
-        [Advice(Kind.Before)] // you can have also After (async-aware), and Around(Wrap/Instead) kinds
-        public void LogEnter([Argument(Source.Name)] string name)
+        [Advice(Kind.Before)]
+        public void LogEnter([Argument(Source.Type)] Type type, [Argument(Source.Name)] string name)
         {
-            Console.WriteLine($"Calling '{name}' method...");   //you can debug it	
+            Console.WriteLine($"Calling '{type.Name}.{name}' method...");
         }
     }
 
@@ -54,7 +54,7 @@ namespace TatumPlatform
             catch (TatumException ex)
             {
                 Console.WriteLine(ex.HttpStatusCode.ToString() + ex.Message);
-                return default(T);
+                return default;
             }
         }
     }

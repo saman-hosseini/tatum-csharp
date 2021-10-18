@@ -102,33 +102,23 @@ namespace TatumPlatform.Clients
 
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
-            //try
-            //{
-                var account = await tronApi.GetAccount(request.Address);
+            var account = await tronApi.GetAccount(request.Address);
 
-                if (Currency == CoinName)
-                {
-                    return TatumHelper.ToDecimal(account.Balance, Precision);
-                }
-                else if (ContractType == TRC10)
-                {
-                    return TatumHelper.ToDecimal(account.Trc10.FirstOrDefault(q => q.Key == ContractAddress).Value, DecimalPrecision);
-                }
-                else if (ContractType == TRC20)
-                {
-                    string balance = "0";
-                    account.Trc20.FirstOrDefault(q => q.TryGetValue(ContractAddress, out balance));
-                    return TatumHelper.ToDecimal(TatumHelper.ToLong(balance), DecimalPrecision);
-                }
-                throw new TatumException($"{ContractType} cant be found in Tron", System.Net.HttpStatusCode.BadRequest);
-            //}
-            //catch (TatumException ex)
-            //{
-            //    if (ex.HttpStatusCode == System.Net.HttpStatusCode.Forbidden)
-            //        return await Task.FromResult(0M);
-            //    else
-            //        throw;
-            //}
+            if (Currency == CoinName)
+            {
+                return TatumHelper.ToDecimal(account.Balance, Precision);
+            }
+            else if (ContractType == TRC10)
+            {
+                return TatumHelper.ToDecimal(account.Trc10.FirstOrDefault(q => q.Key == ContractAddress).Value, DecimalPrecision);
+            }
+            else if (ContractType == TRC20)
+            {
+                string balance = "0";
+                account.Trc20.FirstOrDefault(q => q.TryGetValue(ContractAddress, out balance));
+                return TatumHelper.ToDecimal(TatumHelper.ToLong(balance), DecimalPrecision);
+            }
+            throw new TatumException($"{ContractType} cant be found in Tron", System.Net.HttpStatusCode.BadRequest);
         }
 
         public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)

@@ -76,11 +76,11 @@ namespace TatumPlatform.Clients
             {
                 SignatureId = transfer.SignatureId,
                 FromAccount = transfer.FromAddress,
-                SourceTag = transfer.FromTag,
+                SourceTag = transfer.FromTag.Value,
                 Fee = transfer.Fee.ToString(),
                 Amount = transfer.Amount.ToString(),
                 To = transfer.ToAddress,
-                DestinationTag = transfer.ToTag
+                DestinationTag = transfer.ToTag.Value
             };
             var tx = await xrpApi.SendTransactionKMS(req);
             return tx;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using Newtonsoft.Json;
 
 namespace TatumPlatform
 {
@@ -19,6 +20,11 @@ namespace TatumPlatform
         private const long LongPrecision18 = 1000000000000000000;
         public const int RandomStep = 1000;
 
+        public static T DeserializeObject<T>(string item)
+        {
+            var output = JsonConvert.DeserializeObject<T>(item);
+            return output;
+        }
         public static BigInteger ToBig(string str)
         {
             BigInteger defaultValue = new(0);

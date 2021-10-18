@@ -60,6 +60,27 @@ namespace TatumPlatform.MyConsole
             var response = await ethereumClient.SendTransactionKMS(req);
         }
 
+        public async Task SendTokenTransactionKMS()
+        {
+            ethereumClient.Currency = "ETH";
+            var address1 = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
+            var address2 = "0xbd76e88a1abf05d1c49803dab874841570570ea9";
+            var SignatureId = "977b8792-5aae-40de-a7dd-f0d41bc15fb8";
+            var req = new TransferBlockchainKMS()
+            {
+                FromAddress = address1,
+                ToAddress = address2,
+                Amount = 3,
+                Fee = 0.001M,
+                Index = 1,
+                SignatureId = SignatureId
+            };
+            ethereumClient.ContractAddress = "0x3f987b3c18d6e4e9f534a25541ce8ccc5aa5c49d";
+            ethereumClient.DecimalPrecision = 18;
+            ethereumClient.Currency = "FAU";
+            var response = await ethereumClient.SendTransactionKMS(req);
+        }
+
         public async Task GenerateAddress()
         {
             string xPub = "xpub6Dmec6dnYaMC3Vf34shR6AG1KnJS6j6oYyrEoALgt3SqNzf5eLkJUpb31UDG8oqxMQvXXiAP27gMJKkTvTyNuVrEbXrVwEHZFTaTxbD2hLy";
@@ -72,9 +93,10 @@ namespace TatumPlatform.MyConsole
             string xPub = "xpub6DjUAbkzzUGRRyirEeEifXRtTzFXQQbd7m8yLBRsWm5qBHhJ8dQxDV99m1NhsehW16LXyRtsU5GLvEawtjFDbxRNk9RvR33SXHVFXasaXiF";
             string address = "0x14C087a6c52CEEd605705f5C92d0f7090B560Af9".ToLower();
             //toLower 14462000
-            for (int i = 14462000; i < int.MaxValue; i++)
+            
+            for (int i = 243920000; i <= 2147483647; i++)
             {
-                if (i % 1000 == 0)
+                if (i % 10000 == 0)
                     Console.WriteLine(i);
                 var add = ethereumClient.GenerateAddress(xPub, i, true).ToLower();
                 if (address == add)

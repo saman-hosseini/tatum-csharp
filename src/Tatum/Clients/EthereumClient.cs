@@ -19,6 +19,8 @@ namespace TatumPlatform.Clients
         /// Ethereum actual decimal precision is 18
         /// </summary>
         private static Precision Precision { get; } = Precision.Gwei;
+        private const string CoinName = "ETH";
+        private const string ChainName = "ETH";
         internal EthereumClient()
         {
         }
@@ -80,28 +82,52 @@ namespace TatumPlatform.Clients
 
         public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
-            var sendObj = new TransferEthereumErc20KMS()
+            if (Currency == Model.Currency.ETH.ToString())
             {
-                SignatureId = transfer.SignatureId,
-                Amount = transfer.Amount.ToString(),
-                Currency = Currency,
-                To = transfer.ToAddress,
-                Fee = new Fee()
+                var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
+                var sendObj = new TransferEthereumErc20KMS()
                 {
-                    GasLimit = GasLimit.ToString(),
-                    GasPrice = gasPrice
-                },
-                Index = transfer.Index,
-                Data = transfer.Message
-            };
-            var tx = await ethereumApi.SendTransactionKMS(sendObj);
-            return tx;
+                    SignatureId = transfer.SignatureId,
+                    Amount = transfer.Amount.ToString(),
+                    Currency = Currency,
+                    To = transfer.ToAddress,
+                    Fee = new Fee()
+                    {
+                        GasLimit = GasLimit.ToString(),
+                        GasPrice = gasPrice
+                    },
+                    Index = transfer.Index,
+                    Data = transfer.Message
+                };
+                var tx = await ethereumApi.SendTransactionKMS(sendObj);
+                return tx;
+            }
+            else
+            {
+                var sendObj = new TransferEthereumTokenErc20KMS()
+                {
+                    Chain = ChainName,
+                    SignatureId = transfer.SignatureId,
+                    Amount = transfer.Amount.ToString(),
+                    To = transfer.ToAddress,
+                    Fee = new Fee()
+                    {
+                        GasLimit = GasLimit.ToString(),
+                        GasPrice = "40"
+                    },
+                    ContractAddress = ContractAddress,
+                    Digits = DecimalPrecision,
+                    Index = transfer.Index,
+                    
+                };
+                var tx = await ethereumApi.SendTokenTransactionKMS(sendObj);
+                return tx;
+            }
         }
 
         public async Task<decimal> GetBalance(BalanceRequest request)
         {
-            if (Currency == Model.Currency.ETH.ToString())
+            if (Currency == CoinName)
             {
                 var balance = await ethereumApi.GetAccountBalance(request.Address);
                 return TatumHelper.ToDecimal(balance.Balance);
