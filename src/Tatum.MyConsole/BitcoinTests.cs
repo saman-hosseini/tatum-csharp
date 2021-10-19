@@ -68,7 +68,7 @@ namespace TatumPlatform.MyConsole
                 SenderAccountId = "6165623e00a4f26048c49180",
                 SignatureId = "c380bebc-9f1a-4740-a814-fa427e31c1f5",
                 ToAddress = "mxoCTTj4yKY925JqRg7rb74NUHJNWhSwrw",
-                Xpub = "tpubDFeJdScxMsBg4raNVftTuyx54EeTNu4K7H9vYozyUTNBMU5BrygwbepWHsHU5wU79E6yuHfz5pCCqt1MZP3823QB2jWadFSaH3om86GiTmg"
+                XPub = "tpubDFeJdScxMsBg4raNVftTuyx54EeTNu4K7H9vYozyUTNBMU5BrygwbepWHsHU5wU79E6yuHfz5pCCqt1MZP3823QB2jWadFSaH3om86GiTmg"
             });
         }
 

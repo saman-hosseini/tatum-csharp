@@ -4,8 +4,7 @@ using TatumPlatform.Model.Responses;
 
 namespace TatumPlatform.Clients
 {
-    [LogCall]
-    [CatchErrorsAttribute]
+    //[CatchErrorsAttribute]
     public class BaseClient
     {
         public string NetworkName { get; set; }

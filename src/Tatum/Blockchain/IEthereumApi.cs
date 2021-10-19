@@ -43,5 +43,8 @@ namespace TatumPlatform.Blockchain
 
         [Post("/v3/blockchain/token/transaction")]
         Task<Signature> SendTokenTransactionKMS(TransferEthereumTokenErc20KMS transfer);
+
+        [Post("/v3/ethereum/gas")]
+        Task<Fee> EstimateFee(EthereumEstimateFee transfer);
     }
 }

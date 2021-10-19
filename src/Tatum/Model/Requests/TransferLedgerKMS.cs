@@ -8,7 +8,7 @@ namespace TatumPlatform.Model.Requests
         public string SenderAccountId { get; set; }
         public string ToAddress { get; set; }
         public decimal Amount { get; set; }
-        public string Xpub { get; set; }
+        public string XPub { get; set; }
         public decimal Fee { get; set; }
         public List<string> MultipleAmounts { get; set; }
     }

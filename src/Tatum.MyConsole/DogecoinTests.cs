@@ -48,12 +48,13 @@ namespace TatumPlatform.MyConsole
         {
             var address1 = "nZGmHHXPcorDbiREihKnuBfhssrGPeHmEs";
             var address2 = "no71xUudiRSBbYwe8QNXWZB8Zz25Nr65g7";
+            var accountId = "615473eace3de8d452520e84";
+            var signatureId = "3be381a1-d149-4f86-9c58-b4626b0f502f";
             var req = new TransferBlockchainKMS()
             {
                 FromAddress = address1,
                 ToAddress = address2,
                 Amount = 0.0042M,
-                Fee = 0.001M,
                 SignatureId = "3be381a1-d149-4f86-9c58-b4626b0f502f"
             };
             var response = await dogecoinClient.SendTransactionKMS(req);

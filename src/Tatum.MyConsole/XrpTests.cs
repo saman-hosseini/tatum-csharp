@@ -53,8 +53,7 @@ namespace TatumPlatform.MyConsole
                 new TransferBlockchainKMS()
                 {
                     FromAddress = address1,
-                    Amount = 125,
-                    Fee = 1,
+                    Amount = 5,
                     FromTag = 3,
                     ToTag = 2,
                     ToAddress = address2,

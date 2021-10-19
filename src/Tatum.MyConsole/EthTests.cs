@@ -46,14 +46,12 @@ namespace TatumPlatform.MyConsole
             ethereumClient.Currency = "ETH";
             var address1 = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
             var address2 = "0x14C087a6c52CEEd605705f5C92d0f7090B560AF9";
-            var SignaturePrivatekey = "3be381a1-d149-4f86-9c58-b4626b0f502f";
             var SignatureMnemonic = "977b8792-5aae-40de-a7dd-f0d41bc15fb8";
             var req = new TransferBlockchainKMS()
             {
                 FromAddress = address1,
                 ToAddress = address2,
-                Amount = 3,
-                Fee = 0.001M,
+                Amount = 0.1M,
                 Index = 1,
                 SignatureId = SignatureMnemonic
             };
@@ -70,8 +68,7 @@ namespace TatumPlatform.MyConsole
             {
                 FromAddress = address1,
                 ToAddress = address2,
-                Amount = 3,
-                Fee = 0.001M,
+                Amount = 0.1M,
                 Index = 1,
                 SignatureId = SignatureId
             };
@@ -94,14 +91,14 @@ namespace TatumPlatform.MyConsole
             string address = "0x14C087a6c52CEEd605705f5C92d0f7090B560Af9".ToLower();
             //toLower 14462000
             
-            for (int i = 243920000; i <= 2147483647; i++)
+            for (int i = 255770000; i <= 2147483647; i++)
             {
                 if (i % 10000 == 0)
                     Console.WriteLine(i);
                 var add = ethereumClient.GenerateAddress(xPub, i, true).ToLower();
                 if (address == add)
                 {
-
+                    Console.ReadLine();
                 }
             }
 

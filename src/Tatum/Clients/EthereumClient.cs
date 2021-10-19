@@ -82,20 +82,23 @@ namespace TatumPlatform.Clients
 
         public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            if (Currency == Model.Currency.ETH.ToString())
+            if (Currency == CoinName)
             {
-                var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
+                var fee = await ethereumApi.EstimateFee(new EthereumEstimateFee()
+                {
+                    From = transfer.FromAddress,
+                    To = transfer.ToAddress,
+                    Amount = transfer.Amount.ToString(),
+                    Data = transfer.Message
+                });
+                fee.GasPrice = TatumHelper.ToFormat(fee.GasPrice, 9);
                 var sendObj = new TransferEthereumErc20KMS()
                 {
                     SignatureId = transfer.SignatureId,
                     Amount = transfer.Amount.ToString(),
                     Currency = Currency,
                     To = transfer.ToAddress,
-                    Fee = new Fee()
-                    {
-                        GasLimit = GasLimit.ToString(),
-                        GasPrice = gasPrice
-                    },
+                    Fee = fee,
                     Index = transfer.Index,
                     Data = transfer.Message
                 };

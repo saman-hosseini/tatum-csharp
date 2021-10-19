@@ -8,8 +8,7 @@ namespace TatumPlatform.Clients
     public class XdcClient : BaseClient, IXdcClient
     {
         private readonly IXdcApi xdcApi;
-        private const int GasLimit = 21000;
-        private static Precision Precision { get; } = Precision.Gwei;
+
         internal XdcClient()
         {
         }
@@ -42,7 +41,14 @@ namespace TatumPlatform.Clients
 
         public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
+            var fee = await xdcApi.EstimateFee(new EthereumEstimateFee()
+            {
+                From = transfer.FromAddress,
+                To = transfer.ToAddress,
+                Amount = transfer.Amount.ToString(),
+                Data = transfer.Message
+            });
+            fee.GasPrice = TatumHelper.ToFormat(fee.GasPrice, 3);
             var req = new TransferXdcBlockchainKMS()
             {
                 SignatureId = transfer.SignatureId,
@@ -51,11 +57,7 @@ namespace TatumPlatform.Clients
                 Data = transfer.Message,
                 Index = transfer.Index,
                 To = transfer.ToAddress,
-                Fee = new Fee()
-                {
-                    GasLimit = GasLimit.ToString(),
-                    GasPrice = gasPrice
-                }
+                Fee = fee
             };
             var tx = await xdcApi.SendTransactionKMS(req);
             return tx;

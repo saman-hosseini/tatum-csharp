@@ -153,7 +153,7 @@ namespace TatumPlatform.Clients
         public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
             var allUxtos = await GetAllUxto(transfer.FromAddress);
-            var totalSatoshi = transfer.Amount + transfer.Fee;
+            var totalSatoshi = transfer.Amount + 0.0003M;
             var (Utxos, Remain) = GetNeededUxto(allUxtos, totalSatoshi);
 
             var sendObj = new TransferBtcBasedBlockchainKMS()

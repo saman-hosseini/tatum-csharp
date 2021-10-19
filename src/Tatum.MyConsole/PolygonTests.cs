@@ -22,7 +22,7 @@ namespace TatumPlatform.MyConsole
             .Build();
 
             string baseUrl = config.GetValue<string>("TatumApiSettings:baseUrl");
-            string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
+            string xApiKey = config.GetValue<string>("TatumApiSettings:FirstRealAPI");
 
             polygonClient = PolygonClient.Create(baseUrl, xApiKey);
             polygonClient.Currency = "MATIC";
@@ -54,8 +54,7 @@ namespace TatumPlatform.MyConsole
                 new TransferBlockchainKMS()
                 {
                     FromAddress = address1,
-                    Amount = 0.0002M,
-                    Fee = 0.00066M,
+                    Amount = 0.00001M,
                     Index = 1,
                     ToAddress = address2,
                     SignatureId = signatureId

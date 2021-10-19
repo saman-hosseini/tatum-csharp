@@ -41,5 +41,8 @@ namespace TatumPlatform.Blockchain
 
         [Get("/v3/bitcoin/address/{xpub}/{index}")]
         Task<BlockchainAddress> GenerateAddress(string xpub, int index);
+
+        [Post("/v3/offchain/blockchain/estimate")]
+        Task<EstimatedFee> EstimateFee(BitcoinEstimateFee estimateFee);
     }
 }

@@ -25,7 +25,7 @@ namespace TatumPlatform.MyConsole
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
             celoClient = CeloClient.Create(baseUrl, xApiKey);
-            celoClient.Currency = "Celo";
+            celoClient.Currency = "CELO";
         }
 
         public async Task GetBalance()
@@ -47,8 +47,7 @@ namespace TatumPlatform.MyConsole
                 new TransferBlockchainKMS()
                 {
                     FromAddress = address1,
-                    Amount = 3,
-                    Fee = 1,
+                    Amount = .02M,
                     Index = 1,
                     ToAddress = address2,
                     SignatureId = signatureId

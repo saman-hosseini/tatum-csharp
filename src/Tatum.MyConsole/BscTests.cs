@@ -49,6 +49,25 @@ namespace TatumPlatform.MyConsole
             var response2 = await bscClient.GetBalance(req);
         }
 
+        public async Task SendTokenTransactionKMS()
+        {
+            var address1 = "0xe4bdce3fee7cd2d722580b0e701531bae004b85b";
+            var address2 = "0x3cc789313fbe6b482a871cec004261759c0699f4";
+            var signatureId = "35521f03-310c-4544-8732-54cfcd2138e0";
+            var req = new TransferBlockchainKMS()
+            {
+                FromAddress = address1,
+                ToAddress = address2,
+                Amount = 2.5M,
+                Index = 1,
+                SignatureId = signatureId
+            };
+            bscClient.Currency = "MT5";
+            bscClient.DecimalPrecision = 18;
+            bscClient.ContractAddress = "0x099528c5827f7ce98bf02b51dc1eca4f123471d3";
+            var response = await bscClient.SendTransactionKMS(req);
+        }
+
         public async Task GenerateAddress()
         {
             string xPub = "xpub6FGg7CoGebEDo4PX3UuNi4chj7YoPWZFZeZdCFwq8YcHcBQUnkqrTD9g3qCgZSWsMKa5HiA7YiNA9hWkAXBt8bwsy8mGwinLh6DMN4iqoHU";
@@ -66,14 +85,12 @@ namespace TatumPlatform.MyConsole
                 FromAddress = address1,
                 ToAddress = address2,
                 Amount = 0.12M,
-                Fee = 1,
                 Index = 1,
                 SignatureId = signatureId
             };
-            bscClient.Currency = "BUSD";
-            bscClient.DecimalPrecision = 18;
-            bscClient.ContractAddress = "0xed24fc36d5ee211ea25a80239fb8c4cfd80f12ee";
+            bscClient.Currency = "BSC";
             var response = await bscClient.SendTransactionKMS(req);
         }
+
     }
 }

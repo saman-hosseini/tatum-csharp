@@ -5,17 +5,6 @@ using System.Threading.Tasks;
 
 namespace TatumPlatform
 {
-    [Aspect(Scope.Global)]
-    [Injection(typeof(LogCall))]
-    public class LogCall : Attribute
-    {
-        [Advice(Kind.Before)]
-        public void LogEnter([Argument(Source.Type)] Type type, [Argument(Source.Name)] string name)
-        {
-            Console.WriteLine($"Calling '{type.Name}.{name}' method...");
-        }
-    }
-
     [Injection(typeof(CatchErrorsAttribute))]
     [Aspect(Scope.Global)]
     public class CatchErrorsAttribute : Attribute

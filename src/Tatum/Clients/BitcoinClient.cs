@@ -157,7 +157,7 @@ namespace TatumPlatform.Clients
         async Task<Signature> SendTransactionKMSOld(TransferBlockchainKMS transfer)
         {
             var allUxtos = await GetAllUxto(transfer.FromAddress);
-            var totalSatoshi = TatumHelper.ToLong(transfer.Amount + transfer.Fee, Precision);
+            var totalSatoshi = TatumHelper.ToLong(transfer.Amount + 0.0003M, Precision);
             var (Utxos, Remain) = GetNeededUxto(allUxtos, totalSatoshi);
 
             var sendObj = new TransferBtcBasedBlockchainKMS()
@@ -210,6 +210,25 @@ namespace TatumPlatform.Clients
 
         public override async Task<Signature> SendLedgerKMS(TransferLedgerKMS transfer)
         {
+            var fee = await bitcoinApi.EstimateFee(new BitcoinEstimateFee()
+            {
+                SenderAccountId = transfer.SenderAccountId,
+                Address = transfer.ToAddress,
+                Amount = transfer.Amount.ToString(),
+                Xpub = transfer.XPub
+            });
+            var sendObj = new OffchainTransferBtcKMS()
+            {
+                Amount = transfer.Amount.ToString(),
+                BlockchainAddress = transfer.ToAddress,
+                Compliant = false,
+                Fee = fee.Medium,
+                SignatureId = transfer.SignatureId,
+                SenderAccountId = transfer.SenderAccountId,
+                Xpub = transfer.XPub,
+                PaymentId = "1",
+                SenderNote = "1"
+            };
             var signature = await tatumApi.OffchainTransferBtc(new OffchainTransferBtcKMS()
             {
                 SignatureId = transfer.SignatureId,
@@ -217,7 +236,7 @@ namespace TatumPlatform.Clients
                 Amount = transfer.Amount.ToString(),
                 Compliant = false,
                 BlockchainAddress = transfer.ToAddress,
-                Xpub = transfer.Xpub,
+                Xpub = transfer.XPub,
                 SenderAccountId = transfer.SenderAccountId,
                 PaymentId = "1",
                 SenderNote = "1"

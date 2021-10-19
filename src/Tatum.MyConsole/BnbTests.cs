@@ -41,7 +41,7 @@ namespace TatumPlatform.MyConsole
 
         public async Task SendTransactionKMS()
         {
-            binanceClient.Currency = "ETH";
+            binanceClient.Currency = "BNB";
             var address1 = "0x307eaba8b2c0f756d64d7ee704b9e88954fca8a9";
             var address2 = "0xbd76e88a1abf05d1c49803dab874841570570ea9";
             var req = new TransferBlockchainKMS()
@@ -49,8 +49,7 @@ namespace TatumPlatform.MyConsole
                 FromAddress = address1,
                 ToAddress = address2,
                 Amount = 0.0042M,
-                Fee = 0.001M,
-                SignatureId = "3be381a1-d149-4f86-9c58-b4626b0f502f"
+                SignatureId = "e4599fcc-7210-4074-b14c-2850501edb12"
             };
             var response = await binanceClient.SendTransactionKMS(req);
         }

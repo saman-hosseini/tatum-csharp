@@ -42,7 +42,7 @@ namespace TatumPlatform.Clients
 
         public async Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer)
         {
-            var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
+            //var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
             var req = new TransferPolygonBlockchainKMS()
             {
                 SignatureId = transfer.SignatureId,
@@ -51,11 +51,11 @@ namespace TatumPlatform.Clients
                 Data = transfer.Message,
                 Index = transfer.Index,
                 To = transfer.ToAddress,
-                Fee = new Fee()
-                {
-                    GasLimit = GasLimit.ToString(),
-                    GasPrice = gasPrice
-                }
+                //Fee = new Fee()
+                //{
+                //    GasLimit = GasLimit.ToString(),
+                //    GasPrice = gasPrice
+                //}
             };
             var tx = await polygonApi.SendTransactionKMS(req);
             return tx;

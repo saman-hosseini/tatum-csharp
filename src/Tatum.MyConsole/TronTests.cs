@@ -89,7 +89,6 @@ namespace TatumPlatform.MyConsole
                 {
                     FromAddress = address1,
                     Amount = 50,
-                    Fee = 0,
                     ToAddress = address2,
                     SignatureId = signatureId,
                     Index = 1

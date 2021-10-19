@@ -13,7 +13,6 @@ namespace TatumPlatform.Clients
         private static Precision Precision { get; } = Precision.Gwei;
         private const string CoinName = "BSC";
         private const string ChainName = "BSC";
-
         internal BscClient()
         {
         }
@@ -54,17 +53,20 @@ namespace TatumPlatform.Clients
         {
             if (Currency == CoinName)
             {
-                var gasPrice = (TatumHelper.ToLong(transfer.Fee, Precision) / GasLimit).ToString();
+                var fee = await bscApi.EstimateFee(new EthereumEstimateFee()
+                {
+                    From = transfer.FromAddress,
+                    To = transfer.ToAddress,
+                    Amount = transfer.Amount.ToString(),
+                    Data = transfer.Message
+                });
+                //fee.GasPrice = TatumHelper.ToFormat(fee.GasPrice, 9);
                 var req = new TransferBscBlockchainKMS()
                 {
                     SignatureId = transfer.SignatureId,
                     Amount = transfer.Amount.ToString(),
                     Currency = Currency,
-                    Fee = new Fee()
-                    {
-                        GasLimit = GasLimit.ToString(),
-                        GasPrice = gasPrice
-                    },
+                    //Fee = fee,
                     To = transfer.ToAddress,
                     Index = transfer.Index,
                     Data = transfer.Message
@@ -80,11 +82,6 @@ namespace TatumPlatform.Clients
                     SignatureId = transfer.SignatureId,
                     Amount = transfer.Amount.ToString(),
                     ContractAddress = ContractAddress,
-                    //Fee = new Fee()
-                    //{
-                    //    GasLimit = GasLimit.ToString(),
-                    //    GasPrice = "40"
-                    //},
                     To = transfer.ToAddress,
                     Index = transfer.Index,
                     Digits = DecimalPrecision

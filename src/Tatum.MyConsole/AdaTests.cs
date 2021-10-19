@@ -61,7 +61,6 @@ namespace TatumPlatform.MyConsole
                 {
                     FromAddress = address1,
                     Amount = 19,
-                    Fee = 1,
                     ToAddress = address2,
                     SignatureId = SignatureMemonic
                 });

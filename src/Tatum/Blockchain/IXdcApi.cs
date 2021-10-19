@@ -22,5 +22,8 @@ namespace TatumPlatform.Blockchain
 
         [Get("/v3/xdc/address/{xpub}/{index}")]
         Task<BlockchainAddress> GenerateAddress(string xpub, int index);
+
+        [Post("/v3/xdc/gas")]
+        Task<Fee<int>> EstimateFee(EthereumEstimateFee transfer);
     }
 }

@@ -15,6 +15,21 @@ namespace TatumPlatform.Model
         public int StatusCode { get; private set; }
 
         [JsonProperty("data")]
-        public List<object> Data { get; private set; }
+        public List<ErrorDetail> Data { get; private set; }
+    }
+
+    public class ErrorDetail
+    {
+        [JsonProperty("target")]
+        public Dictionary<string, object> Target { get; private set; }
+
+        [JsonProperty("value")]
+        public int Value { get; private set; }
+
+        [JsonProperty("property")]
+        public string Property { get; private set; }
+
+        [JsonProperty("constraints")]
+        public Dictionary<string, string> Constraints { get; private set; }
     }
 }

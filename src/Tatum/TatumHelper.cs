@@ -25,7 +25,7 @@ namespace TatumPlatform
             var output = JsonConvert.DeserializeObject<T>(item);
             return output;
         }
-        public static BigInteger ToBig(string str)
+        public static BigInteger ToBig(this string str)
         {
             BigInteger defaultValue = new(0);
             if (String.IsNullOrEmpty(str))
@@ -34,7 +34,7 @@ namespace TatumPlatform
             return defaultValue;
         }
 
-        public static string ToFormat(string str, int precision)
+        public static string ToFormat(this string str, int precision)
         {
             var l = str.Length;
             if (l > precision)
@@ -50,10 +50,14 @@ namespace TatumPlatform
                 }
                 str = "0." + lz + str;
             }
+            str = ToDecimal(str).Normalize().ToString();
             return str;
         }
-
-        public static decimal ToDecimal(string str, decimal defaultValue = 0)
+        public static decimal Normalize(this decimal value)
+        {
+            return value / 1.000000000000000000000000000000000m;
+        }
+        public static decimal ToDecimal(this string str, decimal defaultValue = 0)
         {
             if (String.IsNullOrEmpty(str))
                 return defaultValue;
@@ -61,7 +65,7 @@ namespace TatumPlatform
             return defaultValue;
         }
 
-        public static long ToLong(string str, long defaultValue = 0)
+        public static long ToLong(this string str, long defaultValue = 0)
         {
             if (String.IsNullOrEmpty(str))
                 return defaultValue;

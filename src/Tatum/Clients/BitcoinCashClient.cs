@@ -10,7 +10,7 @@ namespace TatumPlatform.Clients
     public partial class BitcoinCashClient : BaseClient, IBitcoinCashClient
     {
         private readonly IBitcoinCashApi bitcoinCashApi;
-
+        
         internal BitcoinCashClient()
         {
         }

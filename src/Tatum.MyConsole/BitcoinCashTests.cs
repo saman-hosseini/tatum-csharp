@@ -54,7 +54,6 @@ namespace TatumPlatform.MyConsole
                 {
                     FromAddress = address1,
                     Amount = 125,
-                    Fee = 1,
                     FromTag = 3,
                     ToTag = 2,
                     ToAddress = address2,
