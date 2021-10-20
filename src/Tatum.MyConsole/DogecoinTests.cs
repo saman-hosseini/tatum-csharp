@@ -29,7 +29,7 @@ namespace TatumPlatform.MyConsole
 
         public async Task GetBalance()
         {
-            var address = "DMr3fEiVrPWFpoCWS958zNtqgnFb7QWn9D";
+            var address = "no71xUudiRSBbYwe8QNXWZB8Zz25Nr65g7";
             var response = await dogecoinClient.GetBalance(
                 new BalanceRequest() 
                 {
@@ -46,16 +46,19 @@ namespace TatumPlatform.MyConsole
 
         public async Task SendTransactionKMS()
         {
-            var address1 = "nZGmHHXPcorDbiREihKnuBfhssrGPeHmEs";
-            var address2 = "no71xUudiRSBbYwe8QNXWZB8Zz25Nr65g7";
+            var address1 = "no71xUudiRSBbYwe8QNXWZB8Zz25Nr65g7";
+            var address2 = "nZGmHHXPcorDbiREihKnuBfhssrGPeHmEs";
             var accountId = "615473eace3de8d452520e84";
-            var signatureId = "3be381a1-d149-4f86-9c58-b4626b0f502f";
+            var signatureId = "ac0eb7ea-5fb1-4612-93c1-82900a09eafa";
+            var xpub = "tpubDFeJdScxMsBg4raNVftTuyx54EeTNu4K7H9vYozyUTNBMU5BrygwbepWHsHU5wU79E6yuHfz5pCCqt1MZP3823QB2jWadFSaH3om86GiTmg";
             var req = new TransferBlockchainKMS()
             {
                 FromAddress = address1,
                 ToAddress = address2,
-                Amount = 0.0042M,
-                SignatureId = "3be381a1-d149-4f86-9c58-b4626b0f502f"
+                Amount = 1M,
+                SignatureId = signatureId,
+                SenderAccountId = accountId,
+                XPub = xpub
             };
             var response = await dogecoinClient.SendTransactionKMS(req);
         }

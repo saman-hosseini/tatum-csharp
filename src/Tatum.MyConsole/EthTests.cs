@@ -91,7 +91,7 @@ namespace TatumPlatform.MyConsole
             string address = "0x14C087a6c52CEEd605705f5C92d0f7090B560Af9".ToLower();
             //toLower 14462000
             
-            for (int i = 255770000; i <= 2147483647; i++)
+            for (int i = 453190000; i <= 2147483647; i++)
             {
                 if (i % 10000 == 0)
                     Console.WriteLine(i);

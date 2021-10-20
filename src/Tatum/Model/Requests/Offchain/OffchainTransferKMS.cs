@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace TatumPlatform.Model.Requests
@@ -11,7 +8,7 @@ namespace TatumPlatform.Model.Requests
         [StringLength(1, MinimumLength = 38)]
         [RegularExpression(@"^[+]?((\d+(\.\d*)?)|(\.\d+))$")]
         [JsonPropertyName("amount")]
-        public string Amount { get; set; }
+        public virtual string Amount { get; set; }
 
         [JsonPropertyName("compliant")]
         public bool Compliant { get; set; }

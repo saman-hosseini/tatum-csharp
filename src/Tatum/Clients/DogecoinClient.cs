@@ -13,6 +13,7 @@ namespace TatumPlatform.Clients
     {
         private readonly IDogecoinApi dogecoinApi;
         private readonly IDogechainApi dogechainApi;
+        private readonly ITatumApi tatumApi;
         private const string dogechainUrl = "https://dogechain.info/";
         private static Precision Precision { get; } = Precision.Precision8;
         internal DogecoinClient()
@@ -24,6 +25,7 @@ namespace TatumPlatform.Clients
         {
             dogecoinApi = RestClientFactory.Create<IDogecoinApi>(apiBaseUrl, xApiKey);
             dogechainApi = RestClientFactory.Create<IDogechainApi>(dogechainUrl);
+            tatumApi = RestClientFactory.Create<ITatumApi>(apiBaseUrl, xApiKey);
         }
 
         public static IDogecoinClient Create(string apiBaseUrl, string xApiKey)
@@ -101,6 +103,33 @@ namespace TatumPlatform.Clients
             };
             var tx = await dogecoinApi.SendTransactionKMS(sendObj);
             return tx;
+        }
+
+        async Task<Signature> IBaseClient.SendTransactionKMS(TransferBlockchainKMS transfer)
+        {
+            // too high fee
+            var fee = await dogecoinApi.EstimateFee(new BitcoinEstimateFee()
+            {
+                SenderAccountId = transfer.SenderAccountId,
+                Address = transfer.ToAddress,
+                Amount = transfer.Amount.ToString(),
+                Xpub = transfer.XPub
+            });
+            var sendObj = new OffchainTransferDogecoinKMS()
+            {
+                Amount = "1",
+                BlockchainAddress = transfer.ToAddress,
+                Compliant = false,
+                //Fee = fee.Medium,
+                SignatureId = transfer.SignatureId,
+                SenderAccountId = transfer.SenderAccountId,
+                Xpub = transfer.XPub,
+                PaymentId = "1",
+                SenderNote = "1"
+            };
+
+            var txHash = await tatumApi.OffchainTransferDoge(sendObj);
+            return txHash;
         }
 
         public async Task<decimal> GetBalance(BalanceRequest request)
