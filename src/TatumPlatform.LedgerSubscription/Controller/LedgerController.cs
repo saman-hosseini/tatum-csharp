@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TatumPlatform.LedgerSubscription.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace TatumPlatform.LedgerSubscription.Controller
 {
@@ -17,7 +18,7 @@ namespace TatumPlatform.LedgerSubscription.Controller
     public class LedgerController : ControllerBase
     {
         [AllowAnonymous]
-        public string Get()
+        public async Task<string> Get()
         {
             return "Hi";
         }

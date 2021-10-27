@@ -14,4 +14,5 @@ namespace TatumPlatform.LedgerSubscription.Model
         [JsonPropertyName("error")]
         public string Error { get; set; }
     }
+
 }

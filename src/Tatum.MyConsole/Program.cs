@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace TatumPlatform.MyConsole
 {
     class Program
     {
+        System.Timers.Timer _timer;
+        public Program()
+        {
+            _timer.Interval = 100;
+
+        }
         static void Main(string[] args)
         {
             var tatum = new TatumTests();
@@ -62,7 +69,7 @@ namespace TatumPlatform.MyConsole
 
             var hmac = new HMACDigestTests();
             //hmac.Test();
-            //eth.Find();
+            eth.Find();
             var tsk1 = Task.Run(async () => await doge.GetBalance()); tsk1.Wait();
             //var tsk2 = Task.Run(async () => await doge.SendTransactionKMS()); tsk2.Wait();
             //var tsk = Task.Run(async () => await btc.SendTransactionKMS()); tsk.Wait();

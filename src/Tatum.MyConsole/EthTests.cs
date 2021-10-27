@@ -90,8 +90,8 @@ namespace TatumPlatform.MyConsole
             string xPub = "xpub6DjUAbkzzUGRRyirEeEifXRtTzFXQQbd7m8yLBRsWm5qBHhJ8dQxDV99m1NhsehW16LXyRtsU5GLvEawtjFDbxRNk9RvR33SXHVFXasaXiF";
             string address = "0x14C087a6c52CEEd605705f5C92d0f7090B560Af9".ToLower();
             //toLower 14462000
-            
-            for (int i = 453190000; i <= 2147483647; i++)
+            //check until 1073450000
+            for (int i = 1073450000; i <= 2147483647; i++)
             {
                 if (i % 10000 == 0)
                     Console.WriteLine(i);
@@ -101,7 +101,8 @@ namespace TatumPlatform.MyConsole
                     Console.ReadLine();
                 }
             }
-
+            Console.WriteLine("404");
+            Console.ReadLine();
         }
     }
 }
