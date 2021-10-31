@@ -6,14 +6,9 @@ namespace TatumPlatform.MyConsole
 {
     class Program
     {
-        System.Timers.Timer _timer;
-        public Program()
-        {
-            _timer.Interval = 100;
-
-        }
         static void Main(string[] args)
         {
+
             var tatum = new TatumTests();
             tatum.Setup();
             var tron = new TronTests();

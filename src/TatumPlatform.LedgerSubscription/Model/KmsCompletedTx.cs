@@ -11,7 +11,7 @@ namespace TatumPlatform.LedgerSubscription.Model
         [JsonPropertyName("signatureId")]
         public string SignatureId { get; set; }
 
-        [JsonPropertyName("error")]
-        public string Error { get; set; }
+        [JsonPropertyName("txId")]
+        public string TxId { get; set; }
     }
 }
