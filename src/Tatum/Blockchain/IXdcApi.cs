@@ -25,5 +25,8 @@ namespace TatumPlatform.Blockchain
 
         [Post("/v3/xdc/gas")]
         Task<Fee<int>> EstimateFee(EthereumEstimateFee transfer);
+
+        [Get("/v3/xdc/transaction/{hash}")]
+        Task<EthereumTx> GetTransaction(string hash);
     }
 }

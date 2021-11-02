@@ -20,7 +20,7 @@ namespace TatumPlatform.LedgerSubscription.Model
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=.;Database=LedgerSubscriptionDB;User Id=sa;Password=aA123456");
+                optionsBuilder.UseSqlServer(@"Server=.;Database=LedgerSubscriptionDBNew;User Id=sa;Password=aA123456");
             }
         }
     }

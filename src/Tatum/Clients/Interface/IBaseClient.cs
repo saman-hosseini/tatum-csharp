@@ -15,5 +15,6 @@ namespace TatumPlatform.Clients
         Task<Signature> SendLedgerKMS(TransferLedgerKMS transfer);
         Task<decimal> GetBalance(BalanceRequest request);
         Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index);
+        Task<decimal> GetTransactionFee(string transactionHash);
     }
 }

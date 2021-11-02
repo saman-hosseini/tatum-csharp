@@ -54,11 +54,17 @@ namespace TatumPlatform.MyConsole
                 new TransferBlockchainKMS()
                 {
                     FromAddress = address1,
-                    Amount = 2,
+                    Amount = 1,
                     Index = 1,
                     ToAddress = address2,
                     SignatureId = signatureId
                 });
+        }
+
+        public async Task GetTransactionFee()
+        {
+            var hash = "0xdaaf2edc7170a0cd829e34fb5357c2608c5ddcc95bf174336cd3103c2246b569";
+            var fee = await xdcClient.GetTransactionFee(hash);
         }
     }
 }

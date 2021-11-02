@@ -21,7 +21,7 @@ namespace TatumPlatform.LedgerSubscription.Migrations
 
             modelBuilder.Entity("TatumPlatform.LedgerSubscription.Model.AccountIncomingBlockchainTransaction", b =>
                 {
-                    b.Property<long>("TId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -56,14 +56,14 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                     b.Property<string>("TxId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TId");
+                    b.HasKey("Id");
 
                     b.ToTable("AccountIncomingBlockchainTransactions");
                 });
 
             modelBuilder.Entity("TatumPlatform.LedgerSubscription.Model.AccountPendingBlockchainTransaction", b =>
                 {
-                    b.Property<long>("TId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -98,17 +98,15 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                     b.Property<string>("TxId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TId");
+                    b.HasKey("Id");
 
                     b.ToTable("AccountPendingBlockchainTransaction");
                 });
 
             modelBuilder.Entity("TatumPlatform.LedgerSubscription.Model.CustomerTradeMatch", b =>
                 {
-                    b.Property<long>("TId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Amount")
                         .HasColumnType("nvarchar(max)");
@@ -134,9 +132,6 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                     b.Property<string>("FrefeeAccountIdated")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("IsMaker")
                         .HasColumnType("nvarchar(max)");
 
@@ -149,14 +144,14 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TId");
+                    b.HasKey("Id");
 
                     b.ToTable("CustomerTradeMatch");
                 });
 
             modelBuilder.Entity("TatumPlatform.LedgerSubscription.Model.IncomingRequest", b =>
                 {
-                    b.Property<long>("TId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -167,14 +162,14 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                     b.Property<string>("JsonData")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TId");
+                    b.HasKey("Id");
 
                     b.ToTable("IncomingRequest");
                 });
 
             modelBuilder.Entity("TatumPlatform.LedgerSubscription.Model.KmsCompletedTx", b =>
                 {
-                    b.Property<long>("TId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -182,20 +177,20 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Error")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SignatureId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TId");
+                    b.Property<string>("TxId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("KmsCompletedTx");
                 });
 
             modelBuilder.Entity("TatumPlatform.LedgerSubscription.Model.KmsFailedTx", b =>
                 {
-                    b.Property<long>("TId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -209,14 +204,14 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                     b.Property<string>("SignatureId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TId");
+                    b.HasKey("Id");
 
                     b.ToTable("KmsFailedTx");
                 });
 
             modelBuilder.Entity("TatumPlatform.LedgerSubscription.Model.TransactionInTheBlock", b =>
                 {
-                    b.Property<long>("TId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -248,7 +243,7 @@ namespace TatumPlatform.LedgerSubscription.Migrations
                     b.Property<string>("WithdrawalId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TId");
+                    b.HasKey("Id");
 
                     b.ToTable("TransactionInTheBlock");
                 });

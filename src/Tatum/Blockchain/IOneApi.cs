@@ -19,5 +19,8 @@ namespace TatumPlatform.Blockchain
 
         [Get("/v3/one/address/{xpub}/{index}")]
         Task<BlockchainAddress> GenerateAddress(string xpub, int index);
+
+        [Get("/v3/one/transaction/{hash}")]
+        Task<PolygonTx> GetTransaction(string hash);
     }
 }

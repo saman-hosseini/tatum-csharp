@@ -53,12 +53,18 @@ namespace TatumPlatform.MyConsole
                 new TransferBlockchainKMS()
                 {
                     FromAddress = address1,
-                    Amount = 5,
-                    FromTag = 3,
-                    ToTag = 2,
+                    Amount = 1,
+                    FromTag = 34,
+                    ToTag = 41,
                     ToAddress = address2,
                     SignatureId = signatureId
                 });
+        }
+
+        public async Task GetTransactionFee()
+        {
+            var hash = "60721B5A5B6F13246183012600AEE0F5AA77FB59C3139B86321F5041BB3F7B6D";
+            var fee = await xrpClient.GetTransactionFee(hash);
         }
     }
 }

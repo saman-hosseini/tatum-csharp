@@ -58,7 +58,7 @@ namespace TatumPlatform.MyConsole
             {
                 FromAddress = address1,
                 ToAddress = address2,
-                Amount = 2.5M,
+                Amount = 23M,
                 Index = 1,
                 SignatureId = signatureId
             };
@@ -90,6 +90,12 @@ namespace TatumPlatform.MyConsole
             };
             bscClient.Currency = "BSC";
             var response = await bscClient.SendTransactionKMS(req);
+        }
+
+        public async Task GetTransactionFee()
+        {
+            var hash = "0xeb4e44a17ec1b9d7dbd58b58a34d300bc16e192e21695fa10d16ad0af3d05c2e";
+            var fee = await bscClient.GetTransactionFee(hash);
         }
 
     }

@@ -9,7 +9,6 @@ namespace TatumPlatform.Model.Requests
         public string ToAddress { get; set; }
         public decimal Amount { get; set; }
         public string XPub { get; set; }
-        public decimal Fee { get; set; }
         public List<string> MultipleAmounts { get; set; }
     }
 }

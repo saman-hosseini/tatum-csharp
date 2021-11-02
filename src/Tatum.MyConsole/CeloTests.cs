@@ -53,5 +53,11 @@ namespace TatumPlatform.MyConsole
                     SignatureId = signatureId
                 });
         }
+
+        public async Task GetTransactionFee()
+        {
+            var hash = "0x1256b29c1c847e188f5f9f3eb6ca78c4b5179cc5376ea5a6bfcc342db77accd8";
+            var fee = await celoClient.GetTransactionFee(hash);
+        }
     }
 }

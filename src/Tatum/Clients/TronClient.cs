@@ -121,6 +121,13 @@ namespace TatumPlatform.Clients
             throw new TatumException($"{ContractType} cant be found in Tron", System.Net.HttpStatusCode.BadRequest);
         }
 
+        public override async Task<decimal> GetTransactionFee(string transactionHash)
+        {
+            var tx = await tronApi.GetTransaction(transactionHash);
+            var fee = TatumHelper.ToDecimal(tx.NetFee + tx.EnergyFee, Precision);
+            return fee;
+        }
+
         public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await tronApi.GenerateAddress(xPubString, index);

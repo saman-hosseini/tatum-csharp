@@ -60,5 +60,11 @@ namespace TatumPlatform.MyConsole
                     SignatureId = signatureId
                 });
         }
+
+        public async Task GetTransactionFee()
+        {
+            var hash = "0x6891b5c1c78cb18ee9a67e97461b1cf4dc851373bb891f9c63d7423bb1130e31";
+            var fee = await polygonClient.GetTransactionFee(hash);
+        }
     }
 }

@@ -64,7 +64,6 @@ namespace TatumPlatform.MyConsole
             var response = await bitcoinClient.SendLedgerKMS(new TransferLedgerKMS()
             {
                 Amount = 0.00167378M,
-                Fee = 0.0005M,
                 SenderAccountId = "6165623e00a4f26048c49180",
                 SignatureId = "c380bebc-9f1a-4740-a814-fa427e31c1f5",
                 ToAddress = "mxoCTTj4yKY925JqRg7rb74NUHJNWhSwrw",
@@ -77,6 +76,12 @@ namespace TatumPlatform.MyConsole
             string xPub = "tpubDFeJdScxMsBg4raNVftTuyx54EeTNu4K7H9vYozyUTNBMU5BrygwbepWHsHU5wU79E6yuHfz5pCCqt1MZP3823QB2jWadFSaH3om86GiTmg";
             var index = 2;
             var add = await bitcoinClient.GenerateAddress(xPub, index);
+        }
+
+        public async Task GetTransactionFee()
+        {
+            var hash = "5e9a649399af4780ab83dd16e4b640f4a1ba8b165a24890aaa000b7153d51d71";
+            var fee = await bitcoinClient.GetTransactionFee(hash);
         }
     }
 }

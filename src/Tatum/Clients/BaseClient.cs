@@ -17,5 +17,10 @@ namespace TatumPlatform.Clients
         {
             throw new System.NotImplementedException();
         }
+
+        public virtual Task<decimal> GetTransactionFee(string transactionHash)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

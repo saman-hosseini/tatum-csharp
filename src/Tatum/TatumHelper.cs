@@ -117,9 +117,9 @@ namespace TatumPlatform
 
     public enum Precision
     {
-        Precision6,
-        Precision8,
-        Precision18,
-        Gwei
+        Precision6 = 6,
+        Precision8 = 8,
+        Precision18 = 18,
+        Gwei = 9
     }
 }

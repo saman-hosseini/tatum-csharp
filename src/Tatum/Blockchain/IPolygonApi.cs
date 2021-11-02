@@ -1,8 +1,4 @@
 ﻿using Refit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TatumPlatform.Model.Requests;
 using TatumPlatform.Model.Responses;
@@ -19,5 +15,8 @@ namespace TatumPlatform.Blockchain
 
         [Get("/v3/polygon/address/{xpub}/{index}")]
         Task<BlockchainAddress> GenerateAddress(string xpub, int index);
+
+        [Get("/v3/polygon/transaction/{hash}")]
+        Task<PolygonTx> GetTransaction(string hash);
     }
 }

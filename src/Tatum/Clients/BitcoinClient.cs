@@ -258,7 +258,7 @@ namespace TatumPlatform.Clients
             var signature = await tatumApi.OffchainTransferBtc(new OffchainTransferBtcKMS()
             {
                 SignatureId = transfer.SignatureId,
-                Fee = transfer.Fee.ToString(),
+                Fee = fee.Medium,
                 Amount = transfer.Amount.ToString(),
                 Compliant = false,
                 BlockchainAddress = transfer.ToAddress,
@@ -268,6 +268,13 @@ namespace TatumPlatform.Clients
                 SenderNote = "1"
             });
             return signature;
+        }
+
+        public override async Task<decimal> GetTransactionFee(string transactionHash)
+        {
+            var tx = await bitcoinApi.GetTransaction(transactionHash);
+            var feeInBtc = TatumHelper.ToDecimal(tx.Fee, Precision);
+            return feeInBtc;
         }
 
         public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)

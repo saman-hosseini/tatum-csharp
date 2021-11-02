@@ -25,13 +25,13 @@ namespace TatumPlatform.Blockchain
         [Get("/v3/xrp/account/{accountAddress}/balance")]
         Task<XrpAccountBalance> GetAccountBalance(string accountAddress);
 
-        [Get("/v3/xrp/transaction/{hash}")]
-        Task<XrpTx> GetTransaction(string hash);
-
         [Get("/v3/xrp/account/tx/{address}?min={min}&marker={marker}")]
         Task<XrpAccountTransactionsRoot> GetAccountTransactions(string address, uint min = 0, string marker = null);
 
         [Post("/v3/xrp/transaction")]
         Task<Signature> SendTransactionKMS(TransferXrpBlockchainKMS transfer);
+
+        [Get("/v3/xrp/transaction/{hash}")]
+        Task<XrpTx> GetTransaction(string hash);
     }
 }

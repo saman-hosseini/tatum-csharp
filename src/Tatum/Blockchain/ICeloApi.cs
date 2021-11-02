@@ -19,5 +19,8 @@ namespace TatumPlatform.Blockchain
 
         [Get("/v3/celo/address/{xpub}/{index}")]
         Task<BlockchainAddress> GenerateAddress(string xpub, int index);
+
+        [Get("/v3/celo/transaction/{hash}")]
+        Task<CeloTx> GetTransaction(string hash);
     }
 }

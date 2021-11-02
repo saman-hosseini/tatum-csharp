@@ -85,6 +85,13 @@ namespace TatumPlatform.Clients
             return tx;
         }
 
+        public override async Task<decimal> GetTransactionFee(string transactionHash)
+        {
+            var tx = await xrpApi.GetTransaction(transactionHash);
+            var fee = TatumHelper.ToDecimal(TatumHelper.ToFormat(tx.Fee, (int)Precision));
+            return fee;
+        }
+
         public Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             return Task.FromResult(new GenerateAddressResponse() { Address = xPubString, TagId = index, BlockchainAddressType = BlockchainAddressType.TagId });

@@ -24,5 +24,8 @@ namespace TatumPlatform.Blockchain
 
         [Post("/v3/bsc/gas")]
         Task<object> EstimateFee(EthereumEstimateFee estimateFee);
+
+        [Get("/v3/bsc/transaction/{hash}")]
+        Task<EthereumTx> GetTransaction(string hash);
     }
 }

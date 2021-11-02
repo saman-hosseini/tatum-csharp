@@ -61,6 +61,12 @@ namespace TatumPlatform.Clients
             return tx;
         }
 
+        public override async Task<decimal> GetTransactionFee(string transactionHash)
+        {
+            var tx = await oneApi.GetTransaction(transactionHash);
+            return tx.Fee;
+        }
+
         public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await oneApi.GenerateAddress(xPubString, index);

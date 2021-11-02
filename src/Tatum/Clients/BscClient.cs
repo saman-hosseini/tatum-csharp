@@ -11,7 +11,7 @@ namespace TatumPlatform.Clients
         private readonly IBscApi bscApi;
         private const int GasLimit = 21000;
         private static Precision Precision { get; } = Precision.Gwei;
-        private const string CoinName = "BSC";
+        private const string CoinName = "BNB";
         private const string ChainName = "BSC";
         internal BscClient()
         {
@@ -89,6 +89,12 @@ namespace TatumPlatform.Clients
                 var tx = await bscApi.SendTokenTransactionKMS(req);
                 return tx;
             }
+        }
+
+        public override async Task<decimal> GetTransactionFee(string transactionHash)
+        {
+            var tx = await bscApi.GetTransaction(transactionHash);
+            return tx.Fee;
         }
 
         public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)

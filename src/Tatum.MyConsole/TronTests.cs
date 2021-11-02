@@ -16,7 +16,6 @@ namespace TatumPlatform.MyConsole
         ITronClient tronClient;
         //https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt
         readonly string mnemonic = "divert bread quantum tobacco key they one leaf good forward erupt split kitten maid mean crime youth chief jungle mind design broken tilt bus";
-        IBscClient bscClient;
         public void Setup()
         {
             IConfiguration config = new ConfigurationBuilder()
@@ -28,7 +27,6 @@ namespace TatumPlatform.MyConsole
             string baseUrl = config.GetValue<string>("TatumApiSettings:baseUrl");
             string xApiKey = config.GetValue<string>("TatumApiSettings:xApiKey");
 
-            bscClient = BscClient.Create(baseUrl, xApiKey);
             tronClient = TronClient.Create(baseUrl, xApiKey);
         }
 
@@ -60,7 +58,7 @@ namespace TatumPlatform.MyConsole
             var Maddress = "TDBndvRdCGNi1cCpLK3zYenv6rjhftPvts";
             var req = new BalanceRequest()
             {
-                Address = Maddress,               
+                Address = Maddress,
             };
             var response = await tronClient.GetBalance(req);
         }
@@ -84,15 +82,26 @@ namespace TatumPlatform.MyConsole
             var address2 = "TDqxs8V9QdQ7NHGZgoR9ParThTVkSgs6Ro";
             var signatureId = "8df80a24-378c-4c9b-8080-023ee3e03ad4";
             tronClient.Currency = "TRON";
+
+
             var r = await tronClient.SendTransactionKMS(
                 new TransferBlockchainKMS()
                 {
                     FromAddress = address1,
-                    Amount = 50,
+                    Amount = 2.3M,
                     ToAddress = address2,
                     SignatureId = signatureId,
                     Index = 1
                 });
+        }
+
+        public async Task GetTransactionFee()
+        {
+            var hashTest = "c353ed7f0636c7540483c148de4d0f8deb0a201ec6ae4d176032c67d51d25c00";
+            var hashTest2 = "462b66eb8fc5e8d63c9fb6ba87e2ce68bf7c066899b9df05c345a3c622cede52";
+            var hashMain = "0f465409bb184acad8e6fb6ecbde5514851fa43899cec3f4e35babcfa3f49472";
+            var hashMain2 = "6ecae51fce67d746f198b773cc610583da6175b0d891c17505dd1e285140aed2";
+            var fee = await tronClient.GetTransactionFee(hashTest2);
         }
     }
 }
