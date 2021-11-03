@@ -103,5 +103,11 @@ namespace TatumPlatform.MyConsole
             var hashMain2 = "6ecae51fce67d746f198b773cc610583da6175b0d891c17505dd1e285140aed2";
             var fee = await tronClient.GetTransactionFee(hashTest2);
         }
+
+        public async Task GetAccountTransactions()
+        {
+            var address = "TFysCB929XGezbnyumoFScyevjDggu3BPq";
+            await tronClient.GetAccountTransactions(address);
+        }
     }
 }

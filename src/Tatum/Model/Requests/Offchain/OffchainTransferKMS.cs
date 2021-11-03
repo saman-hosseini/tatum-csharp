@@ -8,7 +8,7 @@ namespace TatumPlatform.Model.Requests
         [StringLength(1, MinimumLength = 38)]
         [RegularExpression(@"^[+]?((\d+(\.\d*)?)|(\.\d+))$")]
         [JsonPropertyName("amount")]
-        public virtual string Amount { get; set; }
+        public string Amount { get; set; }
 
         [JsonPropertyName("compliant")]
         public bool Compliant { get; set; }

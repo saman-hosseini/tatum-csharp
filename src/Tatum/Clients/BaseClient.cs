@@ -18,6 +18,16 @@ namespace TatumPlatform.Clients
             throw new System.NotImplementedException();
         }
 
+        public virtual Task<decimal> EstimateTransactionFee(TransferBlockchainKMS transfer)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public virtual Task<Signature> SendTransactionKMS(TransferBtcBasedKMS transfer)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public virtual Task<decimal> GetTransactionFee(string transactionHash)
         {
             throw new System.NotImplementedException();

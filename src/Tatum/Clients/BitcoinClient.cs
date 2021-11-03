@@ -234,39 +234,59 @@ namespace TatumPlatform.Clients
             return txHash;
         }
 
+        async Task<Signature> IBaseClient.SendTransactionKMS(TransferBtcBasedKMS transfer)
+        {
+            var adressConcat = string.Join(",", transfer.ToAddresses);
+            var estimateObj = new BitcoinEstimateFee()
+            {
+                SenderAccountId = transfer.SenderAccountId,
+                Address = adressConcat,
+                Amount = transfer.Amount.ToString(),
+                Xpub = transfer.XPub,
+                MultipleAmounts = transfer.MultipleAmounts.ToList()
+            };
+            var fee = await bitcoinApi.EstimateFee(estimateObj);
+
+            var sendObj = new OffchainTransferBtcKMS()
+            {
+                Amount = transfer.Amount.ToString(),
+                BlockchainAddress = adressConcat,
+                Compliant = false,
+                Fee = fee.Medium.Round((int)Precision),
+                SignatureId = transfer.SignatureId,
+                SenderAccountId = transfer.SenderAccountId,
+                Xpub = transfer.XPub,
+                MultipleAmounts = transfer.MultipleAmounts,
+                PaymentId = "1",
+                SenderNote = "1"
+            };
+
+            var txHash = await tatumApi.OffchainTransferBtc(sendObj);
+            return txHash;
+        }
+
         public override async Task<Signature> SendLedgerKMS(TransferLedgerKMS transfer)
         {
             var fee = await bitcoinApi.EstimateFee(new BitcoinEstimateFee()
             {
                 SenderAccountId = transfer.SenderAccountId,
                 Address = transfer.ToAddress,
-                Amount = transfer.Amount.ToString(),
+                Amount = transfer.Amount,
                 Xpub = transfer.XPub
             });
             var sendObj = new OffchainTransferBtcKMS()
             {
-                Amount = transfer.Amount.ToString(),
+                Amount = transfer.Amount,
                 BlockchainAddress = transfer.ToAddress,
                 Compliant = false,
-                Fee = fee.Medium,
+                Fee = fee.Medium.Round((int)Precision),
                 SignatureId = transfer.SignatureId,
                 SenderAccountId = transfer.SenderAccountId,
                 Xpub = transfer.XPub,
                 PaymentId = "1",
                 SenderNote = "1"
             };
-            var signature = await tatumApi.OffchainTransferBtc(new OffchainTransferBtcKMS()
-            {
-                SignatureId = transfer.SignatureId,
-                Fee = fee.Medium,
-                Amount = transfer.Amount.ToString(),
-                Compliant = false,
-                BlockchainAddress = transfer.ToAddress,
-                Xpub = transfer.XPub,
-                SenderAccountId = transfer.SenderAccountId,
-                PaymentId = "1",
-                SenderNote = "1"
-            });
+            var signature = await tatumApi.OffchainTransferBtc(sendObj);
             return signature;
         }
 

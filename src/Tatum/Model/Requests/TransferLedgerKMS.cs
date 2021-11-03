@@ -7,8 +7,8 @@ namespace TatumPlatform.Model.Requests
         public string SignatureId { get; set; }
         public string SenderAccountId { get; set; }
         public string ToAddress { get; set; }
-        public decimal Amount { get; set; }
+        public string Amount { get; set; }
         public string XPub { get; set; }
-        public List<string> MultipleAmounts { get; set; }
+        public string[] MultipleAmounts { get; set; }
     }
 }

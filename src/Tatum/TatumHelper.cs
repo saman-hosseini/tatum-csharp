@@ -53,6 +53,13 @@ namespace TatumPlatform
             str = ToDecimal(str).Normalize().ToString();
             return str;
         }
+
+        public static string Round(this string str, int maxPrecision)
+        {
+            str = Math.Round(str.ToDecimal(), maxPrecision).Normalize().ToString();
+            return str;
+        }
+
         public static decimal Normalize(this decimal value)
         {
             return value / 1.000000000000000000000000000000000m;

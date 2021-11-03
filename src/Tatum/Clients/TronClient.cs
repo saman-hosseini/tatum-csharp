@@ -128,6 +128,11 @@ namespace TatumPlatform.Clients
             return fee;
         }
 
+        public async Task GetAccountTransactions(string address)
+        {
+            var txs = await tronApi.GetAccountTransactions(address);
+        }
+
         public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await tronApi.GenerateAddress(xPubString, index);

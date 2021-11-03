@@ -12,6 +12,7 @@ namespace TatumPlatform.Clients
         string ContractType { get; set; }
         int DecimalPrecision { get; set; }
         Task<Signature> SendTransactionKMS(TransferBlockchainKMS transfer);
+        Task<Signature> SendTransactionKMS(TransferBtcBasedKMS transfer);
         Task<Signature> SendLedgerKMS(TransferLedgerKMS transfer);
         Task<decimal> GetBalance(BalanceRequest request);
         Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index);

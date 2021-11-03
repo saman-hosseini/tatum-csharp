@@ -42,5 +42,8 @@ namespace TatumPlatform.Blockchain
 
         [Get("/v3/tron/transaction/{hash}")]
         Task<TronTx> GetTransaction(string hash);
+
+        [Get("/v3/tron/transaction/account/{address}")]
+        Task<TronTxs> GetAccountTransactions(string address, string next = "");
     }
 }

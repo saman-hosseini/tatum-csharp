@@ -61,12 +61,23 @@ namespace TatumPlatform.MyConsole
             //        ToAddress = btc2,
             //        SignatureId = signatureId
             //    });
-            var response = await bitcoinClient.SendLedgerKMS(new TransferLedgerKMS()
+            //var response1 = await bitcoinClient.SendLedgerKMS(new TransferLedgerKMS()
+            //{
+            //    Amount = "0.0003",
+            //    SenderAccountId = "6165623e00a4f26048c49180",
+            //    SignatureId = "c380bebc-9f1a-4740-a814-fa427e31c1f5",
+            //    ToAddress = "mxoCTTj4yKY925JqRg7rb74NUHJNWhSwrw",
+            //    XPub = "tpubDFeJdScxMsBg4raNVftTuyx54EeTNu4K7H9vYozyUTNBMU5BrygwbepWHsHU5wU79E6yuHfz5pCCqt1MZP3823QB2jWadFSaH3om86GiTmg"
+            //});
+
+            var response = await bitcoinClient.SendTransactionKMS(new TransferBtcBasedKMS()
             {
-                Amount = 0.00167378M,
+
+                Amount = 0.000024M,
                 SenderAccountId = "6165623e00a4f26048c49180",
                 SignatureId = "c380bebc-9f1a-4740-a814-fa427e31c1f5",
-                ToAddress = "mxoCTTj4yKY925JqRg7rb74NUHJNWhSwrw",
+                MultipleAmounts = new string[] { "0.000011", "0.000013" },
+                ToAddresses = new string[] { "mxoCTTj4yKY925JqRg7rb74NUHJNWhSwrw", "mwFw8ZNKG8W7FkQWy3UHmBeypH7MaR9UUL" },
                 XPub = "tpubDFeJdScxMsBg4raNVftTuyx54EeTNu4K7H9vYozyUTNBMU5BrygwbepWHsHU5wU79E6yuHfz5pCCqt1MZP3823QB2jWadFSaH3om86GiTmg"
             });
         }
@@ -80,7 +91,7 @@ namespace TatumPlatform.MyConsole
 
         public async Task GetTransactionFee()
         {
-            var hash = "5e9a649399af4780ab83dd16e4b640f4a1ba8b165a24890aaa000b7153d51d71";
+            var hash = "d65cda43ed2013fd11875c84bc9a2b2bfc1fd3a8bbf963f4743af029a512aeee";
             var fee = await bitcoinClient.GetTransactionFee(hash);
         }
     }
