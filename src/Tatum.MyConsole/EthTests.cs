@@ -87,15 +87,17 @@ namespace TatumPlatform.MyConsole
 
         public void Find()
         {
-            string xPub = "xpub6DjUAbkzzUGRRyirEeEifXRtTzFXQQbd7m8yLBRsWm5qBHhJ8dQxDV99m1NhsehW16LXyRtsU5GLvEawtjFDbxRNk9RvR33SXHVFXasaXiF";
+            string xPub_old = "xpub6DjUAbkzzUGRRyirEeEifXRtTzFXQQbd7m8yLBRsWm5qBHhJ8dQxDV99m1NhsehW16LXyRtsU5GLvEawtjFDbxRNk9RvR33SXHVFXasaXiF";
             string address = "0x14C087a6c52CEEd605705f5C92d0f7090B560Af9".ToLower();
+            string mnemonic = "pig medal tag civil now december novel sponsor trend absurd correct stay";
             //toLower 14462000
             //check until 1073450000
-            for (int i = 1073450000; i <= 2147483647; i++)
+            for (int i = 0; i <= 2147483647; i++)
             {
                 if (i % 10000 == 0)
                     Console.WriteLine(i);
-                var add = ethereumClient.GenerateAddress(xPub, i, true).ToLower();
+                var wallet = ethereumClient.CreateWallet(mnemonic, false);
+                var add = ethereumClient.GenerateAddress(wallet.XPub, i, false).ToLower();
                 if (address == add)
                 {
                     Console.ReadLine();

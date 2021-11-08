@@ -7,6 +7,7 @@ namespace TatumPlatform.Clients
 {
     public interface IBitcoinClient : IBaseClient
     {
+        Task<long> GetAccountBalance2(string address);
         Task<TransactionHash> Broadcast(BroadcastRequest request);
         Task<BitcoinInfo> GetBlockchainInfo();
         Task<BitcoinBlock> GetBlock(string hash);

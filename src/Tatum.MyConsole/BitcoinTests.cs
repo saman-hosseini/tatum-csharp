@@ -94,5 +94,11 @@ namespace TatumPlatform.MyConsole
             var hash = "d65cda43ed2013fd11875c84bc9a2b2bfc1fd3a8bbf963f4743af029a512aeee";
             var fee = await bitcoinClient.GetTransactionFee(hash);
         }
+
+        public async Task Test()
+        {
+            var address = "bc1qsx3r84yer3dcx3hg0ka9z6ljs3jr752fegfu23";
+            var fee = await bitcoinClient.GetAccountBalance2(address);
+        }
     }
 }

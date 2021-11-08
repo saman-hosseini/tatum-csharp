@@ -8,13 +8,18 @@ namespace TatumPlatform.MyConsole
     {
         static void Main(string[] args)
         {
-
+            var btc = new BitcoinTests();
+            btc.Setup();
+            for (int i = 0; i < 1000; i++)
+            {
+                var tsk = btc.Test();
+                tsk.Wait();
+            }
             var tatum = new TatumTests();
             tatum.Setup();
             var tron = new TronTests();
             tron.Setup();
-            var btc = new BitcoinTests();
-            btc.Setup();
+            
             var ada = new AdaTests();
             ada.Setup();
             var doge = new DogecoinTests();
@@ -63,9 +68,11 @@ namespace TatumPlatform.MyConsole
             bcash.Setup();
 
             var hmac = new HMACDigestTests();
-            //hmac.Test();
-            //eth.Find();
-            var tsk1 = Task.Run(async () => await btc.SendTransactionKMS()); tsk1.Wait();
+            hmac.Test();
+            eth.Find();
+            tatum.EndpointTest();
+            Console.ReadLine();
+            //var tsk1 = Task.Run(async () => await tatum.EndpointTest()); tsk1.Wait();
             //var tsk2 = Task.Run(async () => await doge.SendTransactionKMS()); tsk2.Wait();
             //var tsk = Task.Run(async () => await btc.SendTransactionKMS()); tsk.Wait();
             //var tsk = Task.Run(async () => await doge.GetBalance()); tsk.Wait();
@@ -84,4 +91,6 @@ namespace TatumPlatform.MyConsole
             Console.WriteLine("Hello World!");
         }
     }
+
+
 }

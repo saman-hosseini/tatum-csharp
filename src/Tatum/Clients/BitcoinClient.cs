@@ -13,6 +13,7 @@ namespace TatumPlatform.Clients
     {
         private readonly IBitcoinApi bitcoinApi;
         private readonly ITatumApi tatumApi;
+        private readonly IBlockcypherBitcoinApi blockcypherBitcoinApi;
         private static Precision Precision { get; } = Precision.Precision8;
         internal BitcoinClient()
         {
@@ -22,6 +23,7 @@ namespace TatumPlatform.Clients
         {
             bitcoinApi = RestClientFactory.Create<IBitcoinApi>(apiBaseUrl, xApiKey);
             tatumApi = RestClientFactory.Create<ITatumApi>(apiBaseUrl, xApiKey);
+            blockcypherBitcoinApi = RestClientFactory.Create<IBlockcypherBitcoinApi>("https://api.blockcypher.com");
         }
 
         public static IBitcoinClient Create(string apiBaseUrl, string xApiKey)
@@ -301,6 +303,11 @@ namespace TatumPlatform.Clients
         {
             var address = await bitcoinApi.GenerateAddress(xPubString, index);
             return new GenerateAddressResponse() { Address = address.Address, BlockchainAddressType = BlockchainAddressType.ReceiveAddress };
+        }
+
+        public async Task<long> GetAccountBalance2(string address)
+        {
+            return (await blockcypherBitcoinApi.GetTxForAccount(address)).Balance;
         }
     }
 
