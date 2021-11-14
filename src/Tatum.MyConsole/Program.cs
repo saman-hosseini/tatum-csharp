@@ -8,18 +8,14 @@ namespace TatumPlatform.MyConsole
     {
         static void Main(string[] args)
         {
+
             var btc = new BitcoinTests();
             btc.Setup();
-            for (int i = 0; i < 1000; i++)
-            {
-                var tsk = btc.Test();
-                tsk.Wait();
-            }
             var tatum = new TatumTests();
             tatum.Setup();
             var tron = new TronTests();
             tron.Setup();
-            
+
             var ada = new AdaTests();
             ada.Setup();
             var doge = new DogecoinTests();

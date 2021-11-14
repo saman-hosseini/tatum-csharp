@@ -18,6 +18,7 @@ namespace TatumPlatform.LedgerSubscription
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHealthChecks();
+            services.AddRazorPages();
             services.AddControllers();
             services.AddAuthentication(o => {
                 o.DefaultScheme = SchemesNamesConst.TokenAuthenticationDefaultScheme;
@@ -44,6 +45,7 @@ namespace TatumPlatform.LedgerSubscription
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHealthChecks("/healthz");
+                endpoints.MapRazorPages();
                 endpoints.MapControllerRoute(
                     name: "people",
                     pattern: "api/Ledger",

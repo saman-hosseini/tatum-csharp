@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>Václav Ryška</Authors>
     <Company>Tatum</Company>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -32,15 +32,15 @@
 
   <ItemGroup>
     <PackageReference Include="AspectInjector" Version="2.6.0" />
-    <PackageReference Include="FluentValidation" Version="10.3.3" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.9" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.9" />
-    <PackageReference Include="NBitcoin" Version="5.0.61" />
-    <PackageReference Include="NBitcoin.Altcoins" Version="2.0.21" />
-    <PackageReference Include="Nethereum.HdWallet" Version="3.8.0" />
-    <PackageReference Include="Refit" Version="5.2.1" />
-    <PackageReference Include="stellar-dotnet-sdk" Version="6.0.34" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="FluentValidation" Version="10.3.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageReference Include="NBitcoin" Version="6.0.18" />
+    <PackageReference Include="NBitcoin.Altcoins" Version="3.0.8" />
+    <PackageReference Include="Nethereum.HdWallet" Version="4.1.1" />
+    <PackageReference Include="Refit" Version="6.1.15" />
+    <PackageReference Include="stellar-dotnet-sdk" Version="7.2.14" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

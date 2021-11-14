@@ -9,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TatumPlatform.LedgerSubscription.Model;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System.Net.Http;
+using ClosedXML.Excel;
 
 namespace TatumPlatform.LedgerSubscription.Controller
 {
@@ -25,6 +28,33 @@ namespace TatumPlatform.LedgerSubscription.Controller
 
         [AllowAnonymous]
         [HttpPost]
+        public async Task<string> FileTest(IFormFile file)
+        {
+            using (var stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                stream.Position = 0;
+                using (var workBook = new XLWorkbook(stream))
+                {
+                    IXLWorksheet workSheet = workBook.Worksheet(1);
+                    foreach (IXLRow row in workSheet.Rows())
+                    {
+                        foreach (IXLCell cell in row.Cells())
+                        {
+                        }
+                        for (int i = 0; i < row.CellCount(); i++)
+                        {
+                            var firstCol = row.Cell(0);
+                            var secondCol = row.Cell(1);
+                        }
+                    }
+                }
+                return "Hi file";
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
         public async Task<string> Test(object obj)
         {
             string output = JsonSerializer.Serialize(obj);
@@ -32,7 +62,7 @@ namespace TatumPlatform.LedgerSubscription.Controller
             {
                 using (var context = new LedgerContext())
                 {
-                    await context.IncomingRequest.AddAsync(new IncomingRequest() { JsonData = output});
+                    await context.IncomingRequest.AddAsync(new IncomingRequest() { JsonData = output });
                     await context.SaveChangesAsync();
                 }
                 return "success";
@@ -55,7 +85,7 @@ namespace TatumPlatform.LedgerSubscription.Controller
                 }
                 return "success";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Exception(ex);
             }
