@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TatumPlatform.MyConsole.Model;
 
 namespace TatumPlatform.MyConsole
 {
@@ -8,7 +11,12 @@ namespace TatumPlatform.MyConsole
     {
         static void Main(string[] args)
         {
+            //using (var db = new MyContext())
+            //{
+            //    var result = db.MyTest.OrderBy("JobId").Take(5).ToList();
+            //}
 
+            #region
             var btc = new BitcoinTests();
             btc.Setup();
             var tatum = new TatumTests();
@@ -64,11 +72,11 @@ namespace TatumPlatform.MyConsole
             bcash.Setup();
 
             var hmac = new HMACDigestTests();
-            hmac.Test();
-            eth.Find();
-            tatum.EndpointTest();
+            //hmac.Test();
+            //eth.Find();
+            var tsk1 = Task.Run(async () => await btc.SendTransactionKMS()); tsk1.Wait();
             Console.ReadLine();
-            //var tsk1 = Task.Run(async () => await tatum.EndpointTest()); tsk1.Wait();
+
             //var tsk2 = Task.Run(async () => await doge.SendTransactionKMS()); tsk2.Wait();
             //var tsk = Task.Run(async () => await btc.SendTransactionKMS()); tsk.Wait();
             //var tsk = Task.Run(async () => await doge.GetBalance()); tsk.Wait();
@@ -85,8 +93,22 @@ namespace TatumPlatform.MyConsole
             //var tsk = Task.Run(async () => await tatum.OffchainGetWithdrawals());tsk.Wait(); 
             //var tsk = Task.Run(async () => await tatum.OffchainCompleteWithdrawal());tsk.Wait();
             Console.WriteLine("Hello World!");
+            #endregion
+        }
+
+    }
+    public static class QueryableExtensions
+    {
+        public static IQueryable<T> OrderBy<T>(this IQueryable<T> source, string orderColumn, bool ascOrder = true)
+        {
+            var expression = source.Expression;
+            var parameter = Expression.Parameter(typeof(T), "x");
+            var selector = Expression.PropertyOrField(parameter, orderColumn);
+            var method = ascOrder ? "OrderBy" : "OrderByDescending";
+            expression = Expression.Call(typeof(Queryable), method,
+                new Type[] { source.ElementType, selector.Type },
+                expression, Expression.Quote(Expression.Lambda(selector, parameter)));
+            return source.Provider.CreateQuery<T>(expression);
         }
     }
-
-
 }

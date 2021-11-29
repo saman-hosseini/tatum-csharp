@@ -70,14 +70,23 @@ namespace TatumPlatform.MyConsole
             //    XPub = "tpubDFeJdScxMsBg4raNVftTuyx54EeTNu4K7H9vYozyUTNBMU5BrygwbepWHsHU5wU79E6yuHfz5pCCqt1MZP3823QB2jWadFSaH3om86GiTmg"
             //});
 
+            //var response = await bitcoinClient.SendTransactionKMS(new TransferBtcBasedKMS()
+            //{
+            //    Amount = 0.000024M,
+            //    SenderAccountId = "6165623e00a4f26048c49180",
+            //    SignatureId = "c380bebc-9f1a-4740-a814-fa427e31c1f5",
+            //    MultipleAmounts = new string[] { "0.000011", "0.000013" },
+            //    ToAddresses = new string[] { "mxoCTTj4yKY925JqRg7rb74NUHJNWhSwrw", "mwFw8ZNKG8W7FkQWy3UHmBeypH7MaR9UUL" },
+            //    XPub = "tpubDFeJdScxMsBg4raNVftTuyx54EeTNu4K7H9vYozyUTNBMU5BrygwbepWHsHU5wU79E6yuHfz5pCCqt1MZP3823QB2jWadFSaH3om86GiTmg"
+            //});
+
             var response = await bitcoinClient.SendTransactionKMS(new TransferBtcBasedKMS()
             {
-
-                Amount = 0.000024M,
+                Amount = 0.000001M,
                 SenderAccountId = "6165623e00a4f26048c49180",
                 SignatureId = "c380bebc-9f1a-4740-a814-fa427e31c1f5",
-                MultipleAmounts = new string[] { "0.000011", "0.000013" },
-                ToAddresses = new string[] { "mxoCTTj4yKY925JqRg7rb74NUHJNWhSwrw", "mwFw8ZNKG8W7FkQWy3UHmBeypH7MaR9UUL" },
+                MultipleAmounts = new string[] { "0.000001" },
+                ToAddresses = new string[] { "n4qcpTFcFq4rYTe2pMUEyiL8kUuFaqJJxC" },
                 XPub = "tpubDFeJdScxMsBg4raNVftTuyx54EeTNu4K7H9vYozyUTNBMU5BrygwbepWHsHU5wU79E6yuHfz5pCCqt1MZP3823QB2jWadFSaH3om86GiTmg"
             });
         }
@@ -93,6 +102,12 @@ namespace TatumPlatform.MyConsole
         {
             var hash = "d65cda43ed2013fd11875c84bc9a2b2bfc1fd3a8bbf963f4743af029a512aeee";
             var fee = await bitcoinClient.GetTransactionFee(hash);
+        }
+
+        public async Task GetSimpleTransaction()
+        {
+            var hash = "d65cda43ed2013fd11875c84bc9a2b2bfc1fd3a8bbf963f4743af029a512aeee";
+            var obj = await bitcoinClient.GetSimpleTransaction(hash);
         }
 
         public async Task Test()

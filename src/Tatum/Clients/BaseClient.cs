@@ -32,5 +32,10 @@ namespace TatumPlatform.Clients
         {
             throw new System.NotImplementedException();
         }
+
+        public virtual Task<SimpleTransaction> GetSimpleTransaction(string transactionHash)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

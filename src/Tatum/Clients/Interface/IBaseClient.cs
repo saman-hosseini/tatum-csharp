@@ -17,5 +17,6 @@ namespace TatumPlatform.Clients
         Task<decimal> GetBalance(BalanceRequest request);
         Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index);
         Task<decimal> GetTransactionFee(string transactionHash);
+        Task<SimpleTransaction> GetSimpleTransaction(string transactionHash);
     }
 }

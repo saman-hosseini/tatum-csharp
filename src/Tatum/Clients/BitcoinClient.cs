@@ -299,6 +299,36 @@ namespace TatumPlatform.Clients
             return feeInBtc;
         }
 
+        public override async Task<SimpleTransaction> GetSimpleTransaction(string transactionHash)
+        {
+            var tx = await bitcoinApi.GetTransaction(transactionHash);
+            var result = new SimpleTransaction();
+            foreach (var input in tx.Inputs)
+            {
+                if (result.Inputs.TryGetValue(input.Coin.Address, out decimal value))
+                {
+                    result.Inputs[input.Coin.Address] = value + TatumHelper.ToDecimal(input.Coin.Value, Precision);
+                }
+                else
+                {
+                    result.Inputs.Add(input.Coin.Address, TatumHelper.ToDecimal(input.Coin.Value, Precision));
+                }
+            }
+            foreach (var output in tx.Outputs)
+            {
+                if (result.Outputs.TryGetValue(output.Address, out decimal value))
+                {
+                    result.Outputs[output.Address] = value + TatumHelper.ToDecimal(output.Value, Precision);
+                }
+                else
+                {
+                    result.Outputs.Add(output.Address, TatumHelper.ToDecimal(output.Value, Precision));
+                }
+            }
+            result.Fee = TatumHelper.ToDecimal(tx.Fee, Precision);
+            return result;
+        }
+
         public async Task<GenerateAddressResponse> GenerateAddress(string xPubString, int index)
         {
             var address = await bitcoinApi.GenerateAddress(xPubString, index);
